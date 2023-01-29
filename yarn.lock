@@ -25,6 +25,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@elikar/application@workspace:*, @elikar/application@workspace:packages/core/application":
+  version: 0.0.0-use.local
+  resolution: "@elikar/application@workspace:packages/core/application"
+  dependencies:
+    inversify: "*"
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@elikar/commands@workspace:*, @elikar/commands@workspace:packages/shared/commands":
   version: 0.0.0-use.local
   resolution: "@elikar/commands@workspace:packages/shared/commands"
@@ -59,6 +70,22 @@ __metadata:
     inversify: "*"
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
+"@elikar/message-listener@workspace:*, @elikar/message-listener@workspace:packages/core/message-listener":
+  version: 0.0.0-use.local
+  resolution: "@elikar/message-listener@workspace:packages/core/message-listener"
+  dependencies:
+    "@elikar/logger": "workspace:*"
+    "@types/amqplib": ^0
+    "@types/koa": ^2
+    amqplib: ^0.10.3
+    inversify: "*"
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    type-fest: ^3.5.3
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -801,6 +828,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:microservices/api"
   dependencies:
+    "@elikar/application": "workspace:*"
     "@elikar/commands": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/message-client": "workspace:*"
@@ -3911,6 +3939,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^3.5.3":
+  version: 3.5.3
+  resolution: "type-fest@npm:3.5.3"
+  checksum: ac52b1a1c695cbbc5e18edf9b15b27d9135611b4be7a50a41ac07bed9687f79a8cad759aa4e17ef74f2ef5a72c503012de6f1a960a132040798ebc588f574f5c
+  languageName: node
+  linkType: hard
+
 "type-is@npm:^1.6.16":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -4012,11 +4047,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "user@workspace:microservices/user"
   dependencies:
+    "@elikar/application": "workspace:*"
     "@elikar/commands": "workspace:*"
+    "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
+    "@elikar/message-listener": "workspace:*"
     "@types/amqplib": ^0
-    "@types/koa": ^2
+    "@types/bunyan": ^1
+    "@types/convict": ^6
     amqplib: ^0.10.3
-    koa: ^2.14.1
+    bunyan: ^1.8.15
+    convict: ^6.2.4
+    inversify: ^6.0.1
+    reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
     typescript: ^4.9.4
   languageName: unknown

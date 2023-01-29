@@ -1,17 +1,13 @@
-import amqplib from 'amqplib'
-import { CreateUserCommand } from '@elikar/commands'
+import { App } from './App'
+import { AppModule } from './AppModule'
+import { ConfigService } from './config'
 
-async function foo(): Promise<void> {
-  const connection = await amqplib.connect('amqp://localhost')
-  const channel = await connection.createChannel()
-  await channel.assertQueue(CreateUserCommand.name)
+function main(): void {
+  const ioc = new AppModule(new ConfigService())
+  ioc.init()
+  const app = ioc.get(App)
 
-  channel.consume(CreateUserCommand.name, (msg) => {
-    if (!msg) return
-    console.log(JSON.parse(msg.content.toString()))
-    channel.ack(msg)
-  })
-  console.log('started')
+  app.start()
 }
 
-foo()
+main()

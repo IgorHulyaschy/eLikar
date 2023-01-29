@@ -16,7 +16,7 @@ export class MessageClient {
 
   async bootstrap(): Promise<void> {
     this.channel = await amqplib.connect(this.config.url).then((conn) => conn.createChannel())
-    this.logger.info('Amqp message client has bootstrapted')
+    this.logger.info('Amqp message client has bootstraped')
   }
 
   emit(message: Command<any>): boolean {

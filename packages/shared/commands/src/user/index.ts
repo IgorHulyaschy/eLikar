@@ -1,1 +1,1 @@
-export * from './CreateUserCommand'
+export * from './UserCreateCommand'
