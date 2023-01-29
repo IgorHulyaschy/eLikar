@@ -15,6 +15,13 @@
       "projectFolderIgnoreList": ["./packages/*/lib/**", "./microservies/*/build/**"]
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/promise-function-async": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/return-await": "off",
+    "constructor-super": "off",
+    "@typescript-eslint/consistent-type-imports": "off"
   }
 }

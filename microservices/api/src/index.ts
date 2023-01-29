@@ -1,7 +1,14 @@
-import Koa from 'koa'
+import { App } from './App'
+import { AppModule } from './AppModule'
+import { ConfigService } from './config'
 
-const koa = new Koa()
+function main(): Promise<void> {
+  const ioc = new AppModule(new ConfigService())
+  ioc.init()
 
-koa.listen(3000, () => {
-  console.log('Server is running')
-})
+  const app = ioc.get(App)
+
+  return app.start()
+}
+
+main()

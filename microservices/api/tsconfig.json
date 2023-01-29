@@ -17,5 +17,8 @@
     "src/**/*.spec.ts"
   ],
   "references": [
+    { "path": "../../packages/shared/commands" },
+    { "path": "../../packages/core/message-client" },
+    { "path": "../../packages/core/logger" }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "name": "elikar",
   "packageManager": "yarn@3.3.1",
+  "version": "1.0.0",
   "devDependencies": {
     "@types/eslint": "^8",
     "@types/node": "^18.11.18",
@@ -20,8 +21,13 @@
   "scripts": {
     "build:modules": "tsc -b -v tsconfig.build.json"
   },
+  "private": true,
   "workspaces": [
     "microservices/*",
-    "packages/*"
-  ]
+    "packages/core/*",
+    "packages/shared/*"
+  ],
+  "resolutions": {
+    "module-details-from-path": "patch:module-details-from-path@npm:1.0.3#.yarn/patches/module-details-from-path-npm-1.0.3-396d5203b4"
+  }
 }

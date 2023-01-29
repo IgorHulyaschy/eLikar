@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": "build/.tsbuildinfo",
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ],
+  "references": [
+    { "path": "../../packages/shared/commands" }
+  ]
+}

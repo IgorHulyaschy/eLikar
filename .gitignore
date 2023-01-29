@@ -4,6 +4,10 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+!.yarn/cache
 
 **/build/**
 **/lib/**
+.pnp.*
+**/.env
+**/npm-debug.log
