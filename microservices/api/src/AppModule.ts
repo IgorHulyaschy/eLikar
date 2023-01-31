@@ -1,7 +1,8 @@
-import { Container, decorate, injectable } from 'inversify'
+import { decorate, injectable } from 'inversify'
 import { MessageClientModule } from '@elikar/message-client'
-import { ApplicationModule } from '@elikar/application'
+import { ApplicationModule, Modules } from '@elikar/module'
 import { LoggerModule } from '@elikar/logger'
+import { AmqpModule } from '@elikar/amqp'
 import Koa from 'koa'
 
 import { App } from './App'
@@ -30,11 +31,14 @@ export class AppModule extends ApplicationModule {
     this.mainContainer.bind<Options>(TYPES.Options).toConstantValue(this.config.get('web'))
   }
 
-  localModules(): Container[] {
-    return [new UserModule().init()]
-  }
-
-  importedModules(): Container[] {
-    return [new MessageClientModule().init(this.config.get('amqp')), new LoggerModule().init()]
+  modules(): Modules {
+    return {
+      import: [
+        new AmqpModule().init(this.config.get('amqp')),
+        new MessageClientModule().init(),
+        new LoggerModule().init()
+      ],
+      local: [new UserModule().init()]
+    }
   }
 }

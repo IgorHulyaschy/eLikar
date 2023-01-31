@@ -25,10 +25,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@elikar/application@workspace:*, @elikar/application@workspace:packages/core/application":
+"@elikar/amqp@workspace:*, @elikar/amqp@workspace:packages/core/amqp":
   version: 0.0.0-use.local
-  resolution: "@elikar/application@workspace:packages/core/application"
+  resolution: "@elikar/amqp@workspace:packages/core/amqp"
   dependencies:
+    "@elikar/logger": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@types/amqplib": ^0
+    "@types/koa": ^2
+    amqplib: ^0.10.3
     inversify: "*"
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
@@ -46,10 +51,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@elikar/controller@workspace:*, @elikar/controller@workspace:packages/general/controller":
+  version: 0.0.0-use.local
+  resolution: "@elikar/controller@workspace:packages/general/controller"
+  dependencies:
+    "@elikar/message-listener": "workspace:*"
+    "@types/amqplib": ^0
+    "@types/koa": ^2
+    "@types/koa-joi-router": ^8
+    amqplib: ^0.10.3
+    inversify: "*"
+    koa-joi-router: ^8.0.0
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    type-fest: ^3.5.3
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@elikar/logger@workspace:*, @elikar/logger@workspace:packages/core/logger":
   version: 0.0.0-use.local
   resolution: "@elikar/logger@workspace:packages/core/logger"
   dependencies:
+    "@elikar/module": "workspace:*"
     "@types/bunyan": ^1
     bunyan: ^1.8.15
     inversify: "*"
@@ -63,7 +87,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/message-client@workspace:packages/core/message-client"
   dependencies:
+    "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
+    "@elikar/module": "workspace:*"
     "@types/amqplib": ^0
     "@types/koa": ^2
     amqplib: ^0.10.3
@@ -78,7 +104,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/message-listener@workspace:packages/core/message-listener"
   dependencies:
+    "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
+    "@elikar/module": "workspace:*"
     "@types/amqplib": ^0
     "@types/koa": ^2
     amqplib: ^0.10.3
@@ -86,6 +114,19 @@ __metadata:
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
     type-fest: ^3.5.3
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
+"@elikar/module@workspace:*, @elikar/module@workspace:packages/general/module":
+  version: 0.0.0-use.local
+  resolution: "@elikar/module@workspace:packages/general/module"
+  dependencies:
+    "@types/amqplib": ^0
+    "@types/koa": ^2
+    inversify: "*"
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -828,10 +869,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:microservices/api"
   dependencies:
-    "@elikar/application": "workspace:*"
+    "@elikar/amqp": "workspace:*"
     "@elikar/commands": "workspace:*"
+    "@elikar/controller": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/message-client": "workspace:*"
+    "@elikar/module": "workspace:*"
     "@koa/cors": ^4.0.0
     "@types/amqplib": ^0
     "@types/bunyan": ^1
@@ -4047,11 +4090,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "user@workspace:microservices/user"
   dependencies:
-    "@elikar/application": "workspace:*"
+    "@elikar/amqp": "workspace:*"
     "@elikar/commands": "workspace:*"
+    "@elikar/controller": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/message-client": "workspace:*"
     "@elikar/message-listener": "workspace:*"
+    "@elikar/module": "workspace:*"
     "@types/amqplib": ^0
     "@types/bunyan": ^1
     "@types/convict": ^6

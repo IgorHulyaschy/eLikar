@@ -1,13 +1,20 @@
-import { Logger } from '@elikar/logger'
+import { MessageListener } from '@elikar/message-listener'
+import { UserCreateCommand } from '@elikar/commands'
 import { injectable } from 'inversify'
+import { CommandController } from '@elikar/controller'
 import { UserService } from './UserService'
 
 @injectable()
-export class UserCommandController {
-  constructor(private readonly logger: Logger, private readonly service: UserService) {}
+export class UserCommandController extends CommandController {
+  constructor(private readonly service: UserService, messageListener: MessageListener) {
+    super(messageListener)
+  }
+
+  register(): void {
+    this.on(UserCreateCommand, this.createUser)
+  }
 
   createUser = async (data: any): Promise<void> => {
     this.service.createUser(data)
-    this.logger.info(data)
   }
 }

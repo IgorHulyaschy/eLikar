@@ -17,8 +17,5 @@
     "src/**/*.spec.ts"
   ],
   "references": [
-    { "path": "../logger" },
-    { "path": "../amqp" },
-    { "path": "../../general/module" }
   ]
 }

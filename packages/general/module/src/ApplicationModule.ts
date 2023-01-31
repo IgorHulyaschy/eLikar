@@ -1,11 +1,18 @@
 import { Container, interfaces } from 'inversify'
 
+export interface Modules {
+  import: Container[]
+  local: Container[]
+}
+
 export abstract class ApplicationModule {
   mainContainer!: interfaces.Container
 
   init(): void {
-    const [dep, ...otherImportedModules] = this.importedModules()
-    const [local, ...otherLocalModules] = this.localModules()
+    const {
+      import: [dep, ...otherImportedModules],
+      local: [local, ...otherLocalModules]
+    } = this.modules()
 
     this.mainContainer = Container.merge(local, dep, ...otherLocalModules, ...otherImportedModules)
   }
@@ -14,6 +21,5 @@ export abstract class ApplicationModule {
     return this.mainContainer.get(servicesIdentifier)
   }
 
-  abstract localModules(): Container[]
-  abstract importedModules(): Container[]
+  abstract modules(): Modules
 }

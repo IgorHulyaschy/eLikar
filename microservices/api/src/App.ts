@@ -1,4 +1,4 @@
-import { MessageClient } from '@elikar/message-client'
+import { AmqpTransport } from '@elikar/amqp'
 import { inject, injectable } from 'inversify'
 import { Logger } from '@elikar/logger'
 import Router from 'koa-router'
@@ -7,15 +7,15 @@ import body from 'koa-body'
 import Koa from 'koa'
 
 import { Options, TYPES } from './AppModule'
-import { UserRouter } from './user'
+import { UserWebController } from './user'
 
 @injectable()
 export class App extends Koa {
   private readonly port: number
   constructor(
     @inject(TYPES.Options) options: Options,
-    private readonly messageClient: MessageClient,
-    private readonly userRouter: UserRouter,
+    private readonly amqpServer: AmqpTransport,
+    private readonly userController: UserWebController,
     private readonly logger: Logger
   ) {
     super()
@@ -23,13 +23,13 @@ export class App extends Koa {
   }
 
   private async init(): Promise<void> {
-    await this.messageClient.bootstrap()
+    await this.amqpServer.bootstrap()
   }
 
-  private initRouters(): void {
+  private initControllers(): void {
     const router = new Router()
 
-    router.use('', this.userRouter.bootstrap().middleware())
+    router.use('', this.userController.bootstrap().middleware())
 
     this.use(router.middleware())
   }
@@ -40,7 +40,7 @@ export class App extends Koa {
     this.use(cors())
     this.use(body())
 
-    this.initRouters()
+    this.initControllers()
 
     this.listen(this.port, () => {
       this.logger.info(`Koa web server started on port ${this.port}`)

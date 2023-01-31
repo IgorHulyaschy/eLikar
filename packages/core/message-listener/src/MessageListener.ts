@@ -1,28 +1,23 @@
-import { inject, injectable } from 'inversify'
+import { injectable } from 'inversify'
+import { AmqpTransport } from '@elikar/amqp'
 import { Class } from 'type-fest'
 import { Logger } from '@elikar/logger'
-import amqplib from 'amqplib'
-import { TYPES } from './constants'
 
 @injectable()
 export abstract class MessageListener {
-  channel!: amqplib.Channel
   handlers: Array<{ queue: string; handler: (any: any) => any | Promise<any> }> = []
-  private readonly url: string
 
-  constructor(@inject(TYPES.Options) { url }: { url: string }, private readonly logger: Logger) {
-    this.url = url
-  }
+  constructor(private readonly amqp: AmqpTransport, private readonly logger: Logger) {}
 
   async subscribe(queue: string, cb: (any: any) => any | Promise<any>): Promise<void> {
-    await this.channel.assertQueue(queue)
+    await this.amqp.channel.assertQueue(queue)
 
-    this.channel.consume(queue, async (msg) => {
+    this.amqp.channel.consume(queue, async (msg) => {
       if (!msg) return
 
       await cb(JSON.parse(msg.content.toString()))
 
-      this.channel.ack(msg)
+      this.amqp.channel.ack(msg)
     })
   }
 
@@ -31,7 +26,6 @@ export abstract class MessageListener {
   }
 
   async bootstrap(): Promise<void> {
-    this.channel = await amqplib.connect(this.url).then((conn) => conn.createChannel())
     await Promise.all(this.handlers.map(({ queue, handler }) => this.subscribe(queue, handler)))
     this.logger.info('Amqp message listener has bootstraped')
   }

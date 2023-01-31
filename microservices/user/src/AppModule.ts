@@ -1,11 +1,11 @@
 import { MessageListenerModule } from '@elikar/message-listener'
-import { ApplicationModule } from '@elikar/application'
+import { ApplicationModule, Modules } from '@elikar/module'
 import { LoggerModule } from '@elikar/logger'
-import { Container } from 'inversify'
+import { AmqpModule } from '@elikar/amqp'
 
-import { App } from './App'
 import { ConfigService } from './config'
 import { UserModule } from './user'
+import { App } from './App'
 
 export class AppModule extends ApplicationModule {
   constructor(private readonly config: ConfigService) {
@@ -18,11 +18,14 @@ export class AppModule extends ApplicationModule {
     this.mainContainer.bind(App).toSelf().inSingletonScope()
   }
 
-  localModules(): Container[] {
-    return [new UserModule().init()]
-  }
-
-  importedModules(): Container[] {
-    return [new MessageListenerModule().init(this.config.get('amqp')), new LoggerModule().init()]
+  modules(): Modules {
+    return {
+      import: [
+        new AmqpModule().init(this.config.get('amqp')),
+        new MessageListenerModule().init(),
+        new LoggerModule().init()
+      ],
+      local: [new UserModule().init()]
+    }
   }
 }

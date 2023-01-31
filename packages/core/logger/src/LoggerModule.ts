@@ -1,10 +1,8 @@
-import { Container } from 'inversify'
+import { Module } from '@elikar/module'
 import { Logger } from './Logger'
 
-export class LoggerModule {
-  container = new Container()
-  init(): Container {
-    this.container.bind(Logger).toSelf().inSingletonScope()
-    return this.container
+export class LoggerModule extends Module {
+  register(): void {
+    this.bind(Logger).toSelf().inSingletonScope()
   }
 }

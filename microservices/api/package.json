@@ -2,10 +2,12 @@
   "name": "api",
   "packageManager": "yarn@3.3.1",
   "dependencies": {
-    "@elikar/application": "workspace:*",
+    "@elikar/amqp": "workspace:*",
     "@elikar/commands": "workspace:*",
+    "@elikar/controller": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
+    "@elikar/module": "workspace:*",
     "@koa/cors": "^4.0.0",
     "amqplib": "^0.10.3",
     "bunyan": "^1.8.15",

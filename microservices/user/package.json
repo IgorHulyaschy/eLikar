@@ -9,11 +9,13 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@elikar/application": "workspace:*",
+    "@elikar/amqp": "workspace:*",
     "@elikar/commands": "workspace:*",
+    "@elikar/controller": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
     "@elikar/message-listener": "workspace:*",
+    "@elikar/module": "workspace:*",
     "@types/amqplib": "^0",
     "@types/bunyan": "^1",
     "@types/convict": "^6",

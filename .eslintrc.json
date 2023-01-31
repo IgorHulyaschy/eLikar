@@ -22,6 +22,9 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/return-await": "off",
     "constructor-super": "off",
-    "@typescript-eslint/consistent-type-imports": "off"
+    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-useless-return": "off",
+    "@typescript-eslint/prefer-readonly": "off"
   }
 }
