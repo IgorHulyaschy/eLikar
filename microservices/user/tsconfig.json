@@ -8,7 +8,8 @@
     "typeRoots": [
       "types",
       "node_modules/@types"
-    ]
+    ],
+    "lib": ["dom", "es2017"]
   },
   "include": [
     "src/**/*.ts"
@@ -18,9 +19,11 @@
   ],
   "references": [
     { "path": "../../packages/shared/commands" },
+    { "path": "../../packages/shared/rpc-schemas" },
     { "path": "../../packages/core/message-client" },
     { "path": "../../packages/core/message-listener" },
     { "path": "../../packages/core/logger" },
+    { "path": "../../packages/core/rpc-server" },
     { "path": "../../packages/core/amqp" },
     { "path": "../../packages/general/module" },
     { "path": "../../packages/general/controller" }

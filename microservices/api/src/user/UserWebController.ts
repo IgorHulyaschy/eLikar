@@ -13,7 +13,7 @@ export class UserWebController extends WebController {
     this.get('/ping', this.ping)
   }
 
-  ping = (ctx: Context): void => {
-    ctx.body = this.service.ping()
+  ping = async (ctx: Context): Promise<void> => {
+    ctx.body = await this.service.ping()
   }
 }

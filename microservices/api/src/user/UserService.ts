@@ -1,13 +1,14 @@
-import { UserCreateCommand } from '@elikar/commands'
-import { MessageClient } from '@elikar/message-client'
+// import { UserCreateCommand } from '@elikar/commands'
+// import { MessageClient } from '@elikar/message-client'
 import { injectable } from 'inversify'
+import { UserProxy } from '../proxy/UserProxy'
 
 @injectable()
 export class UserService {
-  constructor(private readonly messageClient: MessageClient) {}
+  constructor(private readonly proxy: UserProxy) {}
 
-  ping(): { message: string } {
-    this.messageClient.emit(new UserCreateCommand({ message: 'yeah' }))
-    return { message: 'pong' }
+  ping(): Promise<{ message: string }> {
+    // this.messageClient.emit(new UserCreateCommand({ message: 'yeah' }))
+    return this.proxy.ping()
   }
 }

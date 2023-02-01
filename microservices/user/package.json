@@ -16,6 +16,8 @@
     "@elikar/message-client": "workspace:*",
     "@elikar/message-listener": "workspace:*",
     "@elikar/module": "workspace:*",
+    "@elikar/rpc-schemas": "workspace:*",
+    "@elikar/rpc-server": "workspace:*",
     "@types/amqplib": "^0",
     "@types/bunyan": "^1",
     "@types/convict": "^6",

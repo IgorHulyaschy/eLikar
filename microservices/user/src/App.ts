@@ -1,5 +1,6 @@
 import { AmqpTransport } from '@elikar/amqp'
 import { Logger } from '@elikar/logger'
+import { RpcServer } from '@elikar/rpc-server'
 import { injectable } from 'inversify'
 
 import { UserCommandController } from './user'
@@ -8,6 +9,7 @@ import { UserCommandController } from './user'
 export class App {
   constructor(
     private readonly amqpServer: AmqpTransport,
+    private readonly rpcServer: RpcServer<any>,
     private readonly userCommandController: UserCommandController,
     private readonly logger: Logger
   ) {}
@@ -17,7 +19,8 @@ export class App {
   }
 
   async init(): Promise<void> {
-    await Promise.all([this.amqpServer.bootstrap()])
+    await this.amqpServer.bootstrap()
+    await this.rpcServer.bootstrap()
   }
 
   async start(): Promise<void> {

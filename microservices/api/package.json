@@ -8,6 +8,8 @@
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
     "@elikar/module": "workspace:*",
+    "@elikar/rpc-client": "workspace:*",
+    "@elikar/rpc-schemas": "workspace:*",
     "@koa/cors": "^4.0.0",
     "amqplib": "^0.10.3",
     "bunyan": "^1.8.15",

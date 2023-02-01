@@ -22,6 +22,8 @@
     { "path": "../../packages/core/logger" },
     { "path": "../../packages/general/module" },
     { "path": "../../packages/general/controller" },
-    { "path": "../../packages/core/amqp" }
+    { "path": "../../packages/core/amqp" },
+    { "path": "../../packages/core/rpc-client" },
+    { "path": "../../packages/shared/rpc-schemas" }
   ]
 }

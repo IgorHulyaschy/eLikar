@@ -1,6 +1,7 @@
 import { decorate, injectable } from 'inversify'
 import { MessageClientModule } from '@elikar/message-client'
 import { ApplicationModule, Modules } from '@elikar/module'
+import { RpcClientModule } from '@elikar/rpc-client'
 import { LoggerModule } from '@elikar/logger'
 import { AmqpModule } from '@elikar/amqp'
 import Koa from 'koa'
@@ -8,6 +9,7 @@ import Koa from 'koa'
 import { App } from './App'
 import { ConfigService } from './config'
 import { UserModule } from './user'
+import { ProxyModule } from './proxy/ProxyModule'
 
 export const TYPES = {
   Options: Symbol('App:Options')
@@ -33,12 +35,13 @@ export class AppModule extends ApplicationModule {
 
   modules(): Modules {
     return {
-      import: [
+      import: () => [
         new AmqpModule().init(this.config.get('amqp')),
         new MessageClientModule().init(),
-        new LoggerModule().init()
+        new LoggerModule().init(),
+        new RpcClientModule().init()
       ],
-      local: [new UserModule().init()]
+      local: () => [new UserModule().init(), new ProxyModule().init()]
     }
   }
 }
