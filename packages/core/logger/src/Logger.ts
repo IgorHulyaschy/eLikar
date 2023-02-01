@@ -1,5 +1,6 @@
 import { injectable } from 'inversify'
 import BunyanLoggerLib from 'bunyan'
+import { Tracing } from '@elikar/als'
 
 @injectable()
 export class Logger {
@@ -13,15 +14,20 @@ export class Logger {
     this.logger = BunyanLoggerLib.createLogger({ name: 'Logger', streams })
   }
 
+  private get bunyan(): BunyanLoggerLib {
+    const traceId = Tracing.getTrace()
+    return traceId ? this.logger.child({ traceId }) : this.logger
+  }
+
   debug(...params: any[]): void {
-    this.logger.debug(params)
+    this.bunyan.debug(params)
   }
 
   error(...params: any[]): void {
-    this.logger.error(params)
+    this.bunyan.error(params)
   }
 
   info(...params: any[]): void {
-    this.logger.info(params)
+    this.bunyan.info(params)
   }
 }

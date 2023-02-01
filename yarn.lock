@@ -25,6 +25,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@elikar/als@workspace:*, @elikar/als@workspace:packages/core/als":
+  version: 0.0.0-use.local
+  resolution: "@elikar/als@workspace:packages/core/als"
+  dependencies:
+    "@types/node": ^18.11.18
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@elikar/amqp@workspace:*, @elikar/amqp@workspace:packages/core/amqp":
   version: 0.0.0-use.local
   resolution: "@elikar/amqp@workspace:packages/core/amqp"
@@ -56,10 +67,9 @@ __metadata:
   resolution: "@elikar/controller@workspace:packages/general/controller"
   dependencies:
     "@elikar/message-listener": "workspace:*"
-    "@types/amqplib": ^0
+    "@elikar/middlewares": "workspace:*"
     "@types/koa": ^2
     "@types/koa-joi-router": ^8
-    amqplib: ^0.10.3
     inversify: "*"
     koa-joi-router: ^8.0.0
     reflect-metadata: ^0.1.13
@@ -73,6 +83,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/logger@workspace:packages/core/logger"
   dependencies:
+    "@elikar/als": "workspace:*"
     "@elikar/module": "workspace:*"
     "@types/bunyan": ^1
     bunyan: ^1.8.15
@@ -87,6 +98,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/message-client@workspace:packages/core/message-client"
   dependencies:
+    "@elikar/als": "workspace:*"
     "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/module": "workspace:*"
@@ -104,6 +116,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/message-listener@workspace:packages/core/message-listener"
   dependencies:
+    "@elikar/als": "workspace:*"
     "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/module": "workspace:*"
@@ -114,6 +127,21 @@ __metadata:
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
     type-fest: ^3.5.3
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
+"@elikar/middlewares@workspace:*, @elikar/middlewares@workspace:packages/general/middlewares":
+  version: 0.0.0-use.local
+  resolution: "@elikar/middlewares@workspace:packages/general/middlewares"
+  dependencies:
+    "@elikar/als": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@types/koa": ^2
+    inversify: "*"
+    koa: ^2.14.1
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -135,6 +163,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/rpc-client@workspace:packages/core/rpc-client"
   dependencies:
+    "@elikar/als": "workspace:*"
     "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/module": "workspace:*"
@@ -163,6 +192,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@elikar/rpc-server@workspace:packages/core/rpc-server"
   dependencies:
+    "@elikar/als": "workspace:*"
     "@elikar/amqp": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/module": "workspace:*"

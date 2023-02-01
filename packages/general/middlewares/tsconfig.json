@@ -17,7 +17,7 @@
     "src/**/*.spec.ts"
   ],
   "references": [
-    { "path": "../../core/message-listener" },
-    { "path": "../middlewares" }
+    { "path": "../module" },
+    { "path": "../../core/als" }
   ]
 }

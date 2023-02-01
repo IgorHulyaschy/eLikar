@@ -9,9 +9,7 @@ export class UserProxy {
     this.proxy = rpcClient.getService(UserRpcSchema)
   }
 
-  async ping(): Promise<{ message: string }> {
-    const res = await this.proxy.ping({ message: 'yeah' })
-    console.log(res)
-    return res
+  ping(): Promise<{ message: string }> {
+    return this.proxy.ping({ message: 'yeah' })
   }
 }

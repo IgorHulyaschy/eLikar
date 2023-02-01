@@ -17,6 +17,7 @@
     "src/**/*.spec.ts"
   ],
   "references": [
-    { "path": "../../general/module" }
+    { "path": "../../general/module" },
+    { "path": "../als" }
   ]
 }

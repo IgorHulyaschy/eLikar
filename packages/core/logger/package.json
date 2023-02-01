@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "dependencies": {
+    "@elikar/als": "workspace:*",
     "@elikar/module": "workspace:*",
     "bunyan": "^1.8.15",
     "inversify": "*",

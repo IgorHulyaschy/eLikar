@@ -19,6 +19,7 @@
   "references": [
     { "path": "../logger" },
     { "path": "../amqp" },
-    { "path": "../../general/module" }
+    { "path": "../../general/module" },
+    { "path": "../als" }
   ]
 }

@@ -35,6 +35,7 @@
     { "path": "packages/core/rpc-server" },
     { "path": "packages/general/module" },
     { "path": "packages/general/controller" },
+    { "path": "packages/general/middlewares" },
     { "path": "microservices/api" },
     { "path": "microservices/user" }
   ]

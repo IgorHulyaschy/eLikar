@@ -2,6 +2,7 @@ import { injectable } from 'inversify'
 import { AmqpTransport } from '@elikar/amqp'
 import { Class } from 'type-fest'
 import { Logger } from '@elikar/logger'
+import { Tracing } from '@elikar/als'
 
 @injectable()
 export abstract class MessageListener {
@@ -15,9 +16,11 @@ export abstract class MessageListener {
     this.amqp.channel.consume(queue, async (msg) => {
       if (!msg) return
 
-      await cb(JSON.parse(msg.content.toString()))
+      Tracing.run(msg.properties.headers.traceId as string, async () => {
+        await cb(JSON.parse(msg.content.toString()))
 
-      this.amqp.channel.ack(msg)
+        this.amqp.channel.ack(msg)
+      })
     })
   }
 

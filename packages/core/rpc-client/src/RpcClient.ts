@@ -3,6 +3,7 @@ import { AmqpTransport } from '@elikar/amqp'
 import { Logger } from '@elikar/logger'
 import { injectable } from 'inversify'
 import { Class } from 'type-fest'
+import { Tracing } from '@elikar/als'
 
 @injectable()
 export class RpcClient {
@@ -15,10 +16,11 @@ export class RpcClient {
       this.amqp.channel.consume(
         queue.queue,
         async (msg) => {
-          this.logger.info(`Rpc call to ${queueName + ' ' + methodName} - success`)
           if (!msg) return
-
-          resolve(JSON.parse(msg.content.toString()))
+          Tracing.run(msg.properties.headers.traceId as string, () => {
+            this.logger.info(`Rpc call to ${queueName + ' ' + methodName} - success`)
+            resolve(JSON.parse(msg.content.toString()))
+          })
         },
         { noAck: true }
       )
@@ -27,7 +29,8 @@ export class RpcClient {
     this.amqp.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
       replyTo: queue.queue,
       headers: {
-        method: methodName
+        method: methodName,
+        traceId: Tracing.getTrace()
       }
     })
     return promise

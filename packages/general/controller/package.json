@@ -9,14 +9,13 @@
   "main": "lib/index.js",
   "dependencies": {
     "@elikar/message-listener": "workspace:*",
-    "amqplib": "^0.10.3",
+    "@elikar/middlewares": "workspace:*",
     "inversify": "*",
     "koa-joi-router": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "type-fest": "^3.5.3"
   },
   "devDependencies": {
-    "@types/amqplib": "^0",
     "@types/koa": "^2",
     "@types/koa-joi-router": "^8",
     "ts-node": "^10.9.1",

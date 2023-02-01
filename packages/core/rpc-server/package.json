@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "dependencies": {
+    "@elikar/als": "workspace:*",
     "@elikar/amqp": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/module": "workspace:*",
