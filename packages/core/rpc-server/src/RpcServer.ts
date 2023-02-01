@@ -7,14 +7,12 @@ import { Tracing } from '@elikar/als'
 
 @injectable()
 export class RpcServer<RpcSchema extends Record<string, (data: any) => Promise<any>>> {
-  rpc: RpcSchema
-  private readonly queueName: string
+  rpc: RpcSchema & { queueName: string }
   constructor(
-    @inject(TYPES.Options) { queueName, rpcSchema }: Options<any>,
+    @inject(TYPES.Options) { rpcSchema }: Options<RpcSchema>,
     private readonly amqp: AmqpTransport,
     private readonly logger: Logger
   ) {
-    this.queueName = queueName
     this.rpc = rpcSchema
   }
 
@@ -24,9 +22,9 @@ export class RpcServer<RpcSchema extends Record<string, (data: any) => Promise<a
   }
 
   async init(): Promise<void> {
-    this.amqp.channel.assertQueue(this.queueName, { durable: false })
+    this.amqp.channel.assertQueue(this.rpc.queueName, { durable: false })
     this.amqp.channel.prefetch(1)
-    this.amqp.channel.consume(this.queueName, async (msg) => {
+    this.amqp.channel.consume(this.rpc.queueName, async (msg) => {
       if (!msg) return
       Tracing.run(msg.properties.headers.traceId as string, async () => {
         this.logger.info(`Rpc call ${msg.properties.headers.method as string} - request`)

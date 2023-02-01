@@ -31,7 +31,6 @@ export class AppModule extends ApplicationModule {
       local: () => [new UserModule().init()],
       rpc: () => [
         new RpcServerModule<UserRpcSchema>().init({
-          queueName: 'user_rpc_queue',
           rpcSchema: this.get(UserRpcController)
         })
       ]

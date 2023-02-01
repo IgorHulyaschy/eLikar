@@ -18,14 +18,14 @@ export class RpcClient {
         async (msg) => {
           if (!msg) return
           Tracing.run(msg.properties.headers.traceId as string, () => {
-            this.logger.info(`Rpc call to ${queueName + ' ' + methodName} - success`)
+            this.logger.info(`Rpc call to ${queueName + '.' + methodName} - success`)
             resolve(JSON.parse(msg.content.toString()))
           })
         },
         { noAck: true }
       )
     })
-    this.logger.info(`Rpc call to ${queueName + ' ' + methodName} - pending`)
+    this.logger.info(`Rpc call to ${queueName + '.' + methodName} - pending`)
     this.amqp.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
       replyTo: queue.queue,
       headers: {
