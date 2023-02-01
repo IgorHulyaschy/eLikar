@@ -37,12 +37,13 @@ export class RpcClient {
   }
 
   getService<RpcSchema>(rpcSchema: Class<RpcSchema>): RpcSchema {
-    const instance = new rpcSchema()
     let queueName: string
-    return Object.entries(instance as object).reduce((acc: any, [name, value]) => {
+    console.log(Object.keys(new rpcSchema() as object))
+    return Object.keys(new rpcSchema() as object).reduce((acc: any, name) => {
+      console.log(name, 'any')
       if (name === 'queueName') {
-        acc[name] = value
-        queueName = value
+        acc[name] = 'saf'
+        queueName = 'value'
       } else acc[name] = (data: any) => this.rpcCall(queueName, name, data)
       return acc
     }, {})
