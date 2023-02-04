@@ -8,9 +8,6 @@ import { UserService } from './UserService'
 export class UserCommandController extends CommandController {
   constructor(private readonly service: UserService, messageListener: MessageListener) {
     super(messageListener)
-  }
-
-  register(): void {
     this.on(UserCreateCommand, this.createUser)
   }
 

@@ -17,6 +17,7 @@
     "src/**/*.spec.ts"
   ],
   "references": [
-    { "path": "../../core/message-client" }
+    { "path": "../../core/message-client" },
+    { "path": "../dto" }
   ]
 }

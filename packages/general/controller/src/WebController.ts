@@ -7,7 +7,6 @@ export abstract class WebController {
   router = Router()
 
   bootstrap(): Router.Router {
-    this.register()
     return this.router
   }
 
@@ -26,6 +25,4 @@ export abstract class WebController {
   delete(path: string, handler: Router.Handler, ...handlers: Router.Handler[]): Router.Router {
     return this.router.delete(path, TraceMiddleware.middleware, handler, ...handlers)
   }
-
-  abstract register(): void
 }

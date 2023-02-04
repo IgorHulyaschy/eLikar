@@ -21,7 +21,8 @@
     "useUnknownInCatchVariables": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true
   },
   "files": [],
   "references": [
@@ -30,9 +31,12 @@
     { "path": "packages/core/message-listener" },
     { "path": "packages/core/amqp" },
     { "path": "packages/shared/commands" },
+    { "path": "packages/shared/dto" },
     { "path": "packages/shared/rpc-schemas" },
+    { "path": "packages/shared/rpc-error-codes" },
     { "path": "packages/core/rpc-client" },
     { "path": "packages/core/rpc-server" },
+    { "path": "packages/core/typeorm" },
     { "path": "packages/general/module" },
     { "path": "packages/general/controller" },
     { "path": "packages/general/middlewares" },

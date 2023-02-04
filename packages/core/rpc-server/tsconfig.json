@@ -20,6 +20,7 @@
     { "path": "../logger" },
     { "path": "../amqp" },
     { "path": "../../general/module" },
-    { "path": "../als" }
+    { "path": "../als" },
+    { "path": "../../shared/rpc-error-codes" }
   ]
 }

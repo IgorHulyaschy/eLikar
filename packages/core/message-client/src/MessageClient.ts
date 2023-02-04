@@ -15,7 +15,8 @@ export class MessageClient {
       Buffer.from(JSON.stringify(message.payload)),
       {
         headers: {
-          traceId: Tracing.getTrace()
+          traceId: Tracing.getTrace(),
+          messageName: message.constructor.name
         }
       }
     )

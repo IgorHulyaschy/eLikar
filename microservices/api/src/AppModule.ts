@@ -8,8 +8,7 @@ import Koa from 'koa'
 
 import { App } from './App'
 import { ConfigService } from './config'
-import { UserModule } from './user'
-import { ProxyModule } from './proxy/ProxyModule'
+import { HospitalModule } from './hospital'
 
 export const TYPES = {
   Options: Symbol('App:Options')
@@ -41,7 +40,7 @@ export class AppModule extends ApplicationModule {
         new LoggerModule().init(),
         new RpcClientModule().init()
       ],
-      local: () => [new UserModule().init(), new ProxyModule().init()]
+      local: () => [new HospitalModule().init()]
     }
   }
 }

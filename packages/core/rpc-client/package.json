@@ -12,6 +12,7 @@
     "@elikar/amqp": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/module": "workspace:*",
+    "@elikar/rpc-error-codes": "workspace:*",
     "amqplib": "^0.10.3",
     "inversify": "*",
     "reflect-metadata": "^0.1.13",

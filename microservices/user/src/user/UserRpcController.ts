@@ -1,8 +1,9 @@
 import { injectable } from 'inversify'
+import { UserRpcSchema } from '@elikar/rpc-schemas'
 // import { UserService } from './UserService'
 
 @injectable()
-export class UserRpcController {
+export class UserRpcController implements UserRpcSchema {
   queueName = 'user_rpc_queue'
   // constructor(private readonly service: UserService) {}
 

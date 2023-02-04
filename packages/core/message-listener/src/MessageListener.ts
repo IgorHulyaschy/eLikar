@@ -17,6 +17,7 @@ export abstract class MessageListener {
       if (!msg) return
 
       Tracing.run(msg.properties.headers.traceId as string, async () => {
+        this.logger.info(`Consumed message ${msg.properties.headers.messageName as string}`)
         await cb(JSON.parse(msg.content.toString()))
 
         this.amqp.channel.ack(msg)
