@@ -41,6 +41,8 @@
     { "path": "packages/general/controller" },
     { "path": "packages/general/middlewares" },
     { "path": "microservices/api" },
-    { "path": "microservices/user" }
+    { "path": "microservices/user" },
+    { "path": "microservices/hospital" },
+    { "path": "microservices/mailer" }
   ]
 }

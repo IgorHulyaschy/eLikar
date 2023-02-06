@@ -27,6 +27,7 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-useless-return": "off",
     "@typescript-eslint/prefer-readonly": "off",
-    "@typescript-eslint/no-confusing-void-expression": "off"
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   }
 }

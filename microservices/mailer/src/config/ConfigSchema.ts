@@ -1,0 +1,37 @@
+export default {
+  amqp: {
+    url: {
+      format: String,
+      default: 'amqp://localhost',
+      sensitive: true,
+      env: 'AMQP_URL'
+    }
+  },
+  sendpulse: {
+    grantType: {
+      format: String,
+      default: 'client_credentials',
+      env: 'SENDPULSE_GRANT_TYPE'
+    },
+    clientId: {
+      format: String,
+      default: '',
+      env: 'SENDPULSE_CLIENT_ID'
+    },
+    clientSecret: {
+      format: String,
+      default: '',
+      env: 'SENDPULSE_CLIENT_SECRET'
+    },
+    from: {
+      format: String,
+      default: '',
+      env: 'SENDPULSE_FROM'
+    },
+    senderName: {
+      format: String,
+      default: 'elikar',
+      env: 'SENDPULSE_SENDER_NAME'
+    }
+  }
+} as const
