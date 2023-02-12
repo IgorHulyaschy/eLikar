@@ -18,5 +18,6 @@
   ],
   "references": [
     { "path": "../../general/module" },
+    { "path": "../../core/logger" }
   ]
 }

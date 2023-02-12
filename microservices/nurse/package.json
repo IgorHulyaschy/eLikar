@@ -1,5 +1,5 @@
 {
-  "name": "hospital",
+  "name": "nurse",
   "packageManager": "yarn@3.3.1",
   "dependencies": {
     "bunyan": "^1.8.15",
@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "@elikar/amqp": "workspace:*",
-    "@elikar/bcrypt": "workspace:*",
     "@elikar/commands": "workspace:*",
     "@elikar/controller": "workspace:*",
     "@elikar/dto": "workspace:*",
@@ -36,6 +35,6 @@
     "build": "tsc -b",
     "start:dev": "node -r ts-node/register -r dotenv/config -r reflect-metadata ./src/index.ts | bunyan",
     "typeorm": "ts-node $(yarn bin typeorm)",
-    "typeorm:generate-migrations": "yarn typeorm migration:generate -n Hospital --pretty"
+    "typeorm:generate-migrations": "yarn typeorm migration:generate -n Nurse --pretty"
   }
 }

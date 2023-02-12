@@ -21,12 +21,16 @@ export class Hospital {
   @Column({ unique: true })
   email!: string
 
+  @Column()
+  password!: string
+
   static create(data: HospitalDto.CreateHospital): Hospital {
     const hospital = new Hospital()
     hospital.id = randomUUID()
     hospital.name = data.name
     hospital.address = data.address
     hospital.email = data.email
+    hospital.password = data.password
 
     return hospital
   }

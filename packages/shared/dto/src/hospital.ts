@@ -8,5 +8,6 @@ export interface HospitalAddress {
 export interface CreateHospital {
   name: string
   address: HospitalAddress
+  password: string
   email: string
 }
