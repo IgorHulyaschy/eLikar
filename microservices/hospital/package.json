@@ -16,6 +16,7 @@
     "@elikar/commands": "workspace:*",
     "@elikar/controller": "workspace:*",
     "@elikar/dto": "workspace:*",
+    "@elikar/jwt": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
     "@elikar/message-listener": "workspace:*",

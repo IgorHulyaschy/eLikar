@@ -8,6 +8,7 @@
     "@elikar/dto": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
+    "@elikar/middlewares": "workspace:*",
     "@elikar/module": "workspace:*",
     "@elikar/rpc-client": "workspace:*",
     "@elikar/rpc-error-codes": "workspace:*",

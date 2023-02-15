@@ -3,7 +3,7 @@ import { RpcClient } from '@elikar/rpc-client'
 import { HospitalRpcErrorCodes, RpcError } from '@elikar/rpc-error-codes'
 import { HospitalRpcSchema } from '@elikar/rpc-schemas'
 import { injectable } from 'inversify'
-import { AlreadyExistsError } from './errors'
+import { AlreadyExistsError, WrongCredentials } from './errors'
 
 @injectable()
 export class HospitalProxy {
@@ -18,6 +18,17 @@ export class HospitalProxy {
     } catch (err) {
       if (err instanceof RpcError) {
         if (err.code === HospitalRpcErrorCodes.ALREADY_EXISTS) throw new AlreadyExistsError()
+      }
+      throw err
+    }
+  }
+
+  async signIn(data: HospitalDto.SignIn): Promise<{ token: string }> {
+    try {
+      return await this.proxy.signIn(data)
+    } catch (err) {
+      if (err instanceof RpcError) {
+        if (err.code === HospitalRpcErrorCodes.WRONG_CREDENTIALS) throw new WrongCredentials()
       }
       throw err
     }

@@ -11,6 +11,8 @@ import { HospitalModule } from './hospital'
 import { HospitalRpcController } from './hospital/HospitalRpcController'
 import { LoggerModule } from '@elikar/logger'
 import { App } from './App'
+import { BcryptModule } from '@elikar/bcrypt'
+import { JWTModule } from '@elikar/jwt'
 
 export class AppModule extends ApplicationModule {
   constructor(private readonly config: ConfigService) {
@@ -29,7 +31,9 @@ export class AppModule extends ApplicationModule {
         new TypeormModule().init(this.config.get('typeorm')),
         new AmqpModule().init(this.config.get('amqp')),
         new MessageListenerModule().init(),
-        new LoggerModule().init()
+        new LoggerModule().init(),
+        new BcryptModule().init(this.config.get('bcrypt')),
+        new JWTModule().init(this.config.get('jwt'))
         // new MessageClientModule().init()
       ],
       local: () => [new HospitalModule().init()],

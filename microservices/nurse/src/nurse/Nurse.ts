@@ -25,4 +25,7 @@ export class Nurse {
 
   @Column({ default: true })
   isActive!: boolean
+
+  @Column()
+  phoneNumber!: string
 }

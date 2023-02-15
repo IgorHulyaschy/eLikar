@@ -18,7 +18,7 @@ export class HospitalWebController extends WebController {
       ctx.status = 200
     } catch (err) {
       if (err instanceof AlreadyExistsError) {
-        ctx.body = { message: 'Already exists' }
+        ctx.body = { error: err.message }
         ctx.status = 400
         return
       }

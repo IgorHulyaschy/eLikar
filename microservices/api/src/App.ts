@@ -8,6 +8,7 @@ import Koa from 'koa'
 
 import { Options, TYPES } from './AppModule'
 import { HospitalWebController } from './hospital'
+import { AuthHospitalController } from './auth'
 // import { UserWebController } from './user'
 
 @injectable()
@@ -17,6 +18,7 @@ export class App extends Koa {
     @inject(TYPES.Options) options: Options,
     private readonly amqpServer: AmqpTransport,
     private readonly hospitalWebController: HospitalWebController,
+    private readonly authController: AuthHospitalController,
     // private readonly userController: UserWebController,
     private readonly logger: Logger
   ) {
@@ -32,6 +34,7 @@ export class App extends Koa {
     const router = new Router()
 
     router.use('/hospital', this.hospitalWebController.bootstrap().middleware())
+    router.use('/auth', this.authController.bootstrap().middleware())
 
     this.use(router.middleware())
   }

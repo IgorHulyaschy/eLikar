@@ -24,6 +24,9 @@ export class Hospital {
   @Column()
   password!: string
 
+  @Column({ nullable: true })
+  private?: string
+
   static create(data: HospitalDto.CreateHospital): Hospital {
     const hospital = new Hospital()
     hospital.id = randomUUID()

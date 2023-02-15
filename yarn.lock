@@ -103,7 +103,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@elikar/jwt@workspace:packages/core/jwt":
+"@elikar/jwt@workspace:*, @elikar/jwt@workspace:packages/core/jwt":
   version: 0.0.0-use.local
   resolution: "@elikar/jwt@workspace:packages/core/jwt"
   dependencies:
@@ -1090,6 +1090,7 @@ __metadata:
     "@elikar/dto": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/message-client": "workspace:*"
+    "@elikar/middlewares": "workspace:*"
     "@elikar/module": "workspace:*"
     "@elikar/rpc-client": "workspace:*"
     "@elikar/rpc-error-codes": "workspace:*"
@@ -2723,6 +2724,7 @@ __metadata:
     "@elikar/commands": "workspace:*"
     "@elikar/controller": "workspace:*"
     "@elikar/dto": "workspace:*"
+    "@elikar/jwt": "workspace:*"
     "@elikar/logger": "workspace:*"
     "@elikar/message-client": "workspace:*"
     "@elikar/message-listener": "workspace:*"

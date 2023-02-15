@@ -16,4 +16,8 @@ export class HospitalService {
     await this.proxy.validateCreation(data)
     return this.messageClient.emit(new HospitalCreateCommand(data))
   }
+
+  signIn(data: HospitalDto.SignIn): Promise<{ token: string }> {
+    return this.proxy.signIn(data)
+  }
 }
