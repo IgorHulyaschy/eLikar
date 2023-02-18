@@ -1,15 +1,9 @@
-import { Container, interfaces } from 'inversify'
+import { IModule } from './interfaces'
 
 export abstract class Module {
-  container = new Container()
-  init(): Container {
-    this.register()
-    return this.container
+  init(): IModule {
+    return this.register()
   }
 
-  bind<K>(ctor: interfaces.ServiceIdentifier<K>): interfaces.BindingToSyntax<K> {
-    return this.container.bind<K>(ctor)
-  }
-
-  abstract register(): void
+  abstract register(): IModule
 }

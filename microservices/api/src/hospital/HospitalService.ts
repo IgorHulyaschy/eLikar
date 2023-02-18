@@ -20,4 +20,8 @@ export class HospitalService {
   signIn(data: HospitalDto.SignIn): Promise<{ token: string }> {
     return this.proxy.signIn(data)
   }
+
+  validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    return this.proxy.validateToken(token)
+  }
 }

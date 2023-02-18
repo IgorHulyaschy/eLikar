@@ -1,18 +1,16 @@
-import { WebController } from '@elikar/controller'
-import { injectable } from 'inversify'
 import { Context } from 'koa'
+import { post, webController, get, useMiddleware } from '@elikar/application'
 
 import { AlreadyExistsError } from './errors'
 import { HospitalService } from './HospitalService'
+import { AuthHospitalAdminMiddleware } from '../auth/middlewares'
 
-@injectable()
-export class HospitalWebController extends WebController {
-  constructor(private readonly service: HospitalService) {
-    super()
-    this.post('/', this.create)
-  }
+@webController('/hospital')
+export class HospitalWebController {
+  constructor(private readonly service: HospitalService) {}
 
-  create = async (ctx: Context): Promise<void> => {
+  @post('/')
+  async create(ctx: Context): Promise<void> {
     try {
       await this.service.create(ctx.request.body)
       ctx.status = 200
@@ -24,5 +22,11 @@ export class HospitalWebController extends WebController {
       }
       throw err
     }
+  }
+
+  @useMiddleware(AuthHospitalAdminMiddleware)
+  @get('/me')
+  async getMe(ctx: Context): Promise<void> {
+    ctx.body = ctx.state
   }
 }

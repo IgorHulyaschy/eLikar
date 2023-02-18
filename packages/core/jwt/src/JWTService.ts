@@ -17,11 +17,12 @@ export class JWTService {
     return jwt.sign(payload, this.config.secret, options)
   }
 
-  verify<T extends JwtPayload>(token: string): T | void {
+  verify<T extends JwtPayload>(token: string): T | null {
     try {
       return jwt.verify(token, this.config.secret) as T
     } catch (err) {
       this.logger.error('wrong-secret')
+      return null
     }
   }
 }

@@ -16,3 +16,10 @@ export interface SignIn {
   email: string
   password: string
 }
+
+export interface Hospital {
+  email: string
+  address: HospitalAddress
+  name: string
+  id: string
+}

@@ -52,6 +52,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@elikar/application@workspace:*, @elikar/application@workspace:packages/general/application":
+  version: 0.0.0-use.local
+  resolution: "@elikar/application@workspace:packages/general/application"
+  dependencies:
+    "@elikar/logger": "workspace:*"
+    "@elikar/middlewares": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@koa/cors": ^4.0.0
+    "@types/koa": ^2
+    "@types/koa-joi-router": ^8
+    "@types/koa-router": ^7.4.4
+    "@types/koa__cors": ^3.3.0
+    inversify: "*"
+    koa: ^2.14.1
+    koa-body: ^6.0.1
+    koa-joi-router: ^8.0.0
+    koa-router: ^12.0.0
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    type-fest: ^3.5.3
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@elikar/bcrypt@workspace:*, @elikar/bcrypt@workspace:packages/core/bcrypt":
   version: 0.0.0-use.local
   resolution: "@elikar/bcrypt@workspace:packages/core/bcrypt"
@@ -194,6 +218,7 @@ __metadata:
     inversify: "*"
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
+    type-fest: ^3.5.3
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -1085,6 +1110,7 @@ __metadata:
   resolution: "api@workspace:microservices/api"
   dependencies:
     "@elikar/amqp": "workspace:*"
+    "@elikar/application": "workspace:*"
     "@elikar/commands": "workspace:*"
     "@elikar/controller": "workspace:*"
     "@elikar/dto": "workspace:*"
@@ -1113,6 +1139,7 @@ __metadata:
     koa-router: ^12.0.0
     reflect-metadata: ^0.1.13
     ts-node: ^10.9.1
+    type-fest: ^3.6.0
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -4668,6 +4695,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"test@workspace:microservices/test":
+  version: 0.0.0-use.local
+  resolution: "test@workspace:microservices/test"
+  dependencies:
+    "@elikar/amqp": "workspace:*"
+    "@elikar/commands": "workspace:*"
+    "@elikar/controller": "workspace:*"
+    "@elikar/dto": "workspace:*"
+    "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
+    "@elikar/middlewares": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@elikar/rpc-client": "workspace:*"
+    "@elikar/rpc-error-codes": "workspace:*"
+    "@elikar/rpc-schemas": "workspace:*"
+    "@koa/cors": ^4.0.0
+    "@types/amqplib": ^0
+    "@types/bunyan": ^1
+    "@types/convict": ^6
+    "@types/koa": ^2
+    "@types/koa-joi-router": ^8
+    "@types/koa-router": ^7.4.4
+    "@types/koa__cors": ^3.3.0
+    amqplib: ^0.10.3
+    bunyan: ^1.8.15
+    convict: ^6.2.4
+    inversify: ^6.0.1
+    koa: ^2.14.1
+    koa-body: ^6.0.1
+    koa-joi-router: ^8.0.0
+    koa-router: ^12.0.0
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    type-fest: ^3.6.0
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -4825,6 +4890,13 @@ __metadata:
   version: 3.5.4
   resolution: "type-fest@npm:3.5.4"
   checksum: e2250c8afc80c61126bb484bce767e6bf1bf831af9351bfed1b18f2150be45315b5c1c4fd185691572c348c3a929deda7371fd52adb38b301ef6ef9566776118
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "type-fest@npm:3.6.0"
+  checksum: 3cb3b27fc1dc69e0a7524041d9d32cfd3786b16591952e0b2b87ca44b53acaed1bf86ee62a7cc3033a55154d44542e8b488d500d1b363d828f62a9fae9d2a043
   languageName: node
   linkType: hard
 

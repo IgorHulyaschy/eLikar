@@ -33,4 +33,8 @@ export class HospitalProxy {
       throw err
     }
   }
+
+  validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    return this.proxy.validateToken(token)
+  }
 }

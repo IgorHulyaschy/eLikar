@@ -27,6 +27,7 @@
     { "path": "../../packages/core/rpc-client" },
     { "path": "../../packages/shared/rpc-schemas" },
     { "path": "../../packages/shared/rpc-error-codes" },
-    { "path": "../../packages/shared/dto" }
+    { "path": "../../packages/shared/dto" },
+    { "path": "../../packages/general/application" }
   ]
 }

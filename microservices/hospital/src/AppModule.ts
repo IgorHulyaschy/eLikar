@@ -25,7 +25,7 @@ export class AppModule extends ApplicationModule {
     this.mainContainer.bind(App).toSelf().inSingletonScope()
   }
 
-  modules(): Modules {
+  register(): Modules {
     return {
       import: () => [
         new TypeormModule().init(this.config.get('typeorm')),

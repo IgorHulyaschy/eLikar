@@ -6,11 +6,13 @@ import { JWTService } from '@elikar/jwt'
 import { AlreadyExistsError, WrongCredentials } from './errors'
 import { Hospital } from './Hospital'
 import { HospitalRepository } from './HospitalRepository'
+import { HospitalMapper } from './HospitalMapper'
 
 @injectable()
 export class HospitalService {
   constructor(
     private readonly repository: HospitalRepository,
+    private readonly mapper: HospitalMapper,
     private readonly bcrypt: BcryptService,
     private readonly jwt: JWTService
   ) {}
@@ -38,5 +40,16 @@ export class HospitalService {
     return {
       token: this.jwt.sign({ id: admin.id }, { expiresIn: '1h' })
     }
+  }
+
+  async validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    const payload = this.jwt.verify<{ id: string }>(token)
+
+    if (!payload) return null
+
+    const admin = await this.repository.findOne({ id: payload.id })
+    if (!admin) return null
+
+    return this.mapper.toDto(admin)
   }
 }

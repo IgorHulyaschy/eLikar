@@ -1,17 +1,15 @@
-import { WebController } from '@elikar/controller'
-import { injectable } from 'inversify'
+import { post, webController } from '@elikar/application'
 import { Context } from 'koa'
+
 import { HospitalService } from '../hospital'
 import { WrongCredentials } from '../hospital/errors'
 
-@injectable()
-export class AuthHospitalController extends WebController {
-  constructor(private readonly hospitalService: HospitalService) {
-    super()
-    this.post('/sign-in', this.signIn)
-  }
+@webController('/auth')
+export class AuthHospitalController {
+  constructor(private readonly hospitalService: HospitalService) {}
 
-  signIn = async (ctx: Context): Promise<void> => {
+  @post('/sign-in')
+  async signIn(ctx: Context): Promise<void> {
     try {
       ctx.body = await this.hospitalService.signIn(ctx.request.body)
     } catch (err) {

@@ -8,7 +8,7 @@ function main(): Promise<void> {
 
   const app = ioc.get(App)
 
-  return app.start()
+  return app.start({ webControllers: ioc.getWebControllers(), container: ioc })
 }
 
 main()

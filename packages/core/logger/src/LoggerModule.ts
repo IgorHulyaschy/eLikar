@@ -1,8 +1,14 @@
-import { Module } from '@elikar/module'
+import { IModule, Module } from '@elikar/module'
 import { Logger } from './Logger'
 
 export class LoggerModule extends Module {
-  register(): void {
-    this.bind(Logger).toSelf().inSingletonScope()
+  register(): IModule {
+    return {
+      deps: {
+        services(container) {
+          container.bind(Logger).toSelf().inSingletonScope()
+        }
+      }
+    }
   }
 }

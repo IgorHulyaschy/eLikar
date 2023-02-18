@@ -1,8 +1,14 @@
-import { Module } from '@elikar/module'
+import { IModule, Module } from '@elikar/module'
 import { MessageListener } from './MessageListener'
 
 export class MessageListenerModule extends Module {
-  register(): void {
-    this.bind(MessageListener).toSelf().inSingletonScope()
+  register(): IModule {
+    return {
+      deps: {
+        services(container) {
+          container.bind(MessageListener).toSelf().inSingletonScope()
+        }
+      }
+    }
   }
 }

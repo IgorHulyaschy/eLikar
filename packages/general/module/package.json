@@ -9,7 +9,8 @@
   "main": "lib/index.js",
   "dependencies": {
     "inversify": "*",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "type-fest": "^3.5.3"
   },
   "devDependencies": {
     "@types/amqplib": "^0",

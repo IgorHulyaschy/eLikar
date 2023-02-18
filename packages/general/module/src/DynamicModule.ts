@@ -1,15 +1,9 @@
-import { Container, interfaces } from 'inversify'
+import { IModule } from './interfaces'
 
 export abstract class DynamicModule<T> {
-  container = new Container()
-  init(options: T): Container {
-    this.register(options)
-    return this.container
+  init(options: T): IModule {
+    return this.register(options)
   }
 
-  bind<K>(ctor: interfaces.ServiceIdentifier<K>): interfaces.BindingToSyntax<K> {
-    return this.container.bind<K>(ctor)
-  }
-
-  abstract register(options: T): void
+  abstract register(options: T): IModule
 }

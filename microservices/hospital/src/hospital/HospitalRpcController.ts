@@ -30,4 +30,8 @@ export class HospitalRpcController implements HospitalRpcSchema {
       throw err
     }
   }
+
+  validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    return this.service.validateToken(token)
+  }
 }

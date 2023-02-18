@@ -22,7 +22,8 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "noImplicitThis": false
   },
   "files": [],
   "references": [
@@ -42,8 +43,8 @@
     { "path": "packages/general/module" },
     { "path": "packages/general/controller" },
     { "path": "packages/general/middlewares" },
+    { "path": "packages/general/application" },
     { "path": "microservices/api" },
-    { "path": "microservices/user" },
     { "path": "microservices/hospital" },
     { "path": "microservices/mailer" }
   ]
