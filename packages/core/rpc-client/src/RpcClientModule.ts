@@ -1,14 +1,11 @@
-import { IModule, Module } from '@elikar/module'
+import { module } from '@elikar/module'
 import { RpcClient } from './RpcClient'
 
-export class RpcClientModule extends Module {
-  register(): IModule {
-    return {
-      deps: {
-        services(container) {
-          container.bind(RpcClient).toSelf().inSingletonScope()
-        }
-      }
+@module({
+  deps: {
+    services(container) {
+      container.bind(RpcClient).toSelf().inSingletonScope()
     }
   }
-}
+})
+export class RpcClientModule {}

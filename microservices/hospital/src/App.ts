@@ -13,10 +13,10 @@ export class App extends DomainApplication {
     @inject(TYPES.Options) { name }: { name: string },
     private readonly amqpServer: AmqpTransport,
     private readonly typeorm: TypeormProvider,
-    messageListener: MessageListener,
-    rpcServer: RpcServer<any>
+    readonly messageListener: MessageListener,
+    readonly rpcServer: RpcServer<any>
   ) {
-    super({ name }, messageListener, rpcServer)
+    super({ name, messageListener, rpcServer })
   }
 
   async init(): Promise<void> {

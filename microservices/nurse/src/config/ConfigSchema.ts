@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Nurse } from '../nurse/Nurse'
 
 export default {
@@ -24,5 +25,8 @@ export default {
     logging: {
       default: false
     }
+  },
+  application: {
+    name: { default: require('../../package.json').name as string }
   }
 } as const

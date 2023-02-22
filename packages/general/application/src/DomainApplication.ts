@@ -1,31 +1,35 @@
 import { Logger } from '@elikar/logger'
-import { Container, injectable } from 'inversify'
+import { injectable } from 'inversify'
 import { MessageListener } from '@elikar/message-listener'
 import { RpcServer } from '@elikar/rpc-server'
-import { Class } from 'type-fest'
 
 import { ApplicationBuilder } from './ApplicationBuilder'
+import { ApplicationModule } from '@elikar/module'
 
 @injectable()
 export abstract class DomainApplication {
   private readonly applicationBuilder = new ApplicationBuilder()
   private readonly logger = new Logger()
   private readonly domainName: string
-  constructor(
-    { name }: { name: string },
-    readonly messageListener: MessageListener,
-    readonly rpcServer: RpcServer<any>
-  ) {
+  readonly messageListener?: MessageListener
+  readonly rpcServer?: RpcServer<any>
+  constructor({
+    name,
+    messageListener,
+    rpcServer
+  }: {
+    name: string
+    readonly messageListener?: MessageListener
+    readonly rpcServer?: RpcServer<any>
+  }) {
     this.domainName = name
+    this.messageListener = messageListener
+    this.rpcServer = rpcServer
   }
   abstract init(): Promise<void>
 
-  async start(data: {
-    messageControllers: Array<Class<any>>
-    rpcControllers: Array<Class<any>>
-    container: any
-  }): Promise<void> {
-    this.initControllers(data)
+  async start(ioc: ApplicationModule): Promise<void> {
+    this.initControllers(ioc)
     await this.init()
 
     this.logger.info(
@@ -33,24 +37,17 @@ export abstract class DomainApplication {
     )
   }
 
-  private initControllers({
-    messageControllers,
-    rpcControllers,
-    container
-  }: {
-    messageControllers: Array<Class<any>>
-    rpcControllers: Array<Class<any>>
-    container: Container
-  }): void {
-    const handlers = this.applicationBuilder.buildMessageControllers(messageControllers, container)
-    handlers.forEach((handler) => this.messageListener.on(handler))
+  private initControllers(ioc: ApplicationModule): void {
+    if (this.messageListener) {
+      const handlers = this.applicationBuilder.buildMessageControllers(ioc)
+      handlers.forEach((handler) => this.messageListener!.on(handler))
+    }
 
-    const { queue, rpcController } = this.applicationBuilder.buildRpcController(
-      rpcControllers,
-      container
-    )
+    if (this.rpcServer) {
+      const { queue, rpcController } = this.applicationBuilder.buildRpcController(ioc)
 
-    this.rpcServer.setQueue(queue)
-    this.rpcServer.setRpcController(rpcController)
+      this.rpcServer.setQueue(queue)
+      this.rpcServer.setRpcController(rpcController)
+    }
   }
 }

@@ -1,11 +1,12 @@
-import { DynamicModule, IModule } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 
 import { BcryptService } from './BcryptService'
 import { TYPES } from './constants'
 import { Options } from './interfaces'
 
-export class BcryptModule extends DynamicModule<Options> {
-  register(options: Options): IModule {
+@module()
+export class BcryptModule {
+  static register(options: Options): IModule {
     return {
       deps: {
         services(container) {

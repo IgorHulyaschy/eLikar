@@ -1,7 +1,7 @@
 import { AmqpModule } from '@elikar/amqp'
 // import { MessageClientModule } from '@elikar/message-client'
 import { MessageListenerModule } from '@elikar/message-listener'
-import { ApplicationModule, Modules } from '@elikar/module'
+import { IModule } from '@elikar/module'
 import { RpcServerModule } from '@elikar/rpc-server'
 import { TypeormModule } from '@elikar/typeorm'
 
@@ -17,32 +17,27 @@ export const TYPES = {
   Options: Symbol('Options')
 }
 
-export class AppModule extends ApplicationModule {
-  constructor(private readonly config: ConfigService) {
-    super()
-  }
-
-  init(): void {
-    super.init()
-
-    this.mainContainer.bind(App).toSelf().inSingletonScope()
-    this.mainContainer.bind(TYPES.Options).toConstantValue(this.config.get('application'))
-  }
-
-  register(): Modules {
+export class AppModule {
+  static register(config: ConfigService): IModule {
     return {
-      import: () => [
-        new TypeormModule().init(this.config.get('typeorm')),
-        new AmqpModule().init(this.config.get('amqp')),
-        new MessageListenerModule().init(),
-        new LoggerModule().init(),
-        new BcryptModule().init(this.config.get('bcrypt')),
-        new JWTModule().init(this.config.get('jwt')),
-        new ApplicationBuilderModule().init(),
-        new RpcServerModule().init()
+      imports: [
+        TypeormModule.register(config.get('typeorm')),
+        AmqpModule.register(config.get('amqp')),
+        MessageListenerModule,
+        LoggerModule,
+        BcryptModule.register(config.get('bcrypt')),
+        JWTModule.register(config.get('jwt')),
+        ApplicationBuilderModule,
+        RpcServerModule,
+        HospitalModule
         // new MessageClientModule().init()
       ],
-      local: () => [new HospitalModule().init()]
+      deps: {
+        services(container) {
+          container.bind(App).toSelf().inSingletonScope()
+          container.bind(TYPES.Options).toConstantValue(config.get('application'))
+        }
+      }
     }
   }
 }

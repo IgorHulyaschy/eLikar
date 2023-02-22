@@ -1,10 +1,11 @@
-import { DynamicModule, IModule } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 import { AmqpTransport } from './AmqpTransport'
 import { TYPES } from './constants'
 import { Options } from './interfaces'
 
-export class AmqpModule extends DynamicModule<Options> {
-  register(options: Options): IModule {
+@module()
+export class AmqpModule {
+  static register(options: Options): IModule {
     return {
       deps: {
         services(container) {

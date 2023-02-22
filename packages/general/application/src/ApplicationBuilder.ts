@@ -1,23 +1,22 @@
 import 'reflect-metadata'
 import { Class } from 'type-fest'
 import Router from 'koa-joi-router'
-import { Container } from 'inversify'
 import { Middleware } from '@elikar/middlewares'
 
 import {
   getHttpHandlersMetadata,
   getMessageHandlersMetadata,
   getRpcControllerMetadata,
-  // getRpcHandlersMetadata,
   getWebControllersMetadata
 } from './decorators'
 import { getMiddlewaresMetadata } from './decorators/middleware'
+import { ApplicationModule } from '@elikar/module'
 
 export class ApplicationBuilder {
-  buildHttpControllers(controllers: Array<Class<any>>, container: Container): Router.Router[] {
-    return controllers.map((ctor) => {
+  buildHttpControllers(ioc: ApplicationModule): Router.Router[] {
+    return ioc.getWebControllers().map((ctor) => {
       const router = Router()
-      const controller = container.get(ctor)
+      const controller = ioc.get(ctor)
 
       const controllerMetadata = getWebControllersMetadata(ctor)
       const handlersMetadata = getHttpHandlersMetadata(controller)
@@ -37,7 +36,7 @@ export class ApplicationBuilder {
         }
 
         const [middeware, ...otherMiddlewares] = middlewares.map(({ constructor }) => {
-          const middleware = container.get<Middleware>(constructor)
+          const middleware = ioc.get<Middleware>(constructor)
           return middleware.use.bind(middleware)
         })
 
@@ -54,11 +53,10 @@ export class ApplicationBuilder {
   }
 
   buildMessageControllers(
-    messageControllers: Array<Class<any>>,
-    container: Container
+    ioc: ApplicationModule
   ): Array<{ queue: string; handler: (data: any) => Promise<any> }> {
-    const resolvedHandlers = messageControllers.map((ctorMessageController) => {
-      const messageController = container.get(ctorMessageController)
+    const resolvedHandlers = ioc.getMessageControllers().map((ctorMessageController) => {
+      const messageController = ioc.get(ctorMessageController)
 
       const messageHandlersMetadata = getMessageHandlersMetadata(messageController)
 
@@ -76,13 +74,10 @@ export class ApplicationBuilder {
     return resolvedHandlers.flat()
   }
 
-  buildRpcController(
-    rpcControllers: Array<Class<any>>,
-    container: Container
-  ): { queue: string; rpcController: Class<any> } {
-    const queue = getRpcControllerMetadata(rpcControllers[0])
+  buildRpcController(ioc: ApplicationModule): { queue: string; rpcController: Class<any> } {
+    const queue = getRpcControllerMetadata(ioc.getRpcControllers()[0])
 
-    const rpcController = container.get(rpcControllers[0])
+    const rpcController = ioc.get(ioc.getRpcControllers()[0])
 
     return {
       queue,

@@ -1,10 +1,11 @@
-import { DynamicModule, IModule } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 import { TYPES } from './contants'
 import { Options } from './interfaces'
 import { JWTService } from './JWTService'
 
-export class JWTModule extends DynamicModule<Options> {
-  register(options: Options): IModule {
+@module()
+export class JWTModule {
+  static register(options: Options): IModule {
     return {
       deps: {
         services(container) {

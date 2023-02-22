@@ -1,10 +1,11 @@
-import { DynamicModule, IModule } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 import { ConnectionOptions } from 'typeorm'
 import { TYPES } from './constants'
 import { TypeormProvider } from './TypeormProvider'
 
-export class TypeormModule extends DynamicModule<ConnectionOptions> {
-  register(options: ConnectionOptions): IModule {
+@module()
+export class TypeormModule {
+  static register(options: ConnectionOptions): IModule {
     return {
       deps: {
         services(container) {

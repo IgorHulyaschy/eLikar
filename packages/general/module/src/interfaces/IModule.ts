@@ -1,13 +1,12 @@
 import { Container } from 'inversify'
-import { DynamicModule } from '../DynamicModule'
-import { Module } from '../Module'
+import { Class } from 'type-fest'
 
 export interface IModule {
-  deps: {
+  imports?: Array<IModule | Class<any>>
+  deps?: {
     services: (container: Container) => void
-    cqrsControllers?: any[]
-    rpcControllers?: any[]
-    webControllers?: any[]
+    messageControllers?: Array<Class<any>>
+    rpcControllers?: Array<Class<any>>
+    webControllers?: Array<Class<any>>
   }
-  imports?: Array<Module | DynamicModule<any>>
 }

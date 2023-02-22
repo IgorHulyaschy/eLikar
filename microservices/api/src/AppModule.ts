@@ -1,5 +1,5 @@
 import { MessageClientModule } from '@elikar/message-client'
-import { ApplicationModule, Modules } from '@elikar/module'
+import { ApplicationModule, IModule } from '@elikar/module'
 import { RpcClientModule } from '@elikar/rpc-client'
 import { LoggerModule } from '@elikar/logger'
 import { AmqpModule } from '@elikar/amqp'
@@ -19,28 +19,23 @@ export interface Options {
 }
 
 export class AppModule extends ApplicationModule {
-  constructor(private readonly config: ConfigService) {
-    super()
-  }
-
-  init(): void {
-    super.init()
-
-    // only for web server
-    this.mainContainer.bind(App).toSelf().inSingletonScope()
-    this.mainContainer.bind<Options>(TYPES.Options).toConstantValue(this.config.get('web'))
-  }
-
-  register(): Modules {
+  static register(config: ConfigService): IModule {
     return {
-      import: () => [
-        new AmqpModule().init(this.config.get('amqp')),
-        new MessageClientModule().init(),
-        new LoggerModule().init(),
-        new RpcClientModule().init(),
-        new ApplicationBuilderModule().init()
+      imports: [
+        AmqpModule.register(config.get('amqp')),
+        MessageClientModule,
+        LoggerModule,
+        RpcClientModule,
+        ApplicationBuilderModule,
+        HospitalModule,
+        AuthModule
       ],
-      local: () => [new HospitalModule().init(), new AuthModule().init()]
+      deps: {
+        services(local) {
+          local.bind(App).toSelf().inSingletonScope()
+          local.bind<Options>(TYPES.Options).toConstantValue(config.get('web'))
+        }
+      }
     }
   }
 }

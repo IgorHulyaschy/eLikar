@@ -12,21 +12,78 @@
 //   app.init(container)
 // }
 // main()
+import { Container, inject, injectable } from 'inversify'
+import { getModuleMetadata, module } from './decorators'
 
-function rpcSchema(queue: string): ClassDecorator {
-  return function (con: any): any {
-    return class extends con {
-      queue = queue
+const TYPES = {
+  opt: Symbol('asd')
+}
+
+@injectable()
+export class B {
+  baz(): any {
+    console.log('baz')
+  }
+}
+
+@injectable()
+export class A {
+  constructor(private readonly b: B, @inject(TYPES.opt) private readonly opt: any) {}
+  foo(): any {
+    console.log(this.opt)
+    return this.b.baz()
+  }
+}
+
+@module({
+  deps: {
+    services(local) {
+      local.bind(A).toSelf().inSingletonScope()
+      local.bind(B).toSelf().inSingletonScope()
+      local.bind(TYPES.opt).toConstantValue('message')
+    }
+  }
+})
+export class Module {
+  static register(options: any): {
+    deps: { services: (container: Container) => void }
+    module: any
+  } {
+    return {
+      deps: {
+        services(local) {
+          local.bind(A).toSelf().inSingletonScope()
+          local.bind(B).toSelf().inSingletonScope()
+          local.bind(TYPES.opt).toConstantValue(options)
+        }
+      },
+      module: this
     }
   }
 }
 
-// class RpcQueue {
-//   queue!: string
-// }
+class GlobalModule {
+  init(): any {
+    return [Module.register('message')]
+  }
+}
 
-@rpcSchema('rpc_queue')
-class A {}
+class Builder {
+  container = new Container()
+  constructor(private readonly blog: GlobalModule) {}
 
-const a = new A()
-console.log(a.queue)
+  build(): any {
+    const metadata = getModuleMetadata(this.blog.init()[0])
+    if (!metadata) {
+      this.blog.init()[0].deps.services(this.container)
+    }
+    // metadata.deps?.services(this.container)
+  }
+
+  start(): any {
+    this.container.get(A).foo()
+  }
+}
+const app = new Builder(new GlobalModule())
+app.build()
+app.start()

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 export default {
   amqp: {
     url: {
@@ -33,5 +34,8 @@ export default {
       default: 'elikar',
       env: 'SENDPULSE_SENDER_NAME'
     }
+  },
+  application: {
+    name: { default: require('../../package.json').name as string }
   }
 } as const

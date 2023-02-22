@@ -1,19 +1,16 @@
-import { IModule, Module } from '@elikar/module'
+import { module } from '@elikar/module'
 
 import { HospitalProxy } from './HospitalProxy'
 import { HospitalService } from './HospitalService'
 import { HospitalWebController } from './HospitalWebController'
 
-export class HospitalModule extends Module {
-  register(): IModule {
-    return {
-      deps: {
-        services(container) {
-          container.bind(HospitalProxy).toSelf().inSingletonScope()
-          container.bind(HospitalService).toSelf().inSingletonScope()
-        },
-        webControllers: [HospitalWebController]
-      }
-    }
+@module({
+  deps: {
+    services(local) {
+      local.bind(HospitalProxy).toSelf().inSingletonScope()
+      local.bind(HospitalService).toSelf().inSingletonScope()
+    },
+    webControllers: [HospitalWebController]
   }
-}
+})
+export class HospitalModule {}

@@ -1,24 +1,21 @@
 import { Container, interfaces } from 'inversify'
 import { Class } from 'type-fest'
+import { getModuleMetadata } from './decorators'
 import { IModule } from './interfaces'
 
-export interface Modules {
-  import: () => IModule[]
-  local: () => IModule[]
-}
-
-export abstract class ApplicationModule {
+export class ApplicationModule {
   mainContainer = new Container()
   globalWebControllers: Array<Class<any>> = []
   globalRpcControllers: Array<Class<any>> = []
-  globalCqrsControllers: Array<Class<any>> = []
+  globalMessageControllers: Array<Class<any>> = []
+  constructor(private readonly appModule: IModule) {}
 
-  private defineControllers(ctors: IModule[]): void {
-    for (const ctor of ctors) {
-      if (ctor.deps.cqrsControllers) {
-        ctor.deps.cqrsControllers.forEach((controller) => {
+  private defineControllers(ctor: IModule): void {
+    if (ctor.deps) {
+      if (ctor.deps.messageControllers) {
+        ctor.deps.messageControllers.forEach((controller) => {
           this.mainContainer.bind(controller).toSelf().inSingletonScope()
-          this.globalCqrsControllers.push(controller)
+          this.globalMessageControllers.push(controller)
         })
       }
       if (ctor.deps.rpcControllers) {
@@ -38,16 +35,23 @@ export abstract class ApplicationModule {
   }
 
   init(): void {
-    const { import: imported, local } = this.register()
-    const localCtors = local()
-    const importedCtors = imported()
-    for (const ctors of [importedCtors, localCtors]) {
-      this.defineControllers(ctors)
+    const { imports, deps } = this.appModule
+    if (imports) {
+      imports.forEach((module) => {
+        const moduleMetadata = getModuleMetadata(module)
+        if (!moduleMetadata && 'deps' in module) return this.defineControllers(module)
+
+        return this.defineControllers(moduleMetadata)
+      })
+    }
+
+    if (deps) {
+      deps.services(this.mainContainer)
     }
   }
 
-  getCqrsControllers(): Array<Class<any>> {
-    return this.globalCqrsControllers
+  getMessageControllers(): Array<Class<any>> {
+    return this.globalMessageControllers
   }
 
   getRpcControllers(): Array<Class<any>> {
@@ -62,5 +66,7 @@ export abstract class ApplicationModule {
     return this.mainContainer.get(servicesIdentifier)
   }
 
-  abstract register(): Modules
+  getContainer(): Container {
+    return this.mainContainer
+  }
 }

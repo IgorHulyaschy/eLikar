@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "@elikar/amqp": "workspace:*",
+    "@elikar/application": "workspace:*",
     "@elikar/commands": "workspace:*",
-    "@elikar/controller": "workspace:*",
     "@elikar/dto": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",

@@ -1,10 +1,13 @@
-import { Module } from '@elikar/module'
+import { module } from '@elikar/module'
 import { MailerRpcController } from './MailerRpcController'
 import { MailerService } from './MailerService'
 
-export class MailerModule extends Module {
-  register(): void {
-    this.bind(MailerService).toSelf().inSingletonScope()
-    this.bind(MailerRpcController).toSelf().inSingletonScope()
+@module({
+  deps: {
+    services(local) {
+      local.bind(MailerService).toSelf().inSingletonScope()
+    },
+    rpcControllers: [MailerRpcController]
   }
-}
+})
+export class MailerModule {}

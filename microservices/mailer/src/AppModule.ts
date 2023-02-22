@@ -1,36 +1,34 @@
 import { AmqpModule } from '@elikar/amqp'
 import { LoggerModule } from '@elikar/logger'
-import { ApplicationModule, Modules } from '@elikar/module'
-import { MailerRpcSchema } from '@elikar/rpc-schemas'
+import { module, IModule } from '@elikar/module'
 import { RpcServerModule } from '@elikar/rpc-server'
-import { App } from './App'
 
+import { App } from './App'
 import { ConfigService } from './config'
-import { MailerModule, MailerRpcController } from './mailer'
+import { MailerModule } from './mailer'
 import { SendPulseModule } from './sendpulse'
 
-export class AppModule extends ApplicationModule {
-  constructor(private readonly config: ConfigService) {
-    super()
-  }
+export const TYPES = {
+  Options: Symbol('Options')
+}
 
-  init(): void {
-    super.init()
-    this.mainContainer.bind(App).toSelf().inSingletonScope()
-  }
-
-  modules(): Modules {
+@module()
+export class AppModule {
+  static register(configService: ConfigService): IModule {
     return {
-      import: () => [new LoggerModule().init(), new AmqpModule().init(this.config.get('amqp'))],
-      local: () => [
-        new SendPulseModule().init(this.config.get('sendpulse')),
-        new MailerModule().init()
+      imports: [
+        LoggerModule,
+        AmqpModule.register(configService.get('amqp')),
+        RpcServerModule,
+        SendPulseModule.register(configService.get('sendpulse')),
+        MailerModule
       ],
-      rpc: () => [
-        new RpcServerModule<MailerRpcSchema>().init({
-          rpcSchema: this.get(MailerRpcController)
-        })
-      ]
+      deps: {
+        services(container) {
+          container.bind(App).toSelf().inSingletonScope()
+          container.bind(TYPES.Options).toConstantValue(configService.get('application'))
+        }
+      }
     }
   }
 }
