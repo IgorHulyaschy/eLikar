@@ -1,9 +1,8 @@
 export const Decorators = {
   httpMethods: Symbol('httpMethods'),
   webController: Symbol('webController'),
-  middleware: Symbol('middleware')
-}
-
-export const TYPES = {
-  Options: 'KoaApplication:Options'
+  middleware: Symbol('middleware'),
+  messageHandlers: Symbol('messageHandlers'),
+  rpcController: Symbol('rpcController'),
+  rpcMethod: Symbol('rpcMethod')
 }

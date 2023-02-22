@@ -5,7 +5,6 @@ import { IModule } from './interfaces'
 export interface Modules {
   import: () => IModule[]
   local: () => IModule[]
-  rpc?: () => IModule[]
 }
 
 export abstract class ApplicationModule {
@@ -39,15 +38,11 @@ export abstract class ApplicationModule {
   }
 
   init(): void {
-    const { import: imported, local, rpc } = this.register()
+    const { import: imported, local } = this.register()
     const localCtors = local()
     const importedCtors = imported()
     for (const ctors of [importedCtors, localCtors]) {
       this.defineControllers(ctors)
-    }
-    if (rpc) {
-      const [rpcModule] = rpc()
-      rpcModule.deps.services(this.mainContainer)
     }
   }
 

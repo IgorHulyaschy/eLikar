@@ -9,7 +9,7 @@ import { AuthHospitalAdminMiddleware } from '../auth/middlewares'
 export class HospitalWebController {
   constructor(private readonly service: HospitalService) {}
 
-  @post('/')
+  @post('')
   async create(ctx: Context): Promise<void> {
     try {
       await this.service.create(ctx.request.body)

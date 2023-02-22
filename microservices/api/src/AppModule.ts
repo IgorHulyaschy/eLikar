@@ -38,7 +38,7 @@ export class AppModule extends ApplicationModule {
         new MessageClientModule().init(),
         new LoggerModule().init(),
         new RpcClientModule().init(),
-        new ApplicationBuilderModule().init(this.config.get('web'))
+        new ApplicationBuilderModule().init()
       ],
       local: () => [new HospitalModule().init(), new AuthModule().init()]
     }

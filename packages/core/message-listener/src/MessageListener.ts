@@ -1,6 +1,5 @@
 import { injectable } from 'inversify'
 import { AmqpTransport } from '@elikar/amqp'
-import { Class } from 'type-fest'
 import { Logger } from '@elikar/logger'
 import { Tracing } from '@elikar/als'
 
@@ -25,8 +24,8 @@ export abstract class MessageListener {
     })
   }
 
-  on<T>(command: Class<T>, handler: (any: any) => any): void {
-    this.handlers.push({ queue: command.name, handler })
+  on(handler: { queue: string; handler: (any: any) => Promise<any> }): void {
+    this.handlers.push(handler)
   }
 
   async bootstrap(): Promise<void> {

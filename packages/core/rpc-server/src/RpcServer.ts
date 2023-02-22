@@ -1,32 +1,32 @@
-import { inject, injectable } from 'inversify'
+import { injectable } from 'inversify'
 import { AmqpTransport } from '@elikar/amqp'
 import { RpcError } from '@elikar/rpc-error-codes'
 import { Tracing } from '@elikar/als'
 import { Logger } from '@elikar/logger'
 
-import { TYPES } from './constants'
-import { Options } from './interfaces'
-
 @injectable()
 export class RpcServer<RpcSchema extends Record<string, (data: any) => Promise<any>>> {
-  rpc: RpcSchema & { queueName: string }
-  constructor(
-    @inject(TYPES.Options) { rpcSchema }: Options<RpcSchema>,
-    private readonly amqp: AmqpTransport,
-    private readonly logger: Logger
-  ) {
-    this.rpc = rpcSchema
-  }
+  rpc!: RpcSchema
+  queueName!: string
+  constructor(private readonly amqp: AmqpTransport, private readonly logger: Logger) {}
 
   async bootstrap(): Promise<void> {
     await this.init()
     this.logger.info('Rpc server has bootstraped')
   }
 
+  setQueue(queue: string): void {
+    this.queueName = queue
+  }
+
+  setRpcController(rpcController: RpcSchema): void {
+    this.rpc = rpcController
+  }
+
   async init(): Promise<void> {
-    this.amqp.channel.assertQueue(this.rpc.queueName, { durable: false })
+    this.amqp.channel.assertQueue(this.queueName, { durable: false })
     this.amqp.channel.prefetch(1)
-    this.amqp.channel.consume(this.rpc.queueName, async (msg) => {
+    this.amqp.channel.consume(this.queueName, async (msg) => {
       if (!msg) return
       Tracing.run(msg.properties.headers.traceId as string, async () => {
         this.logger.info(`Rpc call ${msg.properties.headers.method as string} - request`)

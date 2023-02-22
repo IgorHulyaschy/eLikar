@@ -1,4 +1,4 @@
-import { Container, inject, injectable } from 'inversify'
+import { Container, injectable } from 'inversify'
 import { GlobalCatcher, TraceMiddleware } from '@elikar/middlewares'
 import { Logger } from '@elikar/logger'
 import Koa from 'koa'
@@ -8,16 +8,13 @@ import Router from 'koa-router'
 import { Class } from 'type-fest'
 
 import { ApplicationBuilder } from './ApplicationBuilder'
-import { TYPES } from './constants'
 
 @injectable()
 export abstract class KoaApplication extends Koa {
   private readonly port: number
-  constructor(
-    @inject(TYPES.Options) { port }: { port: number },
-    private readonly applicationBuilder: ApplicationBuilder,
-    private readonly logger: Logger
-  ) {
+  private readonly applicationBuilder = new ApplicationBuilder()
+  private readonly logger = new Logger()
+  constructor({ port }: { port: number }) {
     super()
     this.port = port
   }

@@ -1,14 +1,13 @@
 import { HospitalDto } from '@elikar/dto'
-import { HospitalRpcSchema } from '@elikar/rpc-schemas'
+// import { HospitalRpcSchema } from '@elikar/rpc-schemas'
 import { RpcError, HospitalRpcErrorCodes } from '@elikar/rpc-error-codes'
-import { injectable } from 'inversify'
+import { rpcController } from '@elikar/application'
 
 import { AlreadyExistsError, WrongCredentials } from './errors'
 import { HospitalService } from './HospitalService'
 
-@injectable()
-export class HospitalRpcController implements HospitalRpcSchema {
-  queueName = 'hospital_rpc_queue'
+@rpcController('hospital_rpc_queue')
+export class HospitalRpcController {
   constructor(private readonly service: HospitalService) {}
 
   async validateCreation(data: HospitalDto.CreateHospital): Promise<void> {

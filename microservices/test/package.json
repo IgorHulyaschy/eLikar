@@ -38,6 +38,7 @@
   },
   "scripts": {
     "build": "tsc -b",
-    "start:dev": "node -r ts-node/register -r reflect-metadata ./src/index.ts | bunyan"
+    "start:dev": "node -r ts-node/register -r reflect-metadata ./src/index.ts | bunyan",
+    "start": "node -r reflect-metadata ./dist/index.ts"
   }
 }

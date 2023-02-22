@@ -9,8 +9,11 @@
   "main": "lib/index.js",
   "dependencies": {
     "@elikar/logger": "workspace:*",
+    "@elikar/message-client": "workspace:*",
+    "@elikar/message-listener": "workspace:*",
     "@elikar/middlewares": "workspace:*",
     "@elikar/module": "workspace:*",
+    "@elikar/rpc-server": "workspace:*",
     "@koa/cors": "^4.0.0",
     "inversify": "*",
     "koa": "^2.14.1",

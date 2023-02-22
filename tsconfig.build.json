@@ -46,6 +46,7 @@
     { "path": "packages/general/application" },
     { "path": "microservices/api" },
     { "path": "microservices/hospital" },
-    { "path": "microservices/mailer" }
+    { "path": "microservices/mailer" },
+    { "path": "microservices/test" }
   ]
 }

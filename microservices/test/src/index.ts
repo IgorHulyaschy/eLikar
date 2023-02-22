@@ -3,12 +3,30 @@
 // import { App } from './App'
 // import { AppModule } from './container'
 
-import { App } from './App'
-import { container } from './container'
+// import { App } from './App'
+// import { container } from './container'
 
-function main(): any {
-  const app = container.get(App)
+// function main(): any {
+//   const app = container.get(App)
 
-  app.init(container)
+//   app.init(container)
+// }
+// main()
+
+function rpcSchema(queue: string): ClassDecorator {
+  return function (con: any): any {
+    return class extends con {
+      queue = queue
+    }
+  }
 }
-main()
+
+// class RpcQueue {
+//   queue!: string
+// }
+
+@rpcSchema('rpc_queue')
+class A {}
+
+const a = new A()
+console.log(a.queue)

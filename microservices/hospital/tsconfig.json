@@ -27,6 +27,7 @@
     { "path": "../../packages/general/controller" },
     { "path": "../../packages/core/typeorm" },
     { "path": "../../packages/core/bcrypt" },
-    { "path": "../../packages/core/jwt" }
+    { "path": "../../packages/core/jwt" },
+    { "path": "../../packages/general/application" }
   ]
 }

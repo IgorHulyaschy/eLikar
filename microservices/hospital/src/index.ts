@@ -7,7 +7,11 @@ function main(): void {
   ioc.init()
   const app = ioc.get(App)
 
-  app.start()
+  app.start({
+    messageControllers: ioc.getCqrsControllers(),
+    rpcControllers: ioc.getRpcControllers(),
+    container: ioc
+  })
 }
 
 main()

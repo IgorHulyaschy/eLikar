@@ -10,16 +10,12 @@ export class MessageClient {
   constructor(private readonly amqp: AmqpTransport, private readonly logger: Logger) {}
 
   emit(message: Command<any>): void {
-    this.amqp.channel.sendToQueue(
-      message.constructor.name,
-      Buffer.from(JSON.stringify(message.payload)),
-      {
-        headers: {
-          traceId: Tracing.getTrace(),
-          messageName: message.constructor.name
-        }
+    this.amqp.channel.sendToQueue(message.constructor.name, Buffer.from(JSON.stringify(message)), {
+      headers: {
+        traceId: Tracing.getTrace(),
+        messageName: message.constructor.name
       }
-    )
+    })
     this.logger.info(`Emitted ${message.constructor.name}`)
   }
 }

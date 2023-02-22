@@ -57,8 +57,11 @@ __metadata:
   resolution: "@elikar/application@workspace:packages/general/application"
   dependencies:
     "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
+    "@elikar/message-listener": "workspace:*"
     "@elikar/middlewares": "workspace:*"
     "@elikar/module": "workspace:*"
+    "@elikar/rpc-server": "workspace:*"
     "@koa/cors": ^4.0.0
     "@types/koa": ^2
     "@types/koa-joi-router": ^8
@@ -2747,6 +2750,7 @@ __metadata:
   resolution: "hospital@workspace:microservices/hospital"
   dependencies:
     "@elikar/amqp": "workspace:*"
+    "@elikar/application": "workspace:*"
     "@elikar/bcrypt": "workspace:*"
     "@elikar/commands": "workspace:*"
     "@elikar/controller": "workspace:*"
@@ -5070,31 +5074,6 @@ __metadata:
   checksum: fbdba6b1d83336aca2216bbdc38ba658d9cfb8fc7f665eb8b17852de638ff7d1a162c198a8e4ed66001ddbf6c9888d41e4798912c62b4fd777a31657989f7bdf
   languageName: node
   linkType: hard
-
-"user@workspace:microservices/user":
-  version: 0.0.0-use.local
-  resolution: "user@workspace:microservices/user"
-  dependencies:
-    "@elikar/amqp": "workspace:*"
-    "@elikar/commands": "workspace:*"
-    "@elikar/controller": "workspace:*"
-    "@elikar/logger": "workspace:*"
-    "@elikar/message-client": "workspace:*"
-    "@elikar/message-listener": "workspace:*"
-    "@elikar/module": "workspace:*"
-    "@elikar/rpc-schemas": "workspace:*"
-    "@elikar/rpc-server": "workspace:*"
-    "@types/amqplib": ^0
-    "@types/bunyan": ^1
-    "@types/convict": ^6
-    bunyan: ^1.8.15
-    convict: ^6.2.4
-    inversify: ^6.0.1
-    reflect-metadata: ^0.1.13
-    ts-node: ^10.9.1
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
 
 "util-deprecate@npm:^1.0.1":
   version: 1.0.2

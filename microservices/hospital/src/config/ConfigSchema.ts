@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Hospital } from '../hospital/Hospital'
 
 export default {
@@ -38,5 +39,8 @@ export default {
       default: 'jwt_secret',
       env: 'JWT_SECRET'
     }
+  },
+  application: {
+    name: { default: require('../../package.json').name as string }
   }
 } as const
