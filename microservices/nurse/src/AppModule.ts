@@ -1,6 +1,6 @@
 import { AmqpModule } from '@elikar/amqp'
 import { MessageListenerModule } from '@elikar/message-listener'
-import { ApplicationModule, IModule, module } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 import { TypeormModule } from '@elikar/typeorm'
 
 import { ConfigService } from './config'
@@ -12,15 +12,15 @@ export const TYPES = {
 }
 
 @module()
-export class AppModule extends ApplicationModule {
+export class AppModule {
   static register(config: ConfigService): IModule {
     return {
       imports: [
         TypeormModule.register(config.get('typeorm')),
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
-        LoggerModule,
-        NurseModule
+        LoggerModule
+        // NurseModule
         // new MessageClientModule().init()
       ],
       deps: {

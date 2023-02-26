@@ -7,6 +7,7 @@ import { AlreadyExistsError, WrongCredentials } from './errors'
 import { Hospital } from './Hospital'
 import { HospitalRepository } from './HospitalRepository'
 import { HospitalMapper } from './HospitalMapper'
+import { MailerService } from '../mailer'
 
 @injectable()
 export class HospitalService {
@@ -14,7 +15,8 @@ export class HospitalService {
     private readonly repository: HospitalRepository,
     private readonly mapper: HospitalMapper,
     private readonly bcrypt: BcryptService,
-    private readonly jwt: JWTService
+    private readonly jwt: JWTService,
+    private readonly mailerService: MailerService
   ) {}
 
   async create(data: HospitalDto.CreateHospital): Promise<void> {
@@ -51,5 +53,9 @@ export class HospitalService {
     if (!admin) return null
 
     return this.mapper.toDto(admin)
+  }
+
+  sendRegistrationLettersForNurses(emails: string[]): Promise<void> {
+    return this.mailerService.sendRegistrationLetters(emails)
   }
 }

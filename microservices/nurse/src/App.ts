@@ -1,35 +1,23 @@
+import { DomainApplication } from '@elikar/application'
 import { AmqpTransport } from '@elikar/amqp'
-import { Logger } from '@elikar/logger'
 import { TypeormProvider } from '@elikar/typeorm'
 import { RpcServer } from '@elikar/rpc-server'
-import { injectable } from 'inversify'
-
-import { HospitalCommandController } from './hospital'
+import { inject, injectable } from 'inversify'
+import { TYPES } from './AppModule'
 
 @injectable()
-export class App {
+export class App extends DomainApplication {
   constructor(
+    @inject(TYPES.Options) { name }: { name: string },
     private readonly amqpServer: AmqpTransport,
-    private readonly rpcServer: RpcServer<any>,
-    private readonly typeorm: TypeormProvider,
-    private readonly hospitalCommandController: HospitalCommandController,
-    private readonly logger: Logger
-  ) {}
-
-  async initCommandRouters(): Promise<void> {
-    await this.hospitalCommandController.bootstrap()
+    readonly rpcServer: RpcServer<any>,
+    private readonly typeorm: TypeormProvider
+  ) {
+    super({ name, rpcServer })
   }
 
   async init(): Promise<void> {
     await this.amqpServer.bootstrap()
     await Promise.all([this.rpcServer.bootstrap(), this.typeorm.bootstrap()])
-  }
-
-  async start(): Promise<void> {
-    await this.init()
-
-    await this.initCommandRouters()
-
-    this.logger.info('Hospital domain has started')
   }
 }

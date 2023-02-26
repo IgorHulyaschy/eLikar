@@ -6,6 +6,7 @@ import { RpcServerModule } from '@elikar/rpc-server'
 import { App } from './App'
 import { ConfigService } from './config'
 import { MailerModule } from './mailer'
+import { MailgunModule } from './mailgun'
 import { SendPulseModule } from './sendpulse'
 
 export const TYPES = {
@@ -21,6 +22,7 @@ export class AppModule {
         AmqpModule.register(configService.get('amqp')),
         RpcServerModule,
         SendPulseModule.register(configService.get('sendpulse')),
+        MailgunModule.register(configService.get('mailgun')),
         MailerModule
       ],
       deps: {

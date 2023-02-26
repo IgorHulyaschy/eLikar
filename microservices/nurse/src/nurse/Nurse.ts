@@ -21,7 +21,7 @@ export class Nurse {
   password!: string
 
   @Column({ unique: true, nullable: true })
-  tgId!: string
+  tgId?: string
 
   @Column({ default: true })
   isActive!: boolean

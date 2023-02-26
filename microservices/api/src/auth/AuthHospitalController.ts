@@ -1,8 +1,9 @@
 import { post, webController } from '@elikar/application'
+import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
 
 import { HospitalService } from '../hospital'
-import { WrongCredentials } from '../hospital/errors'
+import { WrongCredentials } from '../proxy/errors'
 
 @webController('/auth')
 export class AuthHospitalController {
@@ -13,11 +14,8 @@ export class AuthHospitalController {
     try {
       ctx.body = await this.hospitalService.signIn(ctx.request.body)
     } catch (err) {
-      if (err instanceof WrongCredentials) {
-        ctx.body = { error: err.message }
-        ctx.status = 400
-        return
-      }
+      if (err instanceof WrongCredentials)
+        throw new HTTPError({ status: 400, message: err.message })
       throw err
     }
   }

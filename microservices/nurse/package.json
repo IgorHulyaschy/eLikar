@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@elikar/amqp": "workspace:*",
+    "@elikar/application": "workspace:*",
     "@elikar/commands": "workspace:*",
     "@elikar/dto": "workspace:*",
     "@elikar/logger": "workspace:*",

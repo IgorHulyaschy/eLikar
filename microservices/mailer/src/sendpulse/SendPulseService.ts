@@ -3,6 +3,7 @@ import { inject, injectable } from 'inversify'
 import fetch from 'node-fetch'
 import { URLSearchParams } from 'url'
 import { MailerDto } from '@elikar/dto'
+import * as fs from 'fs'
 
 import { TYPES } from './constants'
 import { Options } from './interfaces'
@@ -35,14 +36,21 @@ export class SendPulseService {
   }
 
   async send({ to, subject, template }: MailerDto.SendMail): Promise<void> {
+    const receivers = Array.isArray(to)
+      ? to.map((email) => {
+          return { email }
+        })
+      : [{ email: to }]
+
     const params = new URLSearchParams()
+    console.log(Buffer.from(template, 'base64').toString('base64'))
     params.append(
       'email',
       JSON.stringify({
-        template,
+        html: fs.readFileSync('./index.html').toString('base64'),
         subject,
         from: this.from,
-        to: [{ email: to }]
+        to: receivers
       })
     )
     const res = await fetch('https://api.sendpulse.com/smtp/emails', {

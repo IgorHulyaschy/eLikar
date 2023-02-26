@@ -1,5 +1,5 @@
 export interface SendMail {
-  to: string
+  to: string | string[]
   subject: string
   template: string
 }

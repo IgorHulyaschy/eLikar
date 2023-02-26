@@ -24,6 +24,7 @@
     { "path": "../../packages/core/rpc-server" },
     { "path": "../../packages/core/amqp" },
     { "path": "../../packages/general/module" },
+    { "path": "../../packages/general/application" },
     { "path": "../../packages/core/typeorm" }
   ]
 }

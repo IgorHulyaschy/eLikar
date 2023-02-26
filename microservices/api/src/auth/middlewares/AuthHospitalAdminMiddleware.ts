@@ -1,8 +1,7 @@
 import { middleware } from '@elikar/application'
 import { Context, Next } from 'koa'
 
-// import { HospitalService } from '../../hospital'
-import { HospitalProxy } from '../../hospital/HospitalProxy'
+import { HospitalProxy } from '../../proxy'
 import { UnauthorizedError } from '../errors'
 
 @middleware()

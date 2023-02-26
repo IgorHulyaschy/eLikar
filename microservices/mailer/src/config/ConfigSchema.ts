@@ -35,6 +35,18 @@ export default {
       env: 'SENDPULSE_SENDER_NAME'
     }
   },
+  mailgun: {
+    apiKey: {
+      format: String,
+      default: '',
+      env: 'MAILGUN_API_KEY'
+    },
+    domain: {
+      format: String,
+      default: '',
+      env: 'MAILGUN_DOMAIN'
+    }
+  },
   application: {
     name: { default: require('../../package.json').name as string }
   }

@@ -1,5 +1,6 @@
+import { ApplicationBuilderModule } from '@elikar/application'
 import { MessageClientModule } from '@elikar/message-client'
-import { ApplicationModule, IModule } from '@elikar/module'
+import { IModule, module } from '@elikar/module'
 import { RpcClientModule } from '@elikar/rpc-client'
 import { LoggerModule } from '@elikar/logger'
 import { AmqpModule } from '@elikar/amqp'
@@ -8,7 +9,8 @@ import { App } from './App'
 import { ConfigService } from './config'
 import { HospitalModule } from './hospital'
 import { AuthModule } from './auth'
-import { ApplicationBuilderModule } from '@elikar/application'
+import { ProxyModule } from './proxy'
+import { NurseModule } from './nurse'
 
 export const TYPES = {
   Options: Symbol('App:Options')
@@ -18,7 +20,8 @@ export interface Options {
   port: number
 }
 
-export class AppModule extends ApplicationModule {
+@module()
+export class AppModule {
   static register(config: ConfigService): IModule {
     return {
       imports: [
@@ -27,8 +30,10 @@ export class AppModule extends ApplicationModule {
         LoggerModule,
         RpcClientModule,
         ApplicationBuilderModule,
+        ProxyModule,
         HospitalModule,
-        AuthModule
+        AuthModule,
+        NurseModule
       ],
       deps: {
         services(local) {
