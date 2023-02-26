@@ -43,7 +43,7 @@ export class SendPulseService {
       : [{ email: to }]
 
     const params = new URLSearchParams()
-    console.log(Buffer.from(template, 'base64').toString('base64'))
+
     params.append(
       'email',
       JSON.stringify({

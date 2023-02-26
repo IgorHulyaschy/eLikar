@@ -55,7 +55,7 @@ export class HospitalService {
     return this.mapper.toDto(admin)
   }
 
-  sendRegistrationLettersForNurses(emails: string[]): Promise<void> {
-    return this.mailerService.sendRegistrationLetters(emails)
+  sendRegistrationLettersForNurses(emails: string[], hospitalId: string): Promise<void> {
+    return this.mailerService.sendRegistrationLetters(emails, hospitalId)
   }
 }

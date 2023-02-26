@@ -28,11 +28,10 @@ export class HospitalWebController {
     ctx.body = ctx.state
   }
 
-  // @useMiddleware(AuthHospitalAdminMiddleware)
+  @useMiddleware(AuthHospitalAdminMiddleware)
   @post('/registration-letters')
   async sendLetters(ctx: Context): Promise<void> {
-    console.log(ctx.request.body)
-    this.service.sendRegistrationLettersForNurses(ctx.request.body.emails)
+    this.service.sendRegistrationLettersForNurses(ctx.request.body.emails, ctx.state.id)
     ctx.body = { success: true }
   }
 }

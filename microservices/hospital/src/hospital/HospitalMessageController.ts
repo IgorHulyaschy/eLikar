@@ -14,7 +14,6 @@ export class HospitalMessageController {
 
   @messageHandler(HospitalSendRegistrationLettersCommand)
   sendRegistrationLettersForNurses(cmd: HospitalSendRegistrationLettersCommand): Promise<void> {
-    console.log(cmd)
-    return this.service.sendRegistrationLettersForNurses(cmd.payload.emails)
+    return this.service.sendRegistrationLettersForNurses(cmd.payload.emails, cmd.payload.hospitalId)
   }
 }

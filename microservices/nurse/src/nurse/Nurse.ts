@@ -1,3 +1,5 @@
+import { NurseDto } from '@elikar/dto'
+import { randomUUID } from 'crypto'
 import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('nurse')
@@ -28,4 +30,17 @@ export class Nurse {
 
   @Column()
   phoneNumber!: string
+
+  static create(dto: NurseDto.CreateNurse): Nurse {
+    const nurse = new Nurse()
+    nurse.id = randomUUID()
+    nurse.email = dto.email
+    nurse.fname = dto.fname
+    nurse.hospitalId = dto.hospitalId
+    nurse.lname = dto.lname
+    nurse.password = dto.password
+    nurse.phoneNumber = dto.phone
+
+    return nurse
+  }
 }

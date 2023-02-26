@@ -46,7 +46,6 @@
     { "path": "microservices/api" },
     { "path": "microservices/hospital" },
     { "path": "microservices/mailer" },
-    { "path": "microservices/test" },
     { "path": "microservices/nurse" }
   ]
 }

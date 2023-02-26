@@ -2,10 +2,13 @@ import { AmqpModule } from '@elikar/amqp'
 import { MessageListenerModule } from '@elikar/message-listener'
 import { IModule, module } from '@elikar/module'
 import { TypeormModule } from '@elikar/typeorm'
+import { BcryptModule } from '@elikar/bcrypt'
+import { LoggerModule } from '@elikar/logger'
 
 import { ConfigService } from './config'
-import { LoggerModule } from '@elikar/logger'
 import { App } from './App'
+import { NurseModule } from './nurse'
+import { RpcServer } from '@elikar/rpc-server'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -19,8 +22,10 @@ export class AppModule {
         TypeormModule.register(config.get('typeorm')),
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
-        LoggerModule
-        // NurseModule
+        LoggerModule,
+        RpcServer,
+        BcryptModule.register(config.get('bcrypt')),
+        NurseModule
         // new MessageClientModule().init()
       ],
       deps: {

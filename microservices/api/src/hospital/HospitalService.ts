@@ -25,8 +25,9 @@ export class HospitalService {
     return this.proxy.validateToken(token)
   }
 
-  async sendRegistrationLettersForNurses(emails: string[]): Promise<void> {
-    console.log(emails, 'alo')
-    return this.messageClient.emit(new HospitalSendRegistrationLettersCommand({ emails }))
+  async sendRegistrationLettersForNurses(emails: string[], hospitalId: string): Promise<void> {
+    return this.messageClient.emit(
+      new HospitalSendRegistrationLettersCommand({ emails, hospitalId })
+    )
   }
 }

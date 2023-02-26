@@ -8,7 +8,7 @@ function main(): void {
   ioc.init()
   const app = ioc.get(App)
 
-  app.start()
+  app.start(ioc)
 }
 
 main()

@@ -14,13 +14,14 @@ export class MailerService {
     )
   }
 
-  async sendRegistrationLetters(emails: string[]): Promise<void> {
+  async sendRegistrationLetters(emails: string[], hospitalId: string): Promise<void> {
     for (const email of emails) {
-      console.log(this.template({ link: `http://localhost:3000/api/nurse/form/${email}` }))
       await this.proxy.send({
         to: email,
         subject: 'Register',
-        template: this.template({ link: `http://localhost:3000/api/nurse/form/${email}` })
+        template: this.template({
+          link: `http://localhost:3000/api/nurse/form/${email}/${hospitalId}`
+        })
       })
     }
   }

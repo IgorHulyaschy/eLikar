@@ -26,6 +26,20 @@ export default {
       default: false
     }
   },
+  bcrypt: {
+    saltRounds: {
+      format: Number,
+      default: 10,
+      env: 'BCRYPT_SALT_ROUNDS'
+    }
+  },
+  jwt: {
+    secret: {
+      format: String,
+      default: 'jwt_secret',
+      env: 'JWT_SECRET'
+    }
+  },
   application: {
     name: { default: require('../../package.json').name as string }
   }
