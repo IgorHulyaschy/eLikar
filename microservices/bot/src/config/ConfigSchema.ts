@@ -33,6 +33,12 @@ export default {
       env: 'TG_BOT_TOKEN'
     }
   },
+  redis: {
+    url: {
+      format: String,
+      default: ''
+    }
+  },
   application: {
     name: { default: require('../../package.json').name as string }
   }
