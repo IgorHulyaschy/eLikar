@@ -1,9 +1,8 @@
 import { HospitalDto } from '@elikar/dto'
-// import { HospitalRpcSchema } from '@elikar/rpc-schemas'
 import { RpcError, HospitalRpcErrorCodes } from '@elikar/rpc-error-codes'
 import { rpcController } from '@elikar/application'
 
-import { AlreadyExistsError, WrongCredentials } from './errors'
+import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { HospitalService } from './HospitalService'
 
 @rpcController('hospital_rpc_queue')
@@ -24,7 +23,7 @@ export class HospitalRpcController {
     try {
       return await this.service.signIn(data)
     } catch (err) {
-      if (err instanceof WrongCredentials)
+      if (err instanceof WrongCredentialsError)
         throw new RpcError(HospitalRpcErrorCodes.WRONG_CREDENTIALS)
       throw err
     }

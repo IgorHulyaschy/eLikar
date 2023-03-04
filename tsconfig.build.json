@@ -40,6 +40,7 @@
     { "path": "packages/core/bcrypt" },
     { "path": "packages/core/jwt" },
     { "path": "packages/core/typeorm" },
+    { "path": "packages/core/bot-provider" },
     { "path": "packages/general/module" },
     { "path": "packages/general/middlewares" },
     { "path": "packages/general/application" },

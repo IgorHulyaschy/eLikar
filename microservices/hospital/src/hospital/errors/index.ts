@@ -1,2 +1,2 @@
 export * from './AlreadyExistsError'
-export * from './WrongCredentials'
+export * from './WrongCredentialsError'

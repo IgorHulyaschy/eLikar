@@ -8,5 +8,6 @@ export interface IModule {
     messageControllers?: Array<Class<any>>
     rpcControllers?: Array<Class<any>>
     webControllers?: Array<Class<any>>
+    botControllers?: Array<Class<any>>
   }
 }

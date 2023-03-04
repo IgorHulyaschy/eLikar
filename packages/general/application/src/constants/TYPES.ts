@@ -4,5 +4,7 @@ export const Decorators = {
   middleware: Symbol('middleware'),
   messageHandlers: Symbol('messageHandlers'),
   rpcController: Symbol('rpcController'),
-  rpcMethod: Symbol('rpcMethod')
+  rpcMethod: Symbol('rpcMethod'),
+  onText: Symbol('onText'),
+  onMessage: Symbol('onMessage')
 }

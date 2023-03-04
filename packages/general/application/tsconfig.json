@@ -22,6 +22,7 @@
     { "path": "../../core/logger" },
     { "path": "../../core/rpc-server" },
     { "path": "../../core/message-client" },
-    { "path": "../../core/message-listener" }
+    { "path": "../../core/message-listener" },
+    { "path": "../../core/bot-provider" }
   ]
 }

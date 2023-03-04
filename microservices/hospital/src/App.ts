@@ -3,8 +3,8 @@ import { TypeormProvider } from '@elikar/typeorm'
 import { RpcServer } from '@elikar/rpc-server'
 import { inject, injectable } from 'inversify'
 import { DomainApplication } from '@elikar/application'
-
 import { MessageListener } from '@elikar/message-listener'
+
 import { TYPES } from './AppModule'
 
 @injectable()

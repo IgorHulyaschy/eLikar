@@ -12,6 +12,7 @@ export function module(module?: {
     messageControllers?: Array<Class<any>>
     rpcControllers?: Array<Class<any>>
     webControllers?: Array<Class<any>>
+    botControllers?: Array<Class<any>>
   }
 }): ClassDecorator {
   return function (constructor) {
@@ -27,6 +28,7 @@ export function getModuleMetadata(target: any): {
     messageControllers?: Array<Class<any>>
     rpcControllers?: Array<Class<any>>
     webControllers?: Array<Class<any>>
+    botControllers?: Array<Class<any>>
   }
 } {
   return Reflect.getMetadata(smb, target)

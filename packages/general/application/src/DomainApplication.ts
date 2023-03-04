@@ -5,6 +5,7 @@ import { RpcServer } from '@elikar/rpc-server'
 
 import { ApplicationBuilder } from './ApplicationBuilder'
 import { ApplicationModule } from '@elikar/module'
+import { BotProvider } from '@elikar/bot-provider'
 
 @injectable()
 export abstract class DomainApplication {
@@ -13,14 +14,17 @@ export abstract class DomainApplication {
   private readonly domainName: string
   readonly messageListener?: MessageListener
   readonly rpcServer?: RpcServer<any>
+  readonly botProvider?: BotProvider
   constructor({
     name,
     messageListener,
-    rpcServer
+    rpcServer,
+    botProvider
   }: {
     name: string
     readonly messageListener?: MessageListener
     readonly rpcServer?: RpcServer<any>
+    readonly botProvider?: BotProvider
   }) {
     this.domainName = name
     this.messageListener = messageListener
@@ -48,6 +52,14 @@ export abstract class DomainApplication {
 
       this.rpcServer.setQueue(queue)
       this.rpcServer.setRpcController(rpcController)
+    }
+
+    if (this.botProvider) {
+      const { controller, onTextMetadata, onMessageMetadata } =
+        this.applicationBuilder.buildBotController(ioc)
+
+      this.botProvider.buildOnTextHandlers(onTextMetadata, controller)
+      this.botProvider.buildOnMessageHandlers(onMessageMetadata, controller)
     }
   }
 }

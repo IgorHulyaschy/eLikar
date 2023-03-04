@@ -3,7 +3,7 @@ import { injectable } from 'inversify'
 import { BcryptService } from '@elikar/bcrypt'
 import { JWTService } from '@elikar/jwt'
 
-import { AlreadyExistsError, WrongCredentials } from './errors'
+import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { Hospital } from './Hospital'
 import { HospitalRepository } from './HospitalRepository'
 import { HospitalMapper } from './HospitalMapper'
@@ -35,9 +35,9 @@ export class HospitalService {
 
   async signIn({ email, password }: HospitalDto.SignIn): Promise<{ token: string }> {
     const admin = await this.repository.findOne({ email })
-    if (!admin) throw new WrongCredentials()
+    if (!admin) throw new WrongCredentialsError()
 
-    if (!(await this.bcrypt.compare(password, admin.password))) throw new WrongCredentials()
+    if (!(await this.bcrypt.compare(password, admin.password))) throw new WrongCredentialsError()
 
     return {
       token: this.jwt.sign({ id: admin.id }, { expiresIn: '1h' })

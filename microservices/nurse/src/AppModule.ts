@@ -8,7 +8,7 @@ import { LoggerModule } from '@elikar/logger'
 import { ConfigService } from './config'
 import { App } from './App'
 import { NurseModule } from './nurse'
-import { RpcServer } from '@elikar/rpc-server'
+import { RpcServerModule } from '@elikar/rpc-server'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -23,7 +23,7 @@ export class AppModule {
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
         LoggerModule,
-        RpcServer,
+        RpcServerModule,
         BcryptModule.register(config.get('bcrypt')),
         NurseModule
         // new MessageClientModule().init()

@@ -2,15 +2,17 @@ import 'reflect-metadata'
 import { Class } from 'type-fest'
 import Router from 'koa-joi-router'
 import { Middleware } from '@elikar/middlewares'
+import { ApplicationModule } from '@elikar/module'
 
 import {
   getHttpHandlersMetadata,
   getMessageHandlersMetadata,
+  getOnMessageMetadata,
+  getOnTextMetadata,
   getRpcControllerMetadata,
   getWebControllersMetadata
 } from './decorators'
 import { getMiddlewaresMetadata } from './decorators/middleware'
-import { ApplicationModule } from '@elikar/module'
 
 export class ApplicationBuilder {
   buildHttpControllers(ioc: ApplicationModule): Router.Router[] {
@@ -82,6 +84,26 @@ export class ApplicationBuilder {
     return {
       queue,
       rpcController
+    }
+  }
+
+  buildBotController(ioc: ApplicationModule): {
+    controller: Class<any>
+    onTextMetadata: Array<{
+      regExp: RegExp
+      methodName: string
+    }>
+    onMessageMetadata: Array<{ message: string; methodName: string }>
+  } {
+    const controller = ioc.get(ioc.globalBotControllers[0])
+
+    const onTextMetadata = getOnTextMetadata(controller)
+    const onMessageMetadata = getOnMessageMetadata(controller)
+
+    return {
+      controller,
+      onTextMetadata,
+      onMessageMetadata
     }
   }
 }

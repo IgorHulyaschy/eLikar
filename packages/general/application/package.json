@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "dependencies": {
+    "@elikar/bot-provider": "workspace:*",
     "@elikar/logger": "workspace:*",
     "@elikar/message-client": "workspace:*",
     "@elikar/message-listener": "workspace:*",

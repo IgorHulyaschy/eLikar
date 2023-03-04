@@ -8,6 +8,7 @@ export class ApplicationModule {
   globalWebControllers: Array<Class<any>> = []
   globalRpcControllers: Array<Class<any>> = []
   globalMessageControllers: Array<Class<any>> = []
+  globalBotControllers: Array<Class<any>> = []
   constructor(private readonly appModule: IModule) {}
 
   private defineControllers(ctor: IModule): void {
@@ -28,6 +29,12 @@ export class ApplicationModule {
         ctor.deps.webControllers.forEach((controller) => {
           this.mainContainer.bind(controller).toSelf().inSingletonScope()
           this.globalWebControllers.push(controller)
+        })
+      }
+      if (ctor.deps.botControllers) {
+        ctor.deps.botControllers.forEach((controller) => {
+          this.mainContainer.bind(controller).toSelf().inSingletonScope()
+          this.globalBotControllers.push(controller)
         })
       }
       ctor.deps.services(this.mainContainer)
