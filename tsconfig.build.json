@@ -39,6 +39,7 @@
     { "path": "packages/core/rpc-server" },
     { "path": "packages/core/bcrypt" },
     { "path": "packages/core/jwt" },
+    { "path": "packages/core/redis" },
     { "path": "packages/core/typeorm" },
     { "path": "packages/core/bot-provider" },
     { "path": "packages/general/module" },
