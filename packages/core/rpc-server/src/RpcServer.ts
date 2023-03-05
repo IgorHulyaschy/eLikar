@@ -33,8 +33,10 @@ export class RpcServer<RpcSchema extends Record<string, (data: any) => Promise<a
         const data = JSON.parse(msg.content.toString())
         let response
         try {
+          console.log(data)
           response = await this.rpc[msg.properties.headers.method as keyof typeof this.rpc](data)
         } catch (err) {
+          console.log(err)
           if (err instanceof RpcError) {
             response = { code: err.code }
           } else {

@@ -9,7 +9,7 @@ export class AuthHospitalAdminMiddleware {
   constructor(private readonly service: HospitalProxy) {}
 
   async use(ctx: Context, next: Next): Promise<void> {
-    const token = ctx.request.headers.authorization
+    const token = ctx.request.headers.authorization?.split(' ')[1]
 
     if (!token) throw new UnauthorizedError()
 

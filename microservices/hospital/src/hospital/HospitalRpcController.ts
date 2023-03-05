@@ -32,4 +32,8 @@ export class HospitalRpcController {
   validateToken(token: string): Promise<HospitalDto.Hospital | null> {
     return this.service.validateToken(token)
   }
+
+  get(id: string): Promise<HospitalDto.Hospital> {
+    return this.service.get(id)
+  }
 }

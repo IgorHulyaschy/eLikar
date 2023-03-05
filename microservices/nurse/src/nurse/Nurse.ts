@@ -31,17 +31,21 @@ export class Nurse {
   @Column()
   phoneNumber!: string
 
-  static create(dto: NurseDto.CreateNurse): Nurse {
-    const nurse = new Nurse()
-    nurse.id = randomUUID()
-    nurse.email = dto.email
-    nurse.fname = dto.fname
-    nurse.hospitalId = dto.hospitalId
-    nurse.lname = dto.lname
-    nurse.password = dto.password
-    nurse.phoneNumber = dto.phone
+  constructor(data?: NurseDto.CreateNurse & { id?: string; isActive?: boolean }) {
+    if (data) {
+      this.id = data.id ?? randomUUID()
+      this.email = data.email
+      this.fname = data.fname
+      this.hospitalId = data.hospitalId
+      this.lname = data.lname
+      this.password = data.password
+      this.phoneNumber = data.phoneNumber
+      this.isActive = data.isActive ?? true
+    }
+  }
 
-    return nurse
+  static create(dto: NurseDto.CreateNurse): Nurse {
+    return new Nurse(dto)
   }
 
   setTgId(tgId: string): void {

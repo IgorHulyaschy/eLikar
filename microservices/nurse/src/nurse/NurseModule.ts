@@ -1,4 +1,5 @@
 import { module } from '@elikar/module'
+import { NurseMapper } from './NurseMapper'
 import { NurseMessageController } from './NurseMessageController'
 import { NurseRepository } from './NurseRepository'
 import { NurseRpcController } from './NurseRpcController'
@@ -10,6 +11,7 @@ import { TelegramConnectionSaga } from './sagas'
     services(local) {
       local.bind(NurseRepository).toSelf().inSingletonScope()
       local.bind(NurseService).toSelf().inSingletonScope()
+      local.bind(NurseMapper).toSelf().inSingletonScope()
     },
     messageControllers: [NurseMessageController, TelegramConnectionSaga],
     rpcControllers: [NurseRpcController]

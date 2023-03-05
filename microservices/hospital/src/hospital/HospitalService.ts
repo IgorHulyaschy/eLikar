@@ -26,6 +26,13 @@ export class HospitalService {
     await this.repository.save(hospital)
   }
 
+  async get(id: string): Promise<HospitalDto.Hospital> {
+    const hospital = await this.repository.findOne({ id })
+    if (!hospital) throw new Error()
+
+    return this.mapper.toDto(hospital)
+  }
+
   async validateCreation({ email }: HospitalDto.CreateHospital): Promise<void> {
     const hospital = await this.repository.findOne({ email })
     if (hospital) throw new AlreadyExistsError()

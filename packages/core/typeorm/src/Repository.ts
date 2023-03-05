@@ -18,8 +18,8 @@ export function Repository<Entity extends Ctor>(entity: Class<Entity>): Class<IR
   class Repos implements IRepository<Entity> {
     constructor(private readonly logger: Logger) {}
     async findOne(param: Partial<Entity>, em = getManager()): Promise<Entity | undefined> {
-      const res = await em.findOne(entity, { where: param })
-      return new entity(res)
+      const en = await em.findOne(entity, { where: param })
+      return new entity(en)
     }
 
     async save(entity: Entity, em = getManager()): Promise<Entity> {

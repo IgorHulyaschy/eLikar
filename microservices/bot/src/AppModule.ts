@@ -1,14 +1,18 @@
 import { IModule, module } from '@elikar/module'
 import { BotProviderModule } from '@elikar/bot-provider'
+import { ApplicationBuilderModule } from '@elikar/application'
+import { RpcClientModule } from '@elikar/rpc-client'
+import { AmqpModule } from '@elikar/amqp'
+import { RedisModule } from '@elikar/redis'
+import { MessageClientModule } from '@elikar/message-client'
+import { LoggerModule } from '@elikar/logger'
 
 import { App } from './App'
 import { BotModule } from './bot'
 import { ConfigService } from './config'
-import { LoggerModule } from '@elikar/logger'
 import { MailerModule } from './mailer'
-import { RpcClientModule } from '@elikar/rpc-client'
-import { AmqpModule } from '@elikar/amqp'
-import { RedisModule } from '@elikar/redis'
+import { NurseModule } from './nurse'
+import { HospitalModule } from './hospital'
 
 export const TYPES = {
   Options: 'Options'
@@ -22,10 +26,14 @@ export class AppModule {
         AmqpModule.register(config.get('amqp')),
         BotProviderModule.register(config.get('bot')),
         RedisModule.register(config.get('redis')),
-        BotModule,
+        ApplicationBuilderModule,
+        RpcClientModule,
+        MessageClientModule,
         LoggerModule,
+        BotModule,
         MailerModule,
-        RpcClientModule
+        NurseModule,
+        HospitalModule
       ],
       deps: {
         services(container) {

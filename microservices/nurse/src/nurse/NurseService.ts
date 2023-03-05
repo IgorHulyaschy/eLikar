@@ -5,12 +5,14 @@ import { injectable } from 'inversify'
 import { Nurse } from './Nurse'
 import { NurseRepository } from './NurseRepository'
 import { AlreadyExistsError } from './errors'
+import { NurseMapper } from './NurseMapper'
 
 @injectable()
 export class NurseService {
   constructor(
     private readonly repository: NurseRepository,
-    private readonly bcrypt: BcryptService
+    private readonly bcrypt: BcryptService,
+    private readonly mapper: NurseMapper
   ) {}
 
   async create(dto: NurseDto.CreateNurse): Promise<void> {
@@ -41,5 +43,12 @@ export class NurseService {
       id,
       email
     }
+  }
+
+  async getByTgId(id: string): Promise<NurseDto.Nurse> {
+    const nurse = await this.repository.findOne({ tgId: id })
+    if (!nurse) throw new Error()
+
+    return this.mapper.toDto(nurse)
   }
 }

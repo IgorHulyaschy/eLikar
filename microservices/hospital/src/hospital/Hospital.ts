@@ -27,14 +27,21 @@ export class Hospital {
   @Column({ nullable: true })
   private?: string
 
-  static create(data: HospitalDto.CreateHospital): Hospital {
-    const hospital = new Hospital()
-    hospital.id = randomUUID()
-    hospital.name = data.name
-    hospital.address = data.address
-    hospital.email = data.email
-    hospital.password = data.password
+  constructor(
+    dto?: HospitalDto.CreateHospital & { id?: string; private?: string; verified?: boolean }
+  ) {
+    if (dto) {
+      this.id = dto.id ?? randomUUID()
+      this.name = dto.name
+      this.address = dto.address
+      this.email = dto.email
+      this.password = dto.password
+      this.private = dto.private
+      this.verified = dto.verified ?? false
+    }
+  }
 
-    return hospital
+  static create(data: HospitalDto.CreateHospital): Hospital {
+    return new Hospital(data)
   }
 }

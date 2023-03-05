@@ -9,11 +9,14 @@ export class Bot {
   @Column()
   email!: string
 
-  static create(dto: BotDto.Bot): Bot {
-    const bot = new Bot()
-    bot.id = dto.id
-    bot.email = dto.email
+  constructor(data?: BotDto.Bot) {
+    if (data) {
+      this.email = data.email
+      this.id = data.id
+    }
+  }
 
-    return bot
+  static create(dto: BotDto.Bot): Bot {
+    return new Bot(dto)
   }
 }

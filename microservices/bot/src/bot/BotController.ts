@@ -41,8 +41,9 @@ export class BotController {
     }
   }
 
-  @onMessage('Keyboard')
+  @onMessage('My account')
   async sayHello(ctx: BotContext): Promise<void> {
-    ctx.sendMessage(ctx.msg.chat.id, 'this.service.sayHello()')
+    const data = await this.service.getMe(String(ctx.msg.chat.id))
+    ctx.sendMessage(ctx.msg.chat.id, JSON.stringify(data), MAIN_MENU)
   }
 }

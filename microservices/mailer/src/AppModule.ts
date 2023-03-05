@@ -1,4 +1,5 @@
 import { AmqpModule } from '@elikar/amqp'
+import { ApplicationBuilderModule } from '@elikar/application'
 import { LoggerModule } from '@elikar/logger'
 import { module, IModule } from '@elikar/module'
 import { RpcServerModule } from '@elikar/rpc-server'
@@ -20,6 +21,7 @@ export class AppModule {
       imports: [
         LoggerModule,
         AmqpModule.register(configService.get('amqp')),
+        ApplicationBuilderModule,
         RpcServerModule,
         SendPulseModule.register(configService.get('sendpulse')),
         MailgunModule.register(configService.get('mailgun')),
