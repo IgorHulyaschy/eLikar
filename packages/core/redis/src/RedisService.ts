@@ -15,10 +15,14 @@ export class RedisService {
     return this.redis.set(key, value)
   }
 
-  async get(key: string): Promise<Record<string, any> | null> {
+  async get<T>(key: string): Promise<T | null> {
     const value = await this.redis.get(key)
 
     if (!value) return null
     return JSON.parse(value)
+  }
+
+  delete(key: string): Promise<number> {
+    return this.redis.del(key)
   }
 }

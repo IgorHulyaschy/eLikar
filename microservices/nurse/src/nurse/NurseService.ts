@@ -27,4 +27,19 @@ export class NurseService {
 
     return
   }
+
+  async setTelegramConnection({
+    email,
+    id
+  }: NurseDto.TelegramConnect): Promise<{ id: string; email: string } | null> {
+    const nurse = await this.repository.findOne({ email })
+    if (!nurse) return null
+
+    nurse.setTgId(id)
+    await this.repository.update(nurse)
+    return {
+      id,
+      email
+    }
+  }
 }

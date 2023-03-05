@@ -7,7 +7,7 @@ export class NurseMessageController {
   constructor(private readonly service: NurseService) {}
 
   @messageHandler(NurseCreateCommand)
-  create(cmd: NurseCreateCommand): Promise<void> {
+  onCreate(cmd: NurseCreateCommand): Promise<void> {
     return this.service.create(cmd.payload)
   }
 }

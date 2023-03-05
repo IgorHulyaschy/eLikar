@@ -6,3 +6,8 @@ export interface CreateNurse {
   hospitalId: string
   phone: string
 }
+
+export interface TelegramConnect {
+  email: string
+  id: string
+}

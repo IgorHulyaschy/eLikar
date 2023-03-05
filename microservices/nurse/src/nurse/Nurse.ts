@@ -43,4 +43,8 @@ export class Nurse {
 
     return nurse
   }
+
+  setTgId(tgId: string): void {
+    this.tgId = tgId
+  }
 }
