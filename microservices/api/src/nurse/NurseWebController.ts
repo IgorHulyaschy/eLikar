@@ -1,10 +1,11 @@
-import { get, post, webController } from '@elikar/application'
+import { get, post, useMiddleware, webController } from '@elikar/application'
 import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
+import { AuthNurseMiddleware } from '../auth/middlewares'
 import { AlreadyExistsError } from '../proxy/errors'
 import { NurseService } from './NurseService'
 
-@webController('/nurse')
+@webController('/nurses')
 export class NurseWebController {
   constructor(private readonly service: NurseService) {}
 
@@ -23,5 +24,11 @@ export class NurseWebController {
         throw new HTTPError({ status: 400, message: err.message })
       throw err
     }
+  }
+
+  @useMiddleware(AuthNurseMiddleware)
+  @get('/me')
+  async getMe(ctx: Context): Promise<void> {
+    ctx.body = ctx.state
   }
 }

@@ -24,4 +24,8 @@ export class NurseService {
     await this.proxy.validateCreation(data)
     return this.messageClient.emit(new NurseCreateCommand(data))
   }
+
+  async signIn(data: NurseDto.SignIn): Promise<{ token: string }> {
+    return this.proxy.signIn(data)
+  }
 }

@@ -1,10 +1,11 @@
 import { NurseDto } from '@elikar/dto'
 import { BcryptService } from '@elikar/bcrypt'
+import { JWTService } from '@elikar/jwt'
 
 import { injectable } from 'inversify'
 import { Nurse } from './Nurse'
 import { NurseRepository } from './NurseRepository'
-import { AlreadyExistsError } from './errors'
+import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { NurseMapper } from './NurseMapper'
 
 @injectable()
@@ -12,6 +13,7 @@ export class NurseService {
   constructor(
     private readonly repository: NurseRepository,
     private readonly bcrypt: BcryptService,
+    private readonly jwtService: JWTService,
     private readonly mapper: NurseMapper
   ) {}
 
@@ -28,6 +30,25 @@ export class NurseService {
     if (nurse) throw new AlreadyExistsError()
 
     return
+  }
+
+  async signIn({ email, password }: NurseDto.SignIn): Promise<{ token: string }> {
+    const nurse = await this.repository.findOne({ email })
+    if (!nurse) throw new WrongCredentialsError()
+    console.log(await this.bcrypt.hash(password))
+    if (!(await this.bcrypt.compare(password, nurse.password))) throw new WrongCredentialsError()
+
+    return { token: this.jwtService.sign({ id: nurse.id }, { expiresIn: '1h' }) }
+  }
+
+  async validateToken(token: string): Promise<NurseDto.Nurse | null> {
+    const payload = this.jwtService.verify<{ id: string }>(token)
+    if (!payload) return null
+
+    const nurse = await this.repository.findOne({ id: payload.id })
+    if (!nurse) return null
+
+    return this.mapper.toDto(nurse)
   }
 
   async setTelegramConnection({

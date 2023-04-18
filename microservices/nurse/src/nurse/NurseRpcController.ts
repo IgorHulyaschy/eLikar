@@ -2,7 +2,7 @@ import { rpcController } from '@elikar/application'
 import { NurseDto } from '@elikar/dto'
 import { RpcError, NurseRpcErrorCodes } from '@elikar/rpc-error-codes'
 
-import { AlreadyExistsError } from './errors'
+import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { NurseService } from './NurseService'
 
 @rpcController('nurse_rpc')
@@ -20,5 +20,19 @@ export class NurseRpcController {
 
   getByTgId(id: string): Promise<NurseDto.Nurse> {
     return this.service.getByTgId(id)
+  }
+
+  async signIn(dto: NurseDto.SignIn): Promise<{ token: string }> {
+    try {
+      return await this.service.signIn(dto)
+    } catch (err) {
+      if (err instanceof WrongCredentialsError)
+        throw new RpcError(NurseRpcErrorCodes.WRONG_CREDENTIALS)
+      throw err
+    }
+  }
+
+  validateToken(token: string): Promise<NurseDto.Nurse | null> {
+    return this.service.validateToken(token)
   }
 }

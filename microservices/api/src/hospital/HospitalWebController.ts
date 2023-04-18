@@ -1,10 +1,10 @@
 import { Context } from 'koa'
 import { post, webController, get, useMiddleware } from '@elikar/application'
+import { HTTPError } from '@elikar/middlewares'
 
 import { AlreadyExistsError } from '../proxy/errors'
 import { HospitalService } from './HospitalService'
 import { AuthHospitalAdminMiddleware } from '../auth/middlewares'
-import { HTTPError } from '@elikar/middlewares'
 
 @webController('/hospital')
 export class HospitalWebController {

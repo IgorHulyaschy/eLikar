@@ -20,3 +20,8 @@ export interface Nurse {
   fname: string
   lname: string
 }
+
+export interface SignIn {
+  email: string
+  password: string
+}

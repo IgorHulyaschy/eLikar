@@ -5,7 +5,7 @@ import { Options } from './interfaces'
 
 @injectable()
 export class BcryptService {
-  constructor(@inject(TYPES.Options) readonly config: Options) {}
+  constructor(@inject(TYPES.Options) private readonly config: Options) {}
 
   hash(stringToHash: string): Promise<string> {
     return bcrypt.hash(stringToHash, this.config.saltRounds)

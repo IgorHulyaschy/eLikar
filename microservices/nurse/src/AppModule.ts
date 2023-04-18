@@ -7,6 +7,7 @@ import { IModule, module } from '@elikar/module'
 import { TypeormModule } from '@elikar/typeorm'
 import { BcryptModule } from '@elikar/bcrypt'
 import { LoggerModule } from '@elikar/logger'
+import { JWTModule } from '@elikar/jwt'
 
 import { ConfigService } from './config'
 import { App } from './App'
@@ -28,6 +29,7 @@ export class AppModule {
         LoggerModule,
         RpcServerModule,
         BcryptModule.register(config.get('bcrypt')),
+        JWTModule.register(config.get('jwt')),
         NurseModule,
         MessageClientModule
       ],

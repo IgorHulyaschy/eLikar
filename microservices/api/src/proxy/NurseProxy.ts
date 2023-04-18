@@ -3,7 +3,7 @@ import { RpcClient } from '@elikar/rpc-client'
 import { NurseRpcErrorCodes, RpcError } from '@elikar/rpc-error-codes'
 import { NurseRpcSchema } from '@elikar/rpc-schemas'
 import { injectable } from 'inversify'
-import { AlreadyExistsError } from './errors'
+import { AlreadyExistsError, WrongCredentials } from './errors'
 
 @injectable()
 export class NurseProxy {
@@ -21,5 +21,20 @@ export class NurseProxy {
       }
       throw err
     }
+  }
+
+  async signIn(data: NurseDto.SignIn): Promise<{ token: string }> {
+    try {
+      return await this.proxy.signIn(data)
+    } catch (err) {
+      if (err instanceof RpcError) {
+        if (err.code === NurseRpcErrorCodes.WRONG_CREDENTIALS) throw new WrongCredentials()
+      }
+      throw err
+    }
+  }
+
+  validateToken(token: string): Promise<NurseDto.Nurse | null> {
+    return this.proxy.validateToken(token)
   }
 }
