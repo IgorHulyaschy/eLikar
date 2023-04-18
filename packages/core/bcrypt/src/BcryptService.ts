@@ -12,7 +12,6 @@ export class BcryptService {
   }
 
   compare(stringToCompare: string, hash: string): Promise<boolean> {
-    console.log(stringToCompare, hash, 'alo')
     return bcrypt.compare(stringToCompare, hash)
   }
 }

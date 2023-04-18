@@ -20,7 +20,7 @@ export class BotController {
     ctx.sendMessage(ctx.msg.chat.id, 'Write your email to connect with main account:')
   }
 
-  // # TODO any chars emails
+  // #TODO any chars emails
   @onText(/([A-Za-z])@([A-Za-z]).([A-Za-z])/)
   async onEmailReceived(ctx: BotContext): Promise<void> {
     await this.service.sendConfirmationLetter(ctx.msg.text!, String(ctx.msg.chat.id))

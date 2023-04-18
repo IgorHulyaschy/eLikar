@@ -35,6 +35,7 @@ export class HospitalService {
 
   async validateCreation({ email }: HospitalDto.CreateHospital): Promise<void> {
     const hospital = await this.repository.findOne({ email })
+    console.log(email, hospital)
     if (hospital) throw new AlreadyExistsError()
 
     return

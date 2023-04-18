@@ -19,6 +19,7 @@ export function Repository<Entity extends Ctor>(entity: Class<Entity>): Class<IR
     constructor(private readonly logger: Logger) {}
     async findOne(param: Partial<Entity>, em = getManager()): Promise<Entity | undefined> {
       const en = await em.findOne(entity, { where: param })
+      if (!en?.id) return undefined
       return new entity(en)
     }
 
