@@ -1,9 +1,10 @@
 import { PrimaryColumn, Column, Entity } from 'typeorm'
 import { HospitalDto } from '@elikar/dto'
 import { randomUUID } from 'crypto'
+import { Domain } from '@elikar/typeorm'
 
 @Entity('hospital')
-export class Hospital {
+export class Hospital extends Domain<Hospital> {
   @PrimaryColumn()
   id!: string
 
@@ -27,21 +28,23 @@ export class Hospital {
   @Column({ nullable: true })
   private?: string
 
-  constructor(
-    dto?: HospitalDto.CreateHospital & { id?: string; private?: string; verified?: boolean }
-  ) {
-    if (dto) {
-      this.id = dto.id ?? randomUUID()
-      this.name = dto.name
-      this.address = dto.address
-      this.email = dto.email
-      this.password = dto.password
-      this.private = dto.private
-      this.verified = dto.verified ?? false
-    }
+  static create(dto: HospitalDto.CreateHospital): Hospital {
+    const hospital = new Hospital()
+    hospital.id = randomUUID()
+    hospital.name = dto.name
+    hospital.address = dto.address
+    hospital.email = dto.email
+    hospital.password = dto.password
+    return hospital
   }
 
-  static create(data: HospitalDto.CreateHospital): Hospital {
-    return new Hospital(data)
+  getEntity(entity: Hospital): void {
+    this.id = entity.id
+    this.name = entity.name
+    this.address = entity.address
+    this.email = entity.email
+    this.password = entity.password
+    this.private = entity.private
+    this.verified = entity.verified
   }
 }

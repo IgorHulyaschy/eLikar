@@ -3,9 +3,11 @@ import { Logger } from '@elikar/logger'
 import { injectable } from 'inversify'
 import { Class } from 'type-fest'
 import { getManager } from 'typeorm'
+import { Domain } from './Domain'
 
-type Ctor = { id: string } & Record<string, any>
-export interface IRepository<Entity extends Ctor> {
+type Ctor<Entity> = Domain<Entity> & Record<string, any> & { id: string }
+
+export interface IRepository<Entity extends Ctor<Entity>> {
   save: (entity: Entity) => Promise<Entity>
 
   findOne: (param: Partial<Entity>) => Promise<Entity | undefined>
@@ -13,14 +15,19 @@ export interface IRepository<Entity extends Ctor> {
   update: (data: Entity) => Promise<void>
 }
 
-export function Repository<Entity extends Ctor>(entity: Class<Entity>): Class<IRepository<Entity>> {
+export function Repository<Entity extends Ctor<Entity>>(
+  entity: Class<Entity>
+): Class<IRepository<Entity>> {
   @injectable()
   class Repos implements IRepository<Entity> {
     constructor(private readonly logger: Logger) {}
     async findOne(param: Partial<Entity>, em = getManager()): Promise<Entity | undefined> {
       const en = await em.findOne(entity, { where: param })
-      if (!en?.id) return undefined
-      return new entity(en)
+      if (!en) return undefined
+
+      const domain = new entity()
+      domain.getEntity(en)
+      return domain
     }
 
     async save(entity: Entity, em = getManager()): Promise<Entity> {

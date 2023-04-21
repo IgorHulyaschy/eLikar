@@ -1,22 +1,24 @@
 import { BotDto } from '@elikar/dto'
+import { Domain } from '@elikar/typeorm'
 import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('bot')
-export class Bot {
+export class Bot extends Domain<Bot> {
   @PrimaryColumn()
   id!: string
 
   @Column()
   email!: string
 
-  constructor(data?: BotDto.Bot) {
-    if (data) {
-      this.email = data.email
-      this.id = data.id
-    }
+  static create(dto: BotDto.Bot): Bot {
+    const bot = new Bot()
+    bot.id = dto.id
+    bot.email = dto.email
+    return bot
   }
 
-  static create(dto: BotDto.Bot): Bot {
-    return new Bot(dto)
+  getEntity(entity: Bot): void {
+    this.id = entity.id
+    this.email = entity.email
   }
 }

@@ -1,9 +1,10 @@
 import { NurseDto } from '@elikar/dto'
+import { Domain } from '@elikar/typeorm'
 import { randomUUID } from 'crypto'
 import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('nurse')
-export class Nurse {
+export class Nurse extends Domain<Nurse> {
   @PrimaryColumn()
   id!: string
 
@@ -31,24 +32,30 @@ export class Nurse {
   @Column()
   phoneNumber!: string
 
-  constructor(data?: NurseDto.CreateNurse & { id?: string; isActive?: boolean }) {
-    if (data) {
-      this.id = data.id ?? randomUUID()
-      this.email = data.email
-      this.fname = data.fname
-      this.hospitalId = data.hospitalId
-      this.lname = data.lname
-      this.password = data.password
-      this.phoneNumber = data.phoneNumber
-      this.isActive = data.isActive ?? true
-    }
-  }
-
   static create(dto: NurseDto.CreateNurse): Nurse {
-    return new Nurse(dto)
+    const nurse = new Nurse()
+    nurse.id = randomUUID()
+    nurse.email = dto.email
+    nurse.fname = dto.fname
+    nurse.hospitalId = dto.hospitalId
+    nurse.lname = dto.lname
+    nurse.password = dto.password
+    nurse.phoneNumber = dto.phoneNumber
+    return nurse
   }
 
   setTgId(tgId: string): void {
     this.tgId = tgId
+  }
+
+  getEntity(entity: Nurse): void {
+    this.id = entity.id
+    this.email = entity.email
+    this.fname = entity.fname
+    this.hospitalId = entity.hospitalId
+    this.lname = entity.lname
+    this.password = entity.password
+    this.phoneNumber = entity.phoneNumber
+    this.isActive = entity.isActive
   }
 }
