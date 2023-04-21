@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { Hospital } from '../hospital/Hospital'
 
 export default {

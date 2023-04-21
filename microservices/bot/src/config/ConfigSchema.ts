@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 import { Bot } from '../bot/Bot'
 
 export default {

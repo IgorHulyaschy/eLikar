@@ -1,12 +1,12 @@
 import { ConnectionOptions } from 'typeorm'
 
-import { Hospital } from './src/hospital/Hospital'
+import { MedicineEntity } from './src/medicine/MedicineRepository'
 
 const config: ConnectionOptions = {
   url: process.env.POSTGRES_URL ?? 'postgres://localhost/postgres',
   type: 'postgres',
   migrations: ['migrations/*.ts'],
-  entities: [Hospital],
+  entities: [MedicineEntity] as any[],
   cli: {
     migrationsDir: 'migrations'
   }

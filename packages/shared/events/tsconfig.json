@@ -5,8 +5,9 @@
     "rootDir": "src",
     "composite": true,
     "tsBuildInfoFile": "lib/.tsbuildinfo",
-    "types": [
-      "node",
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
     ]
   },
   "include": [
@@ -16,7 +17,7 @@
     "src/**/*.spec.ts"
   ],
   "references": [
-    { "path": "../logger" },
-    { "path": "../../general/module" }
+    { "path": "../../core/typeorm" },
+    { "path": "../dto" }
   ]
 }

@@ -8,7 +8,7 @@ import { Aggregate } from './Aggregate'
 import { Class } from 'type-fest'
 import { isUniqueKeyError } from './TypeormUtils'
 
-export interface IRepository<Domain extends Aggregate<any>> {
+export interface IAggregateRepository<Domain extends Aggregate<any>> {
   save: (aggregate: Domain) => Promise<void>
   findOne: ({ id }: { id: string }) => Promise<Domain>
 }
@@ -20,9 +20,9 @@ export function AggregateRepository<
   domain: Class<Domain>,
   aggreagteEvents: Array<Class<AggregateEvent>>,
   tableName: string
-): Class<IRepository<Domain>> {
+): Class<IAggregateRepository<Domain>> {
   @injectable()
-  class Repo {
+  class Repo implements IAggregateRepository<Domain> {
     private mapToEvent<T extends AggregateEvent>(
       eventEntity: Event<any>,
       eventsAggregate: Array<Class<T>>

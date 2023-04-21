@@ -32,6 +32,7 @@
     { "path": "packages/core/message-listener" },
     { "path": "packages/core/amqp" },
     { "path": "packages/shared/commands" },
+    { "path": "packages/shared/events" },
     { "path": "packages/shared/dto" },
     { "path": "packages/shared/rpc-schemas" },
     { "path": "packages/shared/rpc-error-codes" },
@@ -49,6 +50,7 @@
     { "path": "microservices/hospital" },
     { "path": "microservices/mailer" },
     { "path": "microservices/nurse" },
-    { "path": "microservices/bot" }
+    { "path": "microservices/bot" },
+    { "path": "microservices/medicine" }
   ]
 }

@@ -121,10 +121,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@elikar/dto@workspace:*, @elikar/dto@workspace:packages/shared/dto":
+"@elikar/dto@workspace:*, @elikar/dto@workspace:packages/shared/dto, @elikar/dto@workspaces:*":
   version: 0.0.0-use.local
   resolution: "@elikar/dto@workspace:packages/shared/dto"
   dependencies:
+    ts-node: ^10.9.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
+"@elikar/events@workspace:*, @elikar/events@workspace:packages/shared/events":
+  version: 0.0.0-use.local
+  resolution: "@elikar/events@workspace:packages/shared/events"
+  dependencies:
+    "@elikar/dto": "workspaces:*"
+    "@elikar/typeorm": "workspaces:*"
     ts-node: ^10.9.1
     typescript: ^4.9.4
   languageName: unknown
@@ -298,13 +309,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@elikar/typeorm@workspace:*, @elikar/typeorm@workspace:packages/core/typeorm":
+"@elikar/typeorm@workspace:*, @elikar/typeorm@workspace:packages/core/typeorm, @elikar/typeorm@workspaces:*":
   version: 0.0.0-use.local
   resolution: "@elikar/typeorm@workspace:packages/core/typeorm"
   dependencies:
     "@elikar/logger": "workspace:*"
     "@elikar/module": "workspace:*"
+    "@types/node": ^18.15.13
     "@types/pg": ^8
+    class-transformer: ^0.5.1
     inversify: "*"
     pg: ^8.9.0
     reflect-metadata: ^0.1.13
@@ -854,6 +867,13 @@ __metadata:
   version: 18.11.18
   resolution: "@types/node@npm:18.11.18"
   checksum: 03f17f9480f8d775c8a72da5ea7e9383db5f6d85aa5fefde90dd953a1449bd5e4ffde376f139da4f3744b4c83942166d2a7603969a6f8ea826edfb16e6e3b49d
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.15.13":
+  version: 18.15.13
+  resolution: "@types/node@npm:18.15.13"
+  checksum: 79cc5a2b5f98e8973061a4260a781425efd39161a0e117a69cd089603964816c1a14025e1387b4590c8e82d05133b7b4154fa53a7dffb3877890a66145e76515
   languageName: node
   linkType: hard
 
@@ -1624,6 +1644,13 @@ __metadata:
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
   checksum: c57cf9dd0791e2f18a5ee9c1a299ae6e801ff58fee96dc8bfd0dcb4738a6ce58dd252a3605b1c93c6418fe4f9d5093b28ffbf4d66648cb2a9c67eaef9679be2f
+  languageName: node
+  linkType: hard
+
+"class-transformer@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "class-transformer@npm:0.5.1"
+  checksum: f191c8b4cc4239990f5efdd790cabdd852c243ed66248e39f6616a349c910c6eed2d9fd1fbf7ee6ea89f69b4f1d0b493b27347fe0cd0ae26b47c3745a805b6d3
   languageName: node
   linkType: hard
 
@@ -3929,6 +3956,42 @@ __metadata:
   checksum: af1b38516c28ec95d6b0826f6c8f276c58aec391f76be42aa07646b4e39d317723e869700933ca6995b056db4b09a78c92d5440dc23657e6764be5d28874bba1
   languageName: node
   linkType: hard
+
+"medicine@workspace:microservices/medicine":
+  version: 0.0.0-use.local
+  resolution: "medicine@workspace:microservices/medicine"
+  dependencies:
+    "@elikar/amqp": "workspace:*"
+    "@elikar/application": "workspace:*"
+    "@elikar/bcrypt": "workspace:*"
+    "@elikar/commands": "workspace:*"
+    "@elikar/dto": "workspace:*"
+    "@elikar/events": "workspace:*"
+    "@elikar/jwt": "workspace:*"
+    "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
+    "@elikar/message-listener": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@elikar/rpc-error-codes": "workspace:*"
+    "@elikar/rpc-schemas": "workspace:*"
+    "@elikar/rpc-server": "workspace:*"
+    "@elikar/typeorm": "workspace:*"
+    "@types/amqplib": ^0
+    "@types/bunyan": ^1
+    "@types/convict": ^6
+    "@types/node": ^18.11.18
+    "@types/pg": ^8
+    bunyan: ^1.8.15
+    convict: ^6.2.4
+    dotenv: ^16.0.3
+    inversify: ^6.0.1
+    pg: ^8.9.0
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    typeorm: ^0.2.31
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
 
 "merge2@npm:^1.3.0, merge2@npm:^1.4.1":
   version: 1.4.1

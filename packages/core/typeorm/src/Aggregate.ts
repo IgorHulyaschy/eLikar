@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 import { Event } from './Event'
 
 export abstract class Aggregate<TEvent extends Event<any>> {
-  id = randomUUID()
+  id: string = randomUUID()
   version = 0
 
   domainEvents: TEvent[] = []

@@ -1,10 +1,9 @@
 import { Class } from 'type-fest'
-import { Column, Entity, Index, PrimaryColumn, QueryFailedError, Unique } from 'typeorm'
+import { Column, Entity, Index, PrimaryColumn, QueryFailedError } from 'typeorm'
 import { Event } from './Event'
 
 export function createAggregateEntity(tableName: string): Class<Event<any>> {
   @Entity(tableName)
-  @Unique(['uniqueKey'])
   @Index(['id', 'version'], { unique: true })
   class AggregateEntity implements Event<any> {
     @PrimaryColumn()

@@ -1,4 +1,4 @@
-import { Nurse } from '../nurse/Nurse'
+import { MedicineEntity } from '../medicine/MedicineRepository'
 
 export default {
   amqp: {
@@ -14,7 +14,7 @@ export default {
       default: 'postgres'
     },
     entities: {
-      default: [Nurse] as any[]
+      default: [MedicineEntity] as any[]
     },
     url: {
       format: String,
@@ -23,20 +23,6 @@ export default {
     },
     logging: {
       default: false
-    }
-  },
-  bcrypt: {
-    saltRounds: {
-      format: Number,
-      default: 10,
-      env: 'BCRYPT_SALT_ROUNDS'
-    }
-  },
-  jwt: {
-    secret: {
-      format: String,
-      default: 'jwt_secret',
-      env: 'JWT_SECRET'
     }
   },
   application: {
