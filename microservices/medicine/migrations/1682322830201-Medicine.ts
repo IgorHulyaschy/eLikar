@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Medicine1682117113229 implements MigrationInterface {
-    name = 'Medicine1682117113229'
+export class Medicine1682322830201 implements MigrationInterface {
+    name = 'Medicine1682322830201'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
@@ -11,7 +11,7 @@ export class Medicine1682117113229 implements MigrationInterface {
                 "eventName" character varying NOT NULL,
                 "payload" jsonb,
                 "saved" boolean NOT NULL DEFAULT true,
-                "createdAt" TIMESTAMP NOT NULL DEFAULT '"2023-04-21T22:45:13.839Z"',
+                "createdAt" TIMESTAMP NOT NULL DEFAULT '"2023-04-24T07:53:50.825Z"',
                 CONSTRAINT "PK_b9e0e6f37b7cadb5f402390928b" PRIMARY KEY ("id")
             )
         `);

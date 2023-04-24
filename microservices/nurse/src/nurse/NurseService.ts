@@ -35,7 +35,7 @@ export class NurseService {
   async signIn({ email, password }: NurseDto.SignIn): Promise<{ token: string }> {
     const nurse = await this.repository.findOne({ email })
     if (!nurse) throw new WrongCredentialsError()
-    console.log(await this.bcrypt.hash(password))
+
     if (!(await this.bcrypt.compare(password, nurse.password))) throw new WrongCredentialsError()
 
     return { token: this.jwtService.sign({ id: nurse.id }, { expiresIn: '1h' }) }

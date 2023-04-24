@@ -1,7 +1,8 @@
 /* eslint-disable new-cap */
 import { injectable } from 'inversify'
 import { getManager } from 'typeorm'
-import { plainToClass } from 'class-transformer'
+import { instanceToPlain, plainToInstance } from 'class-transformer'
+import 'reflect-metadata'
 
 import { Event } from './Event'
 import { Aggregate } from './Aggregate'
@@ -15,12 +16,20 @@ export interface IAggregateRepository<Domain extends Aggregate<any>> {
 
 export function AggregateRepository<
   Domain extends Aggregate<any>,
-  AggregateEvent extends Event<any>
->(
-  domain: Class<Domain>,
-  aggreagteEvents: Array<Class<AggregateEvent>>,
+  AggregateEvent extends Event<any>,
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
+  Entity extends any
+>({
+  domain,
+  aggreagteEvents,
+  tableName,
+  entity
+}: {
+  domain: Class<Domain>
+  aggreagteEvents: Array<Class<AggregateEvent>>
   tableName: string
-): Class<IAggregateRepository<Domain>> {
+  entity: Class<Entity>
+}): Class<IAggregateRepository<Domain>> {
   @injectable()
   class Repo implements IAggregateRepository<Domain> {
     private mapToEvent<T extends AggregateEvent>(
@@ -30,7 +39,7 @@ export function AggregateRepository<
       const ctor = eventsAggregate.find((e) => e.name === eventEntity.eventName)
       if (!ctor) throw new Error('Cannot coerce message.')
 
-      return plainToClass(ctor, eventEntity)
+      return plainToInstance(ctor, eventEntity)
     }
 
     async findOne({ id }: { id: string }, em = getManager()): Promise<Domain> {
@@ -57,8 +66,10 @@ export function AggregateRepository<
 
     async save(aggregate: Domain, em = getManager()): Promise<void> {
       try {
-        const events = aggregate.domainEvents.filter((de) => !de.saved)
-        await em.save(events)
+        const eventsToSave = aggregate.domainEvents
+          .filter((de) => !de.saved)
+          .map((de) => plainToInstance(entity, instanceToPlain(de)))
+        await em.save(eventsToSave)
       } catch (err) {
         if (isUniqueKeyError(err)) throw new Error('Not unique')
         throw err

@@ -11,6 +11,7 @@ import { HospitalModule } from './hospital'
 import { AuthModule } from './auth'
 import { ProxyModule } from './proxy'
 import { NurseModule } from './nurse'
+import { MedicineModule } from './medicine'
 
 export const TYPES = {
   Options: Symbol('App:Options')
@@ -33,7 +34,8 @@ export class AppModule {
         ProxyModule,
         HospitalModule,
         AuthModule,
-        NurseModule
+        NurseModule,
+        MedicineModule
       ],
       deps: {
         services(local) {

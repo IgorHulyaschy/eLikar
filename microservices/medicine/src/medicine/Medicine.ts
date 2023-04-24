@@ -1,5 +1,6 @@
 import { Aggregate } from '@elikar/typeorm'
 import { MedicineRegisteredEvent } from '@elikar/events'
+import { MedicineDto } from '@elikar/dto'
 
 export class Medicine extends Aggregate<MedicineRegisteredEvent> {
   name!: string
@@ -12,5 +13,9 @@ export class Medicine extends Aggregate<MedicineRegisteredEvent> {
       this.unitOfMeasurement = event.payload.unitOfMeasurement
       this.count = 0
     }
+  }
+
+  static create(dto: MedicineDto.MedicineRegistered): Medicine {
+    return new Medicine().addEvents(new MedicineRegisteredEvent(dto))
   }
 }

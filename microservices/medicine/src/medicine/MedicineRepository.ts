@@ -6,8 +6,9 @@ import { MedicineRegisteredEvent } from '@elikar/events'
 export const MedicineEntity = createAggregateEntity('medicine')
 
 @injectable()
-export class MedicineRepository extends AggregateRepository(
-  Medicine,
-  [MedicineRegisteredEvent],
-  'medicine'
-) {}
+export class MedicineRepository extends AggregateRepository({
+  domain: Medicine,
+  aggreagteEvents: [MedicineRegisteredEvent],
+  tableName: 'medicine',
+  entity: MedicineEntity
+}) {}

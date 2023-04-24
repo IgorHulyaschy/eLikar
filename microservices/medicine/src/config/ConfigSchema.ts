@@ -23,7 +23,8 @@ export default {
     },
     logging: {
       default: false
-    }
+    },
+    autoLoadEntities: { default: true }
   },
   application: {
     name: { default: require('../../package.json').name as string }

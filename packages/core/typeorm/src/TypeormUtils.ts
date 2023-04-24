@@ -1,9 +1,10 @@
 import { Class } from 'type-fest'
+import 'reflect-metadata'
 import { Column, Entity, Index, PrimaryColumn, QueryFailedError } from 'typeorm'
 import { Event } from './Event'
 
 export function createAggregateEntity(tableName: string): Class<Event<any>> {
-  @Entity(tableName)
+  @Entity({ name: tableName })
   @Index(['id', 'version'], { unique: true })
   class AggregateEntity implements Event<any> {
     @PrimaryColumn()
