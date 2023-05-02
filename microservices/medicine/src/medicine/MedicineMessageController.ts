@@ -1,5 +1,5 @@
+import { MedicineRegisterCommand, MedicineCountUpdateCommand } from '@elikar/commands'
 import { messageController, messageHandler } from '@elikar/application'
-import { MedicineRegisterCommand } from '@elikar/commands'
 import { MedicineService } from './MedicineService'
 
 @messageController()
@@ -9,5 +9,10 @@ export class MedicineMessageController {
   @messageHandler(MedicineRegisterCommand)
   onCreate(cmd: MedicineRegisterCommand): Promise<void> {
     return this.service.create(cmd.payload)
+  }
+
+  @messageHandler(MedicineCountUpdateCommand)
+  onUpdate(cmd: MedicineCountUpdateCommand): Promise<void> {
+    return this.service.updateMedicineCount(cmd.payload)
   }
 }

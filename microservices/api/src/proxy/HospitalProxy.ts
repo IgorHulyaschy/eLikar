@@ -3,7 +3,7 @@ import { RpcClient } from '@elikar/rpc-client'
 import { HospitalRpcErrorCodes, RpcError } from '@elikar/rpc-error-codes'
 import { HospitalRpcSchema } from '@elikar/rpc-schemas'
 import { injectable } from 'inversify'
-import { AlreadyExistsError, WrongCredentials } from './errors'
+import { AlreadyExistsError, TokenExpitedError, WrongCredentials } from './errors'
 
 @injectable()
 export class HospitalProxy {
@@ -34,7 +34,14 @@ export class HospitalProxy {
     }
   }
 
-  validateToken(token: string): Promise<HospitalDto.Hospital | null> {
-    return this.proxy.validateToken(token)
+  async validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    try {
+      return await this.proxy.validateToken(token)
+    } catch (err) {
+      if (err instanceof RpcError) {
+        if (err.code === HospitalRpcErrorCodes.TOKEN_EXPIRED) throw new TokenExpitedError()
+      }
+      throw err
+    }
   }
 }

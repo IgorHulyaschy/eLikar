@@ -22,9 +22,9 @@ export class RpcClient {
           Tracing.run(msg.properties.headers.traceId as string, () => {
             // setTimeout(() => reject, 10 * 1000) // reject after no response
 
-            const response = JSON.parse(msg.content.toString())
+            const response = JSON.parse(msg.content.toString()).content
 
-            if (response.code) {
+            if (response && response.code) {
               this.logger.info(
                 `Rpc call to ${queueName + '.' + methodName} - failed with status-code: ${
                   response.code as number
@@ -33,7 +33,7 @@ export class RpcClient {
               reject(new RpcError(response.code))
               return
             }
-            if (response.error) {
+            if (response && response.error) {
               reject(response.error)
               return
             }
@@ -46,13 +46,17 @@ export class RpcClient {
       )
     })
     this.logger.info(`Rpc call to ${queueName + '.' + methodName} - pending`)
-    this.amqp.channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)), {
-      replyTo: queue.queue,
-      headers: {
-        method: methodName,
-        traceId: Tracing.getTrace()
+    this.amqp.channel.sendToQueue(
+      queueName,
+      Buffer.from(data ? JSON.stringify(data) : JSON.stringify({ noContent: true })),
+      {
+        replyTo: queue.queue,
+        headers: {
+          method: methodName,
+          traceId: Tracing.getTrace()
+        }
       }
-    })
+    )
     return promise
   }
 

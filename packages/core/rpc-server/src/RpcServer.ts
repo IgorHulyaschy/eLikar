@@ -43,7 +43,7 @@ export class RpcServer<RpcSchema extends Record<string, (data: any) => Promise<a
         }
         this.amqp.channel.sendToQueue(
           msg.properties.replyTo,
-          Buffer.from(JSON.stringify(response ?? { success: true })),
+          Buffer.from(JSON.stringify({ success: true, content: response ?? null })),
           {
             headers: {
               traceId: Tracing.getTrace()

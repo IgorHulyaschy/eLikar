@@ -1,4 +1,4 @@
-import { PrimaryColumn, Column, Entity, getManager } from 'typeorm'
+import { PrimaryColumn, Column, Entity } from 'typeorm'
 import { HospitalDto } from '@elikar/dto'
 import { randomUUID } from 'crypto'
 import { Domain } from '@elikar/typeorm'

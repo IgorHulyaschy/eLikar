@@ -18,6 +18,6 @@ export class AuthHospitalAdminMiddleware {
     if (!admin) throw new Error()
 
     ctx.state = admin
-    next()
+    return next()
   }
 }

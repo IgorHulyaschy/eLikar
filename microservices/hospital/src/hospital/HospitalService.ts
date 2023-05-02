@@ -52,7 +52,7 @@ export class HospitalService {
   }
 
   async validateToken(token: string): Promise<HospitalDto.Hospital | null> {
-    const payload = this.jwt.verify<{ id: string }>(token)
+    const payload = await this.jwt.verify<{ id: string }>(token)
 
     if (!payload) return null
 

@@ -1,6 +1,7 @@
 import { HospitalDto } from '@elikar/dto'
 import { RpcError, HospitalRpcErrorCodes } from '@elikar/rpc-error-codes'
 import { rpcController } from '@elikar/application'
+import { TokenExpiredError } from '@elikar/jwt'
 
 import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { HospitalService } from './HospitalService'
@@ -29,8 +30,15 @@ export class HospitalRpcController {
     }
   }
 
-  validateToken(token: string): Promise<HospitalDto.Hospital | null> {
-    return this.service.validateToken(token)
+  async validateToken(token: string): Promise<HospitalDto.Hospital | null> {
+    try {
+      return await this.service.validateToken(token)
+    } catch (err) {
+      if (err instanceof TokenExpiredError) {
+        throw new RpcError(HospitalRpcErrorCodes.TOKEN_EXPIRED)
+      }
+      throw err
+    }
   }
 
   get(id: string): Promise<HospitalDto.Hospital> {

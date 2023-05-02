@@ -1,5 +1,5 @@
-import { post, useMiddleware, webController } from '@elikar/application'
-import { Context } from 'koa'
+import { get, post, useMiddleware, webController, Context } from '@elikar/application'
+import { MedicineDto } from '@elikar/dto'
 
 import { AuthHospitalAdminMiddleware } from '../auth/middlewares'
 import { MedicineService } from './MedicineService'
@@ -10,8 +10,15 @@ export class MedicineWebController {
 
   @useMiddleware(AuthHospitalAdminMiddleware)
   @post('')
-  async createMedicine(ctx: Context): Promise<void> {
-    await this.service.create(ctx.request.body)
+  async createMedicine(ctx: Context<MedicineDto.MedicineRegister>): Promise<void> {
+    await this.service.create(ctx.request.body, ctx.state.id)
     ctx.status = 200
+  }
+
+  @useMiddleware(AuthHospitalAdminMiddleware)
+  @get('')
+  async getAll(ctx: Context): Promise<void> {
+    ctx.status = 200
+    ctx.body = await this.service.getAll(ctx.state.id)
   }
 }

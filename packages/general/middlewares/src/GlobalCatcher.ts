@@ -9,8 +9,12 @@ export class GlobalCatcher {
     } catch (err) {
       if (err.UNAUTHORIZED) {
         ctx.body = { error: err.message }
-        ctx.body = 401
+        ctx.status = 401
         return
+      }
+      if (err.TOKEN_EXPIRED) {
+        ctx.body = { error: err.message }
+        ctx.status = 400
       }
       if (err instanceof HTTPError) {
         ctx.body = {

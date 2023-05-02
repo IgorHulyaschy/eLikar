@@ -1,37 +1,40 @@
 /* eslint-disable new-cap */
 import { injectable } from 'inversify'
-import { getManager } from 'typeorm'
+import { getManager, In } from 'typeorm'
 import { instanceToPlain, plainToInstance } from 'class-transformer'
 import 'reflect-metadata'
 
 import { Event } from './Event'
 import { Aggregate } from './Aggregate'
-import { Class } from 'type-fest'
+import { Class, PartialDeep } from 'type-fest'
 import { isUniqueKeyError } from './TypeormUtils'
 
-export interface IAggregateRepository<Domain extends Aggregate<any>> {
+export interface IAggregateRepository<
+  Domain extends Aggregate<any>,
+  AggregateEvent extends Event<any>
+> {
   save: (aggregate: Domain) => Promise<void>
   findOne: ({ id }: { id: string }) => Promise<Domain>
+  findAllByEvent: <TEvent extends Class<Event<any>>>(
+    event: TEvent,
+    { payload }: PartialDeep<AggregateEvent>
+  ) => Promise<Domain[]>
 }
 
 export function AggregateRepository<
   Domain extends Aggregate<any>,
-  AggregateEvent extends Event<any>,
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
-  Entity extends any
+  AggregateEvent extends Event<any>
 >({
   domain,
   aggreagteEvents,
-  tableName,
   entity
 }: {
   domain: Class<Domain>
   aggreagteEvents: Array<Class<AggregateEvent>>
-  tableName: string
-  entity: Class<Entity>
-}): Class<IAggregateRepository<Domain>> {
+  entity: Class<AggregateEvent>
+}): Class<IAggregateRepository<Domain, AggregateEvent>> {
   @injectable()
-  class Repo implements IAggregateRepository<Domain> {
+  class Repo implements IAggregateRepository<Domain, AggregateEvent> {
     private mapToEvent<T extends AggregateEvent>(
       eventEntity: Event<any>,
       eventsAggregate: Array<Class<T>>
@@ -43,15 +46,15 @@ export function AggregateRepository<
     }
 
     async findOne({ id }: { id: string }, em = getManager()): Promise<Domain> {
-      const events = await em.query(
-        `
-        SELECT id, payload, version, eventName
-        FROM @1
-        WHERE id = @0
-        ORDER BY version
-      `,
-        [id, tableName]
-      )
+      const events = await em
+        .createQueryBuilder(entity, 'e')
+        .select()
+        .where({
+          id,
+          eventName: In(aggreagteEvents.map((event) => event.name))
+        })
+        .orderBy('e.version', 'ASC')
+        .getMany()
       const mapedEvents = events.map(
         (e: {
           id: string
@@ -62,6 +65,21 @@ export function AggregateRepository<
         }) => this.mapToEvent(e, aggreagteEvents)
       )
       return new domain().addEvents(mapedEvents)
+    }
+
+    async findAllByEvent<TEvent extends Class<Event<any>>>(
+      event: TEvent,
+      { payload }: PartialDeep<AggregateEvent>,
+      em = getManager()
+    ): Promise<Domain[]> {
+      const qb = em.createQueryBuilder(entity, 'e').select().where({
+        eventName: event.name
+      })
+      const query = payload ? qb.andWhere(`payload @> :payload`, { payload }) : qb
+
+      const events = await query.orderBy('e.version', 'ASC').getMany()
+
+      return Promise.all(events.map((event) => this.findOne({ id: event.id })))
     }
 
     async save(aggregate: Domain, em = getManager()): Promise<void> {

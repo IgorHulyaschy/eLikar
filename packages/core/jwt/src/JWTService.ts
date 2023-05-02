@@ -5,6 +5,7 @@ import { Logger } from '@elikar/logger'
 
 import { TYPES } from './contants'
 import { Options } from './interfaces'
+import { TokenExpiredError } from './errors'
 
 @injectable()
 export class JWTService {
@@ -17,10 +18,13 @@ export class JWTService {
     return jwt.sign(payload, this.config.secret, options)
   }
 
-  verify<T extends JwtPayload>(token: string): T | null {
+  async verify<T extends JwtPayload>(token: string): Promise<T | null> {
     try {
       return jwt.verify(token, this.config.secret) as T
     } catch (err) {
+      if (err.message.includes('jwt expired')) {
+        throw new TokenExpiredError()
+      }
       this.logger.error('wrong-secret')
       return null
     }
