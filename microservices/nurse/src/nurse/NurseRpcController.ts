@@ -1,5 +1,6 @@
 import { rpcController } from '@elikar/application'
 import { NurseDto } from '@elikar/dto'
+import { TokenExpiredError } from '@elikar/jwt'
 import { RpcError, NurseRpcErrorCodes } from '@elikar/rpc-error-codes'
 
 import { AlreadyExistsError, WrongCredentialsError } from './errors'
@@ -32,7 +33,12 @@ export class NurseRpcController {
     }
   }
 
-  validateToken(token: string): Promise<NurseDto.Nurse | null> {
-    return this.service.validateToken(token)
+  async validateToken(token: string): Promise<NurseDto.Nurse | null> {
+    try {
+      return await this.service.validateToken(token)
+    } catch (err) {
+      if (err instanceof TokenExpiredError) throw new RpcError(NurseRpcErrorCodes.TOKEN_EXPIRED)
+      throw err
+    }
   }
 }

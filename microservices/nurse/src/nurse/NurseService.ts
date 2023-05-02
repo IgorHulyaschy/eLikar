@@ -42,7 +42,7 @@ export class NurseService {
   }
 
   async validateToken(token: string): Promise<NurseDto.Nurse | null> {
-    const payload = this.jwtService.verify<{ id: string }>(token)
+    const payload = await this.jwtService.verify<{ id: string }>(token)
     if (!payload) return null
 
     const nurse = await this.repository.findOne({ id: payload.id })
