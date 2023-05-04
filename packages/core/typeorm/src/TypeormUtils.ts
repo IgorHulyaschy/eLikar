@@ -5,13 +5,16 @@ import { Event } from './Event'
 
 export function createAggregateEntity(tableName: string): Class<Event<any>> {
   @Entity({ name: tableName })
-  @Index(['id', 'version'], { unique: true })
+  @Index(['aggregateId', 'aggregateVersion'], { unique: true })
   class AggregateEntity implements Event<any> {
     @PrimaryColumn()
     id!: string
 
     @Column()
-    version!: number
+    aggregateId!: string
+
+    @Column()
+    aggregateVersion!: number
 
     @Column()
     eventName!: string

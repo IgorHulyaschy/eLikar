@@ -14,7 +14,7 @@ export interface IAggregateRepository<
   AggregateEvent extends Event<any>
 > {
   save: (aggregate: Domain) => Promise<void>
-  findOne: ({ id }: { id: string }) => Promise<Domain>
+  findOne: ({ aggregateId }: { aggregateId: string }) => Promise<Domain>
   findAllByEvent: <TEvent extends Class<Event<any>>>(
     event: TEvent,
     { payload }: PartialDeep<AggregateEvent>
@@ -45,22 +45,23 @@ export function AggregateRepository<
       return plainToInstance(ctor, eventEntity)
     }
 
-    async findOne({ id }: { id: string }, em = getManager()): Promise<Domain> {
+    async findOne({ aggregateId }: { aggregateId: string }, em = getManager()): Promise<Domain> {
       const events = await em
         .createQueryBuilder(entity, 'e')
         .select()
         .where({
-          id,
+          aggregateId,
           eventName: In(aggreagteEvents.map((event) => event.name))
         })
-        .orderBy('e.version', 'ASC')
+        .orderBy('e.aggregateVersion', 'ASC')
         .getMany()
       const mapedEvents = events.map(
         (e: {
           id: string
+          aggregateVersion: number
+          aggregateId: string
           payload: Record<string, any>
           eventName: string
-          version: number
           saved?: boolean
         }) => this.mapToEvent(e, aggreagteEvents)
       )
@@ -77,14 +78,17 @@ export function AggregateRepository<
       })
       const query = payload ? qb.andWhere(`payload @> :payload`, { payload }) : qb
 
-      const events = await query.orderBy('e.version', 'ASC').getMany()
+      const events = await query.orderBy('e.aggregateVersion', 'ASC').getMany()
 
-      return Promise.all(events.map((event) => this.findOne({ id: event.id })))
+      return Promise.all(events.map((event) => this.findOne({ aggregateId: event.aggregateId })))
     }
 
     async save(aggregate: Domain, em = getManager()): Promise<void> {
       try {
-        const eventsToSave = aggregate.domainEvents
+        const aggsCopy = ([] as Domain[]).concat(aggregate)
+        const eventsToSave = aggsCopy
+          .map((a) => a.domainEvents)
+          .flat()
           .filter((de) => !de.saved)
           .map((de) => plainToInstance(entity, instanceToPlain(de)))
         await em.save(eventsToSave)

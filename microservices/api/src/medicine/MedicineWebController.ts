@@ -1,4 +1,4 @@
-import { get, post, useMiddleware, webController, Context } from '@elikar/application'
+import { get, post, useMiddleware, webController, Context, put } from '@elikar/application'
 import { MedicineDto } from '@elikar/dto'
 
 import { AuthHospitalAdminMiddleware } from '../auth/middlewares'
@@ -20,5 +20,12 @@ export class MedicineWebController {
   async getAll(ctx: Context): Promise<void> {
     ctx.status = 200
     ctx.body = await this.service.getAll(ctx.state.id)
+  }
+
+  @useMiddleware(AuthHospitalAdminMiddleware)
+  @put('')
+  async updateMedicineCount(ctx: Context<MedicineDto.MedicineUpdateCount>): Promise<void> {
+    await this.service.update(ctx.request.body)
+    ctx.status = 200
   }
 }

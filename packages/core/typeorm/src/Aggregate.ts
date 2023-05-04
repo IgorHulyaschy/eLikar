@@ -13,8 +13,8 @@ export abstract class Aggregate<TEvent extends Event<any>> {
     const domainEvents = Array.isArray(events) ? events : [events]
 
     for (const event of domainEvents) {
-      if (!event.id) event.id = this.id
-      if (!event.version) event.version = this.version + 1
+      if (!event.aggregateId) event.aggregateId = this.id
+      if (!event.aggregateVersion) event.aggregateVersion = this.version + 1
       this.domainEvents.push(event)
       this.onEvent(event)
     }
@@ -22,8 +22,8 @@ export abstract class Aggregate<TEvent extends Event<any>> {
   }
 
   private onEvent(event: TEvent): void {
-    this.id = event.id
-    this.version = event.version > this.version ? event.version : this.version
+    this.id = event.aggregateId
+    this.version = event.aggregateVersion > this.version ? event.aggregateVersion : this.version
     this.on(event)
   }
 }
