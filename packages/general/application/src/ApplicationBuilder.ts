@@ -7,6 +7,7 @@ import { ApplicationModule } from '@elikar/module'
 import {
   getHttpHandlersMetadata,
   getMessageHandlersMetadata,
+  getOnCallbackQuery,
   getOnMessageMetadata,
   getOnTextMetadata,
   getRpcControllerMetadata,
@@ -94,16 +95,19 @@ export class ApplicationBuilder {
       methodName: string
     }>
     onMessageMetadata: Array<{ message: string; methodName: string }>
+    onCBQueryMetadata: string
   } {
     const controller = ioc.get(ioc.globalBotControllers[0])
 
     const onTextMetadata = getOnTextMetadata(controller)
     const onMessageMetadata = getOnMessageMetadata(controller)
+    const onCBQueryMetadata = getOnCallbackQuery(controller)
 
     return {
       controller,
       onTextMetadata,
-      onMessageMetadata
+      onMessageMetadata,
+      onCBQueryMetadata
     }
   }
 }

@@ -28,7 +28,7 @@ export class BotProvider extends TelegramBot {
     })
   }
 
-  private initOnMEssageHandlers(
+  private initOnMessageHandlers(
     metadata: Array<{ message: string; methodName: string }>,
     controller: Class<any>
   ): Record<string, (data: any) => Promise<any>> {
@@ -44,7 +44,7 @@ export class BotProvider extends TelegramBot {
     metadata: Array<{ message: string; methodName: string }>,
     controller: Class<any>
   ): Promise<void> {
-    const handlers = this.initOnMEssageHandlers(metadata, controller)
+    const handlers = this.initOnMessageHandlers(metadata, controller)
     this.on('message', async (msg) => {
       if (!msg || !msg.text) return this.logger.error('Receive message but has no text')
 
@@ -55,6 +55,16 @@ export class BotProvider extends TelegramBot {
         this.logger.info(`Receive message from ${msg.chat.id}:${msg.chat.username}`)
         await handlers[msg.text](that)
       }
+    })
+  }
+
+  async buildOnCallbackHandler(metadata: string, controller: Class<any>): Promise<void> {
+    this.on('callback_query', async (msg) => {
+      if (!msg || !msg.data) return this.logger.error('Receive message but has no text')
+
+      const that = this as any
+      that.cb = msg
+      await controller[metadata as keyof typeof controller](that)
     })
   }
 }

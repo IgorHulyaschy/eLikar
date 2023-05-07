@@ -13,6 +13,7 @@ import { ConfigService } from './config'
 import { MailerModule } from './mailer'
 import { NurseModule } from './nurse'
 import { HospitalModule } from './hospital'
+import { PatientModule } from './patient'
 
 export const TYPES = {
   Options: 'Options'
@@ -33,7 +34,8 @@ export class AppModule {
         BotModule,
         MailerModule,
         NurseModule,
-        HospitalModule
+        HospitalModule,
+        PatientModule
       ],
       deps: {
         services(container) {

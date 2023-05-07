@@ -9,6 +9,9 @@ import { Bot } from './Bot'
 import { BotRepository } from './BotRepository'
 import { HospitalProxy } from '../hospital'
 import { NurseProxy } from '../nurse'
+import { PatientProxy } from '../patient/PatientProxy'
+import { BotTemplatesGenerator } from './BotTemplatesGenerator'
+import { ReplyMarkUp } from './interfaces'
 
 @injectable()
 export class BotService {
@@ -17,7 +20,9 @@ export class BotService {
     private readonly redis: RedisService,
     private readonly repository: BotRepository,
     private readonly hospitalService: HospitalProxy,
-    private readonly nurseService: NurseProxy
+    private readonly nurseService: NurseProxy,
+    private readonly patientService: PatientProxy,
+    private readonly botTemplatesGenerator: BotTemplatesGenerator
   ) {}
 
   private generateConfirmationCode(): string {
@@ -64,5 +69,26 @@ export class BotService {
       ...hospital,
       ...nurse
     }
+  }
+
+  async getListOfPatients({
+    id,
+    limit,
+    offset
+  }: {
+    id: string
+    limit: number
+    offset: number
+  }): Promise<ReplyMarkUp> {
+    const nurse = await this.nurseService.get(id)
+    const hospital = await this.hospitalService.get(nurse.hospitalId)
+
+    const patients = await this.patientService.getListOfPatients({
+      hospitalId: hospital.id,
+      limit,
+      offset
+    })
+
+    return this.botTemplatesGenerator.getListOfPatients(patients, { limit, offset }, false)
   }
 }

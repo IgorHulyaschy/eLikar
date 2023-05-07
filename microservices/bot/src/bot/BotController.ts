@@ -1,12 +1,13 @@
 import { injectable } from 'inversify'
-import { onMessage, onText } from '@elikar/application'
+import { onCallbackQuery, onMessage, onText } from '@elikar/application'
 import { BotContext } from '@elikar/bot-provider'
 
 import { BotService } from './BotService'
 import { CodeConfirmationError } from './errors'
-import { MAIN_MENU } from './constants'
+import { MAIN_MENU, StateKeys } from './constants'
 import { NurseTelegramConnectCommand } from '@elikar/commands'
 import { MessageClient } from '@elikar/message-client'
+import { BotCBContext } from '@elikar/bot-provider/src/interfaces'
 
 @injectable()
 export class BotController {
@@ -45,5 +46,38 @@ export class BotController {
   async sayHello(ctx: BotContext): Promise<void> {
     const data = await this.service.getMe(String(ctx.msg.chat.id))
     ctx.sendMessage(ctx.msg.chat.id, JSON.stringify(data), MAIN_MENU)
+  }
+
+  @onMessage('Get patients')
+  async getPatients(ctx: BotContext): Promise<void> {
+    const data = await this.service.getListOfPatients({
+      id: String(ctx.msg.chat.id),
+      limit: 7,
+      offset: 0
+    })
+
+    ctx.sendMessage(ctx.msg.chat.id, 'Список пацієнтів', data)
+  }
+
+  @onCallbackQuery()
+  async onCallBackQuery(ctx: BotCBContext): Promise<void> {
+    const cbData = ctx.cb.data
+    const [stateValue, json] = cbData!.split('@')
+
+    const parsedData = JSON.parse(json)
+
+    switch (stateValue) {
+      case StateKeys.LIST_OF_PATIENTS: {
+        const data = await this.service.getListOfPatients({
+          id: String(ctx.cb.message!.chat.id),
+          limit: parsedData.limit + 7,
+          offset: parsedData.limit
+        })
+        ctx.sendMessage(ctx.cb.message!.chat.id, 'Список пацієнтів', data)
+        break
+      }
+      default:
+        break
+    }
   }
 }

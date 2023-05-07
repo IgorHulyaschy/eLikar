@@ -1,25 +1,18 @@
+import { AmqpModule } from '@elikar/amqp'
+import { MessageListenerModule } from '@elikar/message-listener'
 import { ApplicationBuilderModule } from '@elikar/application'
 import { MessageClientModule } from '@elikar/message-client'
+import { RpcServerModule } from '@elikar/rpc-server'
 import { IModule, module } from '@elikar/module'
-import { RpcClientModule } from '@elikar/rpc-client'
+import { TypeormModule } from '@elikar/typeorm'
 import { LoggerModule } from '@elikar/logger'
-import { AmqpModule } from '@elikar/amqp'
 
-import { App } from './App'
 import { ConfigService } from './config'
-import { HospitalModule } from './hospital'
-import { AuthModule } from './auth'
-import { ProxyModule } from './proxy'
-import { NurseModule } from './nurse'
-import { MedicineModule } from './medicine'
+import { App } from './App'
 import { PatientModule } from './patient'
 
 export const TYPES = {
-  Options: Symbol('App:Options')
-}
-
-export interface Options {
-  port: number
+  Options: Symbol('options')
 }
 
 @module()
@@ -27,22 +20,19 @@ export class AppModule {
   static register(config: ConfigService): IModule {
     return {
       imports: [
+        TypeormModule.register(config.get('typeorm')),
         AmqpModule.register(config.get('amqp')),
-        MessageClientModule,
-        LoggerModule,
-        RpcClientModule,
+        MessageListenerModule,
         ApplicationBuilderModule,
-        ProxyModule,
-        HospitalModule,
-        AuthModule,
-        NurseModule,
-        MedicineModule,
+        LoggerModule,
+        RpcServerModule,
+        MessageClientModule,
         PatientModule
       ],
       deps: {
         services(local) {
           local.bind(App).toSelf().inSingletonScope()
-          local.bind<Options>(TYPES.Options).toConstantValue(config.get('web'))
+          local.bind(TYPES.Options).toConstantValue(config.get('application'))
         }
       }
     }

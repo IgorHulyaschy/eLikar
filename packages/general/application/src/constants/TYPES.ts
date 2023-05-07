@@ -6,5 +6,6 @@ export const Decorators = {
   rpcController: Symbol('rpcController'),
   rpcMethod: Symbol('rpcMethod'),
   onText: Symbol('onText'),
-  onMessage: Symbol('onMessage')
+  onMessage: Symbol('onMessage'),
+  onCallbackQuery: Symbol('onCallbackQuery')
 }

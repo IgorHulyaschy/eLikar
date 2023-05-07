@@ -51,6 +51,7 @@
     { "path": "microservices/mailer" },
     { "path": "microservices/nurse" },
     { "path": "microservices/bot" },
-    { "path": "microservices/medicine" }
+    { "path": "microservices/medicine" },
+    { "path": "microservices/patient" }
   ]
 }

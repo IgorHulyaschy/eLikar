@@ -55,11 +55,12 @@ export abstract class DomainApplication {
     }
 
     if (this.botProvider) {
-      const { controller, onTextMetadata, onMessageMetadata } =
+      const { controller, onTextMetadata, onMessageMetadata, onCBQueryMetadata } =
         this.applicationBuilder.buildBotController(ioc)
 
       this.botProvider.buildOnTextHandlers(onTextMetadata, controller)
       this.botProvider.buildOnMessageHandlers(onMessageMetadata, controller)
+      this.botProvider.buildOnCallbackHandler(onCBQueryMetadata, controller)
     }
   }
 }
