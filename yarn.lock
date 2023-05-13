@@ -284,6 +284,7 @@ __metadata:
   resolution: "@elikar/rpc-schemas@workspace:packages/shared/rpc-schemas"
   dependencies:
     "@elikar/dto": "workspace:*"
+    "@types/node": ^18.11.18
     ts-node: ^10.9.1
     typescript: ^4.9.4
   languageName: unknown
@@ -747,6 +748,15 @@ __metadata:
   version: 2.0.1
   resolution: "@types/http-errors@npm:2.0.1"
   checksum: 3bb0c50b0a652e679a84c30cd0340d696c32ef6558518268c238840346c077f899315daaf1c26c09c57ddd5dc80510f2a7f46acd52bf949e339e35ed3ee9654f
+  languageName: node
+  linkType: hard
+
+"@types/iconv@npm:^3":
+  version: 3.0.1
+  resolution: "@types/iconv@npm:3.0.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: b83d42f50f1d0a94e79c4a05c1bbb5d5f4422bd4a6c27c1d60d67c64437a78823c5ad6f0884c08bc1bf38dd9c5fa980217a18f0aedad5f258ef2b34b22d63bd8
   languageName: node
   linkType: hard
 
@@ -3239,6 +3249,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iconv@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "iconv@npm:3.0.1"
+  dependencies:
+    node-gyp: latest
+  checksum: e52fd6b21293f4c303d6bd48791d2767e1ea74d31fef6063aeebc96f026b370e3962226b47ecbc4e1a6e511139bfec0ad2d0910e78e84b2701c73eac355efa93
+  languageName: node
+  linkType: hard
+
 "ieee754@npm:^1.2.1":
   version: 1.2.1
   resolution: "ieee754@npm:1.2.1"
@@ -4991,6 +5010,41 @@ __metadata:
   checksum: a78dc5c7158ad9ddcfe01aa9144f46e192ddbfa7b263895a70a5c6c73edd9ce85faf7c0430e59ac38839e1734e275b9c3de5c57ee3ab6edc0e0b1bdebefccef8
   languageName: node
   linkType: hard
+
+"report-generator@workspace:microservices/report-generator":
+  version: 0.0.0-use.local
+  resolution: "report-generator@workspace:microservices/report-generator"
+  dependencies:
+    "@elikar/amqp": "workspace:*"
+    "@elikar/application": "workspace:*"
+    "@elikar/commands": "workspace:*"
+    "@elikar/dto": "workspace:*"
+    "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
+    "@elikar/message-listener": "workspace:*"
+    "@elikar/module": "workspace:*"
+    "@elikar/rpc-error-codes": "workspace:*"
+    "@elikar/rpc-schemas": "workspace:*"
+    "@elikar/rpc-server": "workspace:*"
+    "@elikar/typeorm": "workspace:*"
+    "@types/amqplib": ^0
+    "@types/bunyan": ^1
+    "@types/convict": ^6
+    "@types/iconv": ^3
+    "@types/node": ^18.11.18
+    "@types/pg": ^8
+    bunyan: ^1.8.15
+    convict: ^6.2.4
+    dotenv: ^16.0.3
+    iconv: ^3.0.1
+    inversify: ^6.0.1
+    pg: ^8.9.0
+    reflect-metadata: ^0.1.13
+    ts-node: ^10.9.1
+    typeorm: ^0.2.31
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
 
 "request-promise-core@npm:1.1.4":
   version: 1.1.4
