@@ -38,6 +38,7 @@ export class MedicineReport extends Domain<MedicineReport> {
     medicineReport.medicineId = dto.medicineId
     medicineReport.nurseId = dto.nurceId
     medicineReport.patientId = dto.patientId
+    medicineReport.count = dto.count
     return medicineReport
   }
 }

@@ -20,7 +20,7 @@ export class App extends DomainApplication {
 
   async init(): Promise<void> {
     await this.amqpServer.bootstrap()
-    this.typeorm.bootstrap()
+    await this.typeorm.bootstrap()
     await Promise.all([this.messageListener.bootstrap(), this.rpcServer.bootstrap()])
   }
 }

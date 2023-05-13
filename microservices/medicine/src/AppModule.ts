@@ -9,6 +9,7 @@ import { LoggerModule } from '@elikar/logger'
 import { MedicineModule } from './medicine'
 import { ConfigService } from './config'
 import { App } from './App'
+import { MessageClientModule } from '@elikar/message-client'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -23,6 +24,7 @@ export class AppModule {
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
         ApplicationBuilderModule,
+        MessageClientModule,
         LoggerModule,
         RpcServerModule,
         MedicineModule

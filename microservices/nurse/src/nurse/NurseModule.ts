@@ -5,6 +5,7 @@ import { NurseRepository } from './NurseRepository'
 import { NurseRpcController } from './NurseRpcController'
 import { NurseService } from './NurseService'
 import { TelegramConnectionSaga } from './sagas'
+import { MedicineReportCreateSaga } from './sagas/MedicineReportCreateSaga'
 
 @module({
   deps: {
@@ -13,7 +14,7 @@ import { TelegramConnectionSaga } from './sagas'
       local.bind(NurseService).toSelf().inSingletonScope()
       local.bind(NurseMapper).toSelf().inSingletonScope()
     },
-    messageControllers: [NurseMessageController, TelegramConnectionSaga],
+    messageControllers: [NurseMessageController, TelegramConnectionSaga, MedicineReportCreateSaga],
     rpcControllers: [NurseRpcController]
   }
 })

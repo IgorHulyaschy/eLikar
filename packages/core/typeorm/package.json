@@ -9,6 +9,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@elikar/logger": "workspace:*",
+    "@elikar/message-client": "workspace:*",
     "@elikar/module": "workspace:*",
     "class-transformer": "^0.5.1",
     "inversify": "*",

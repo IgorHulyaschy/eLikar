@@ -314,6 +314,7 @@ __metadata:
   resolution: "@elikar/typeorm@workspace:packages/core/typeorm"
   dependencies:
     "@elikar/logger": "workspace:*"
+    "@elikar/message-client": "workspace:*"
     "@elikar/module": "workspace:*"
     "@types/node": ^18.15.13
     "@types/pg": ^8

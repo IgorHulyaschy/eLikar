@@ -25,3 +25,10 @@ export interface SignIn {
   email: string
   password: string
 }
+
+export interface CreateMedicineReport {
+  medicineId: string
+  patientId: string
+  tgId: string
+  count: number
+}
