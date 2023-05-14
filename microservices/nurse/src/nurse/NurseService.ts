@@ -72,4 +72,11 @@ export class NurseService {
 
     return this.mapper.toDto(nurse)
   }
+
+  async get(id: string): Promise<NurseDto.Nurse> {
+    const nurse = await this.repository.findOne({ id })
+    if (!nurse) throw new Error()
+
+    return this.mapper.toDto(nurse)
+  }
 }

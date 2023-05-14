@@ -1,7 +1,7 @@
 import { AmqpModule } from '@elikar/amqp'
 import { MessageListenerModule } from '@elikar/message-listener'
 import { ApplicationBuilderModule } from '@elikar/application'
-// import { RpcServerModule } from '@elikar/rpc-server'
+import { RpcServerModule } from '@elikar/rpc-server'
 import { IModule, module } from '@elikar/module'
 import { TypeormModule } from '@elikar/typeorm'
 import { LoggerModule } from '@elikar/logger'
@@ -24,7 +24,7 @@ export class AppModule {
         MessageListenerModule,
         ApplicationBuilderModule,
         LoggerModule,
-        // RpcServerModule,
+        RpcServerModule,
         MedicineReportModule
       ],
       deps: {

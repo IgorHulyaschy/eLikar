@@ -7,7 +7,7 @@ import { IFileGenerator } from './IFileGenerator'
 export class ReportGeneratorService {
   constructor(@inject(TYPES.ReportGenerator) private readonly generator: IFileGenerator) {}
 
-  async generateReport(dto: ReportGeneratorDto.GeenrateReport): Promise<Buffer> {
+  async generateReport(dto: ReportGeneratorDto.GeenrateReport): Promise<string> {
     return this.generator.generate(dto)
   }
 }

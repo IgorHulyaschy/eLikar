@@ -13,4 +13,8 @@ export class PatientProxy {
   getListOfPatients(dto: PatientDto.GetListOfPatients): Promise<PatientDto.Patient[]> {
     return this.proxy.getListOfPatients(dto)
   }
+
+  get(id: string): Promise<PatientDto.Patient> {
+    return this.proxy.get(id)
+  }
 }

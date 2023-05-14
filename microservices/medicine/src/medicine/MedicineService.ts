@@ -16,6 +16,13 @@ export class MedicineService {
     return this.repository.save(medicine)
   }
 
+  async get(id: string): Promise<MedicineDto.Medicine> {
+    const medicine = await this.repository.findOne({ aggregateId: id })
+    if (!medicine) throw new Error()
+
+    return this.mapper.toDto(medicine)
+  }
+
   async updateMedicineCount({ id, count }: MedicineDto.MedicineUpdateCount): Promise<void> {
     const medicine = await this.repository.findOne({ aggregateId: id })
     if (!medicine) return

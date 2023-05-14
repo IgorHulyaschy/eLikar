@@ -13,4 +13,8 @@ export class MedicineProxy {
   getAll(hospitalId: string): Promise<MedicineDto.Medicine[]> {
     return this.proxy.getAll(hospitalId)
   }
+
+  get(id: string): Promise<MedicineDto.Medicine> {
+    return this.proxy.get(id)
+  }
 }

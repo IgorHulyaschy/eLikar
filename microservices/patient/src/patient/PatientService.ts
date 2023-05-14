@@ -22,4 +22,11 @@ export class PatientService {
 
     return patients.map((p) => this.mapper.toDto(p))
   }
+
+  async get(id: string): Promise<PatientDto.Patient> {
+    const patient = await this.repository.findOne({ id })
+    if (!patient) throw new Error()
+
+    return this.mapper.toDto(patient)
+  }
 }

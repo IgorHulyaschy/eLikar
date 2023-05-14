@@ -70,6 +70,11 @@ export class BotController {
     ctx.sendMessage(ctx.msg.chat.id, 'Список пацієнтів', data)
   }
 
+  @onMessage('Generate report')
+  async createReport(ctx: BotContext): Promise<void> {
+    ctx.sendMessage(ctx.msg.chat.id, 'Виберіть місяць', this.botTemplatesGenerator.getMonth())
+  }
+
   @onMessage('Add medicine to report')
   async onUseMedicine(ctx: BotContext): Promise<void> {
     const medicines = await this.service.getListOfMedicines(String(ctx.msg.chat.id))
@@ -85,6 +90,7 @@ export class BotController {
   async onCallBackQuery(ctx: BotCBContext): Promise<void> {
     const cbData = ctx.cb.data
     const [stateValue, json] = cbData!.split('@')
+    if (!json) return
     const parsedData = typeof json === 'string' ? json : JSON.parse(json)
 
     switch (stateValue) {
@@ -121,6 +127,25 @@ export class BotController {
           { forReport: true, medicineId: parsedData }
         )
         ctx.sendMessage(ctx.cb.message!.chat.id, 'Список пацієнтів', data)
+        break
+      }
+      case StateKeys.REPORT: {
+        await this.service.setReportState(parsedData, String(ctx.cb.message!.chat.id))
+        ctx.sendMessage(
+          ctx.cb.message!.chat.id,
+          'Виберіть день',
+          this.botTemplatesGenerator.getDay(parsedData)
+        )
+        break
+      }
+      case StateKeys.DAY: {
+        const data = await this.service.generateReport(parsedData, String(ctx.cb.message!.chat.id))
+        ctx.sendDocument(
+          ctx.cb.message!.chat.id,
+          data.buffer,
+          {},
+          { contentType: 'application/csv', filename: data.fileName }
+        )
         break
       }
       default:

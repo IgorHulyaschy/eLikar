@@ -13,4 +13,8 @@ export class NurseProxy {
   get(id: string): Promise<NurseDto.Nurse> {
     return this.proxy.getByTgId(id)
   }
+
+  getById(id: string): Promise<NurseDto.Nurse> {
+    return this.proxy.get(id)
+  }
 }

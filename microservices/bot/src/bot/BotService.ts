@@ -15,6 +15,8 @@ import { ReplyMarkUp } from './interfaces'
 import { MedicineProxy } from '../medicine/MedicineProxy'
 import { MessageClient } from '@elikar/message-client'
 import { NurseMedicineReportCreateCommand } from '@elikar/commands'
+import { ReportGeneratorProxy } from '../report-generator'
+import { MedicineReportProxy } from '../medicine-report'
 
 @injectable()
 export class BotService {
@@ -26,6 +28,8 @@ export class BotService {
     private readonly nurseService: NurseProxy,
     private readonly patientService: PatientProxy,
     private readonly medicineService: MedicineProxy,
+    private readonly reportGeneratorService: ReportGeneratorProxy,
+    private readonly medicineReportService: MedicineReportProxy,
     private readonly botTemplatesGenerator: BotTemplatesGenerator,
     private readonly messageClient: MessageClient
   ) {}
@@ -124,7 +128,7 @@ export class BotService {
     const state = await this.redis.get<{ nurseId: string; medicineId: string }>(
       `${StateKeys.LIST_OF_MEDICINES}:${id}`
     )
-    console.log(state)
+
     this.messageClient.emit(
       new NurseMedicineReportCreateCommand({
         medicineId: state!.medicineId,
@@ -135,5 +139,76 @@ export class BotService {
     )
 
     await this.redis.delete(`${StateKeys.LIST_OF_MEDICINES}:${id}`)
+  }
+
+  async setReportState(month: number, id: string): Promise<void> {
+    await this.redis.set(`${StateKeys.REPORT}:${id}`, { month })
+  }
+
+  private aggregateToReport(
+    data: Array<{
+      nurse: { firstName: string; lastName: string }
+      medicine: { name: string; count: number }
+      patient: { firstName: string; lastName: string }
+      createdAt: number
+    }>
+  ): string[][] {
+    const res = data.map((row) => {
+      return [
+        `${row.nurse.firstName} ${row.nurse.lastName}`,
+        `${row.patient.firstName} ${row.patient.lastName}`,
+        row.medicine.name,
+        String(row.medicine.count),
+        new Date(row.createdAt).toISOString()
+      ]
+    })
+    res.unshift(['Nurse name', 'Patient name', 'Medicine', 'Count', 'Date'])
+    return res
+  }
+
+  async generateReport(day: number, id: string): Promise<{ buffer: Buffer; fileName: string }> {
+    const nurse = await this.nurseService.get(id)
+    const hospital = await this.hospitalService.get(nurse.hospitalId)
+
+    const state = await this.redis.get<{ month: number }>(`${StateKeys.REPORT}:${id}`)
+
+    const medicineReports = await this.medicineReportService.getAll({
+      nurseId: nurse.id,
+      date: new Date(new Date().getFullYear(), state!.month, day).getTime()
+    })
+
+    const res = []
+    for await (const mr of medicineReports) {
+      const [nurse, patient, medicine] = await Promise.all([
+        this.nurseService.getById(mr.nurceId),
+        this.patientService.get(mr.patientId),
+        this.medicineService.get(mr.medicineId)
+      ])
+      res.push({
+        nurse: {
+          firstName: nurse.fname,
+          lastName: nurse.lname
+        },
+        medicine: {
+          name: medicine.name,
+          count: mr.count
+        },
+        patient: {
+          firstName: patient.fname,
+          lastName: patient.lname
+        },
+        createdAt: mr.createdAt
+      })
+    }
+    const fileName = `MedicineReport_${hospital.id}_${state!.month}_${day}`
+    return {
+      buffer: Buffer.from(
+        await this.reportGeneratorService.generateReport({
+          data: this.aggregateToReport(res),
+          fileName
+        })
+      ),
+      fileName: fileName + '.csv'
+    }
   }
 }

@@ -20,7 +20,7 @@ export class MedicineReport extends Domain<MedicineReport> {
   @Column()
   count!: number
 
-  @Column({ default: new Date() })
+  @Column()
   createdAt!: Date
 
   getEntity(entity: MedicineReport): void {
@@ -39,6 +39,7 @@ export class MedicineReport extends Domain<MedicineReport> {
     medicineReport.nurseId = dto.nurceId
     medicineReport.patientId = dto.patientId
     medicineReport.count = dto.count
+    medicineReport.createdAt = new Date()
     return medicineReport
   }
 }

@@ -9,4 +9,8 @@ export class PatientRpcController {
   getListOfPatients(dto: PatientDto.GetListOfPatients): Promise<PatientDto.Patient[]> {
     return this.service.getListOfPatients(dto)
   }
+
+  get(id: string): Promise<PatientDto.Patient> {
+    return this.service.get(id)
+  }
 }

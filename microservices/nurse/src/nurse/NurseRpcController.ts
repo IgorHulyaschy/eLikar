@@ -41,4 +41,8 @@ export class NurseRpcController {
       throw err
     }
   }
+
+  get(id: string): Promise<NurseDto.Nurse> {
+    return this.service.get(id)
+  }
 }

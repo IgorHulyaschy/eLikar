@@ -9,4 +9,8 @@ export class MedicineRpcController {
   getAll(hospitalId: string): Promise<MedicineDto.Medicine[]> {
     return this.service.list(hospitalId)
   }
+
+  get(id: string): Promise<MedicineDto.Medicine> {
+    return this.service.get(id)
+  }
 }
