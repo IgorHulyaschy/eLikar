@@ -33,7 +33,7 @@ export class BotController {
     )
   }
 
-  @onText(/([1-9]{6})/)
+  @onText(/([0-9]{6})/)
   async onCodeConfirmation(ctx: BotContext): Promise<void> {
     try {
       const dto = await this.service.confirmConnection(ctx.msg.text!, String(ctx.msg.chat.id))
