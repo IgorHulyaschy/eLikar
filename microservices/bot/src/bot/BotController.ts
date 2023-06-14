@@ -51,7 +51,11 @@ export class BotController {
   @onMessage('My account')
   async sayHello(ctx: BotContext): Promise<void> {
     const data = await this.service.getMe(String(ctx.msg.chat.id))
-    ctx.sendMessage(ctx.msg.chat.id, JSON.stringify(data), this.botTemplatesGenerator.MAIN_MENU())
+    ctx.sendMessage(
+      ctx.msg.chat.id,
+      this.botTemplatesGenerator.personalInfo(data),
+      this.botTemplatesGenerator.MAIN_MENU()
+    )
   }
 
   @onMessage('Get patients')

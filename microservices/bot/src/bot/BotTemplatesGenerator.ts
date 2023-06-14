@@ -143,4 +143,14 @@ export class BotTemplatesGenerator {
     }
     return markUp
   }
+
+  personalInfo(data: any): any {
+    return `Імʼя: ${
+      data.fname
+    } ${
+      data.lname
+    }\nОсобиста пошта: ${
+      data.email}\nПрацюєш в лікарні ${
+        data.name}\nЗа адресою ${data.address.city}, ${data.address.street} ${data.address.buildingNumber}`
+  }
 }
