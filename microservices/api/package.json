@@ -1,6 +1,7 @@
 {
   "name": "api",
   "packageManager": "yarn@3.3.1",
+  "version": "1.0.0",
   "dependencies": {
     "@elikar/amqp": "workspace:*",
     "@elikar/application": "workspace:*",
@@ -24,6 +25,7 @@
     "koa-joi-router": "^8.0.0",
     "koa-router": "^12.0.0",
     "reflect-metadata": "^0.1.13",
+    "ts-node-dev": "^2.0.0",
     "type-fest": "^3.6.0"
   },
   "devDependencies": {

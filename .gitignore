@@ -7,7 +7,7 @@
 !.yarn/cache
 
 **/build/**
-**/lib/**
+packages/**/lib/**
 .pnp.*
 **/.env
 **/npm-debug.log
