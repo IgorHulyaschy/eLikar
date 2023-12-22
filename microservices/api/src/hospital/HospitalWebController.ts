@@ -28,6 +28,12 @@ export class HospitalWebController {
     ctx.body = ctx.state
   }
 
+  @get('/mealo')
+  async get(ctx: Context): Promise<void> {
+    console.log('here')
+    ctx.body = 'Hello'
+  }
+
   @useMiddleware(AuthHospitalAdminMiddleware)
   @post('/registration-letters')
   async sendLetters(ctx: Context): Promise<void> {
