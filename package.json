@@ -3,6 +3,7 @@
   "packageManager": "yarn@3.3.1",
   "version": "1.0.0",
   "dependencies": {
+    "concurrently": "^8.2.2",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
@@ -21,7 +22,8 @@
     "typescript": "*"
   },
   "scripts": {
-    "build:modules": "tsc -b -v tsconfig.build.json"
+    "build:modules": "tsc -b -v tsconfig.build.json",
+    "start": "concurrently \"yarn workspace api start:dev\" \"yarn workspace tg-bot start:dev\"  \"yarn workspace hospital start:dev\" \"yarn workspace mailer start:dev\" \"medicine\" \"yarn workspace medicine-report start:dev\" \"nurse\" \"patient\" \"report-generator\""
   },
   "private": true,
   "workspaces": [
