@@ -1,6 +1,6 @@
-body {
+.wrapper {
   font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 40px 20px;
 }
 
 form {
@@ -22,8 +22,9 @@ input {
 
 .register-button {
   background-color: #4CAF50;
+  font-size: 20px;
   color: white;
-  padding: 10px 15px;
+  padding: 15px 70px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -41,4 +42,16 @@ input.ng-invalid.ng-touched {
 
 input.ng-valid.ng-touched {
   border: 2px solid green;
+}
+
+.header-wrapper {
+  text-align: center;
+}
+
+.main-wrapper {
+  font-size: 14px;
+}
+
+.register-button-wrapper {
+  text-align: center;
 }
