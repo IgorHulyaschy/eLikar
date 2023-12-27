@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build:modules": "tsc -b -v tsconfig.build.json",
-    "start": "concurrently \"yarn workspace api start:dev\" \"yarn workspace tg-bot start:dev\"  \"yarn workspace hospital start:dev\" \"yarn workspace mailer start:dev\" \"medicine\" \"yarn workspace medicine-report start:dev\" \"nurse\" \"patient\" \"report-generator\""
+    "start": "concurrently \"yarn workspace api start:dev\" \"yarn workspace tg-bot start:dev\"  \"yarn workspace hospital start:dev\" \"yarn workspace mailer start:dev\" \"yarn workspace medicine start:dev\" \"yarn workspace medicine-report start:dev\" \"yarn workspace nurse start:dev\" \"yarn workspace patient start:dev\" \"yarn workspace report-generator start:dev\""
   },
   "private": true,
   "workspaces": [
