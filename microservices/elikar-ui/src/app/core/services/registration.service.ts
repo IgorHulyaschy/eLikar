@@ -16,13 +16,16 @@ export class RegistrationService {
 
   public registerNurse(registrationForm: RegistrationForm): Observable<any> {
     console.log(registrationForm)
-    return this.http.post(this.registrationUrl, {
-      email: registrationForm.email,
-      fName: registrationForm.firstName,
-      lName: registrationForm.lastName,
-      phone: registrationForm.phone,
-      password: registrationForm.password,
-      hospitalId: 1
-    })
+    return this.http.post(
+      this.registrationUrl,
+      JSON.stringify({
+        email: registrationForm.email,
+        fname: registrationForm.firstName,
+        lname: registrationForm.lastName,
+        phoneNumber: registrationForm.phone,
+        password: registrationForm.password,
+        hospitalId: '93cd8b03-9689-4e6f-9bef-14573183de32'
+      })
+    )
   }
 }
