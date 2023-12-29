@@ -1,0 +1,38 @@
+{
+  "name": "elikar",
+  "packageManager": "yarn@3.3.1",
+  "version": "1.0.0",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/node": "^18.11.18",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "latest",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.8.3",
+    "typescript": "*"
+  },
+  "scripts": {
+    "build:modules": "tsc -b -v tsconfig.build.json",
+    "start": "concurrently \"yarn workspace api start:dev\" \"yarn workspace tg-bot start:dev\"  \"yarn workspace hospital start:dev\" \"yarn workspace mailer start:dev\" \"yarn workspace medicine start:dev\" \"yarn workspace medicine-report start:dev\" \"yarn workspace nurse start:dev\" \"yarn workspace patient start:dev\" \"yarn workspace report-generator start:dev\""
+  },
+  "private": true,
+  "workspaces": [
+    "microservices/*",
+    "packages/core/*",
+    "packages/shared/*",
+    "packages/general/*"
+  ],
+  "resolutions": {
+    "module-details-from-path": "patch:module-details-from-path@npm:1.0.3#.yarn/patches/module-details-from-path-npm-1.0.3-396d5203b4"
+  }
+}

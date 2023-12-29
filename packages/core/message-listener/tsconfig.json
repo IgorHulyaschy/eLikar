@@ -1,0 +1,25 @@
+{
+  "extends": "../../../tsconfig.build.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": "lib/.tsbuildinfo",
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ],
+  "references": [
+    { "path": "../logger" },
+    { "path": "../amqp" },
+    { "path": "../../general/module" },
+    { "path": "../als" }
+  ]
+}

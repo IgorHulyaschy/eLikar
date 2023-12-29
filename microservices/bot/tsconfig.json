@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": "build/.tsbuildinfo",
+    "types": ["node"]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ],
+  "references": [
+    { "path": "../../packages/shared/commands" },
+    { "path": "../../packages/shared/dto" },
+    { "path": "../../packages/shared/rpc-schemas" },
+    { "path": "../../packages/shared/rpc-error-codes" },
+    { "path": "../../packages/core/message-client" },
+    { "path": "../../packages/core/message-listener" },
+    { "path": "../../packages/core/logger" },
+    { "path": "../../packages/core/rpc-server" },
+    { "path": "../../packages/core/rpc-client" },
+    { "path": "../../packages/core/amqp" },
+    { "path": "../../packages/general/module" },
+    { "path": "../../packages/core/typeorm" },
+    { "path": "../../packages/core/bcrypt" },
+    { "path": "../../packages/core/jwt" },
+    { "path": "../../packages/core/redis" },
+    { "path": "../../packages/general/application" },
+    { "path": "../../packages/core/bot-provider" }
+  ]
+}

@@ -1,0 +1,156 @@
+<mxfile host="app.diagrams.net" modified="2023-05-17T22:31:18.057Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15" etag="bKsrJPyyfHrGAYx6YQsm" version="21.2.9" type="device">
+  <diagram name="Страница 1" id="ppinPdBVUEu68U0y8L-f">
+    <mxGraphModel dx="875" dy="523" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-79" value="Медичний персонал" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="80" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-80" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="190" width="10" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-81" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-80" target="VjqoURGvTfHTIGBrqnKs-79">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="30" y="290" as="sourcePoint" />
+            <mxPoint x="80" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-82" value="Телеграм бот &quot;Elikar&quot;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-83" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="VjqoURGvTfHTIGBrqnKs-82">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="190" as="sourcePoint" />
+            <mxPoint x="430" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-84" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="325" y="190" width="10" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-85" value="" style="endArrow=classic;html=1;rounded=0;entryX=-0.2;entryY=0.344;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="VjqoURGvTfHTIGBrqnKs-84">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="221" as="sourcePoint" />
+            <mxPoint x="200" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-86" value="Нажата команда &quot;/start&quot;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="190" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-87" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-84">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="360" as="sourcePoint" />
+            <mxPoint x="110" y="258" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-88" value="Інструкція по підключенню&lt;br&gt;основного аккаунту до телеграму" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="115" y="220" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-89" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="VjqoURGvTfHTIGBrqnKs-84">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="310" as="sourcePoint" />
+            <mxPoint x="350" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-90" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="325" y="310" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-91" value="" style="endArrow=classic;html=1;rounded=0;exitX=1.2;exitY=0.472;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-80" target="VjqoURGvTfHTIGBrqnKs-90">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="350" as="sourcePoint" />
+            <mxPoint x="170" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-92" value="Введення особистої пошти&lt;br&gt;на яку зареєстровано основний&lt;br&gt;аккаунт" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="280" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-93" value="Сервіс по відправці листів на пошту" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-94" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-97" target="VjqoURGvTfHTIGBrqnKs-93">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="790" y="190" as="sourcePoint" />
+            <mxPoint x="600" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-97" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="785" y="310" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-101" value="Сервіс адміністрування аккаунтів медичного персоналу" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-102" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-103" target="VjqoURGvTfHTIGBrqnKs-101">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="300" as="sourcePoint" />
+            <mxPoint x="470" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-104" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-90" target="VjqoURGvTfHTIGBrqnKs-103">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="340" as="sourcePoint" />
+            <mxPoint x="645" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-103" target="VjqoURGvTfHTIGBrqnKs-97">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-103" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="595" y="310" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-105" value="Перевірка наявності &lt;br&gt;аккаунту з такою поштою" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="300" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-107" value="Відправка листа на вказану &lt;br&gt;пошту,&amp;nbsp;для підтвердення" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="605" y="300" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-108" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="VjqoURGvTfHTIGBrqnKs-90">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="400" as="sourcePoint" />
+            <mxPoint x="270" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-109" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="325" y="400" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-110" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-80" target="VjqoURGvTfHTIGBrqnKs-109">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="450" as="sourcePoint" />
+            <mxPoint x="230" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-111" value="Введення коду підтвердження &lt;br&gt;з листа на пошті &amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-117" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.083;entryY=0.907;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-112" target="VjqoURGvTfHTIGBrqnKs-80">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="480" />
+              <mxPoint x="460" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-112" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="595" y="400" width="10" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-113" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-112" target="VjqoURGvTfHTIGBrqnKs-103">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="410" as="sourcePoint" />
+            <mxPoint x="420" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-114" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="VjqoURGvTfHTIGBrqnKs-109" target="VjqoURGvTfHTIGBrqnKs-112">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="460" as="sourcePoint" />
+            <mxPoint x="597" y="433" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-115" value="Перевірка валідності коду&lt;br&gt;та подальше збереження телеграм-id&lt;br&gt;користувача" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="335" y="370" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VjqoURGvTfHTIGBrqnKs-118" value="Сповіщення про успішне підʼєднання телеграм&lt;br&gt;аккаунту до основного аккаунту системи" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="185" y="483" width="290" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

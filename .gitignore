@@ -1,4 +1,13 @@
-**/.vscode/**
-!/backend/.vscode/**
-**/.idea/**
-**/*.iml
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+!.yarn/cache
+
+**/build/**
+packages/**/lib/**
+.pnp.*
+**/.env
+**/npm-debug.log

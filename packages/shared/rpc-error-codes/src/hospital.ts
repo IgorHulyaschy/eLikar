@@ -1,0 +1,3 @@
+export const ALREADY_EXISTS = 32601
+export const WRONG_CREDENTIALS = 32602
+export const TOKEN_EXPIRED = 32603

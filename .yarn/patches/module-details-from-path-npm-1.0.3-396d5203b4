@@ -1,0 +1,25 @@
+diff --git a/index.js b/index.js
+index 5f241307af86acbd50bc30045e6ca8cfd04fdbef..a9b4fd068e5ea4acda7e99458a3fb6157c0295d9 100644
+--- a/index.js
++++ b/index.js
+@@ -5,7 +5,19 @@ var path = require('path')
+ module.exports = function (file) {
+   var segments = file.split(path.sep)
+   var index = segments.lastIndexOf('node_modules')
+-  if (index === -1) return
++  if (index === -1) {
++    var index = segments.lastIndexOf('__virtual__')
++    if(index === -1) return
++    let name = segments[index + 1].split('-')
++    name.splice(-2)
++    name = name.join('-').replace('-', '/')
++    const libIndex = segments.lastIndexOf('lib')
++    return  {
++      path: segments.splice(libIndex).join('/'),
++      name,
++      basedir: segments.join('/')
++    }
++  }
+   if (!segments[index + 1]) return
+   var scoped = segments[index + 1][0] === '@'
+   var name = scoped ? segments[index + 1] + '/' + segments[index + 2] : segments[index + 1]
