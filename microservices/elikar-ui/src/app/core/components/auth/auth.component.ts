@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationForm } from '../../models/authentication/authentication-form'
 import { AuthService } from '../../services/auth.service'
+import { HttpErrorResponse } from '@angular/common/http'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -10,14 +12,21 @@ import { AuthService } from '../../services/auth.service'
 export class AuthComponent implements OnInit {
   public authenticationFormGroup!: FormGroup
   public loginAsAdmin = false
+  public errorMessageText = ''
 
   private authenticationForm = new AuthenticationForm()
   private authenticationService: AuthService
-  constructor(authenticationService: AuthService) {
+  private router: Router
+  private readonly WRONG_CREDENTIALS_ERROR = 'WRONG_CREDENTIALS'
+  constructor(authenticationService: AuthService, router: Router) {
     this.authenticationService = authenticationService
+    this.router = router;
   }
 
   public ngOnInit(): void {
+    if (this.authenticationService.isLoggedIn()) {
+      this.router.navigate(['/home'])
+    }
     this.authenticationFormGroup = this.buildAuthenticationFormGroup()
   }
 
@@ -26,12 +35,38 @@ export class AuthComponent implements OnInit {
       this.authenticationForm = this.buildAuthenticationForm()
       this.authenticationService
         .getAuthenticationToken(this.authenticationForm, this.loginAsAdmin)
-        .subscribe((res) => {
-          const token = Object.values(res)[0]
-          console.log(token)
-          this.authenticationService.authenticateWithToken(token as string)
-        })
+        .subscribe(
+          (res) => {
+            const token = Object.values(res)[0]
+            this.authenticationService.authenticateWithToken(token as string)
+            this.router.navigate(['/home'])
+          },
+          (error) => {
+            this.handleError(error)
+          }
+        )
     }
+  }
+
+  public resetErrorMessage(): void {
+    this.errorMessageText = ''
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    console.error(error)
+    if (error.error.error === this.WRONG_CREDENTIALS_ERROR) {
+      this.handleErrorWrongCredentials()
+    } else {
+      this.handleCommonError()
+    }
+  }
+
+  private handleErrorWrongCredentials(): void {
+    this.errorMessageText = 'Your email or password is wrong'
+  }
+
+  private handleCommonError(): void {
+    this.errorMessageText = 'Error occurred. Try later'
   }
 
   private buildAuthenticationForm(): AuthenticationForm {
@@ -46,7 +81,7 @@ export class AuthComponent implements OnInit {
       email: new FormControl(this.authenticationForm.email, [Validators.min(5), Validators.email]),
       password: new FormControl(this.authenticationForm.password, [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(4)
       ])
     })
   }

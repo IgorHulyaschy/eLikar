@@ -93,4 +93,8 @@ input.ng-valid.ng-touched {
     border: 2px solid green;
 }
 
+.error-message {
+    color: red;
+}
+
 

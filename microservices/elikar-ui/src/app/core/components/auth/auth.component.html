@@ -5,16 +5,17 @@
     </div>
     <div class="input-text">
       <label>Email</label>
-      <input formControlName="email" required/>
+      <input formControlName="email" (change)="resetErrorMessage()" required/>
     </div>
     <div class="input-text">
       <label>Password</label>
-      <input type="password" formControlName="password" required />
+      <input type="password" formControlName="password" (change)="resetErrorMessage()" required />
     </div>
     <div class="input-checkbox" >
       <label>Authenticate as admin</label>
       <input type="checkbox" [(ngModel)]="loginAsAdmin" [ngModelOptions]="{standalone: true}"/>
     </div>
     <button (click)="authenticate()" [disabled]="!authenticationFormGroup.valid">Authenticate</button>
+    <div class="error-message">{{errorMessageText}}</div>
   </form>
 </div>
