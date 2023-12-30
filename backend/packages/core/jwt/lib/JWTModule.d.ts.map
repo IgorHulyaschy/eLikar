@@ -1,0 +1,1 @@
+{"version":3,"file":"JWTModule.d.ts","sourceRoot":"","sources":["../src/JWTModule.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAU,MAAM,gBAAgB,CAAA;AAEhD,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAA;AAGtC,qBACa,SAAS;IACpB,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,OAAO,GAAG,OAAO;CAU3C"}

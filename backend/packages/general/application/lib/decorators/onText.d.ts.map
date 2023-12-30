@@ -1,0 +1,1 @@
+{"version":3,"file":"onText.d.ts","sourceRoot":"","sources":["../../src/decorators/onText.ts"],"names":[],"mappings":"AAEA,wBAAgB,MAAM,CAAC,MAAM,EAAE,MAAM,GAAG,eAAe,CAStD;AAED,wBAAgB,iBAAiB,CAAC,MAAM,EAAE,GAAG,GAAG,KAAK,CAAC;IAAE,MAAM,EAAE,MAAM,CAAC;IAAC,UAAU,EAAE,MAAM,CAAA;CAAE,CAAC,CAE5F"}

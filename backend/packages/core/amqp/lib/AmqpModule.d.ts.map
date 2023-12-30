@@ -1,0 +1,1 @@
+{"version":3,"file":"AmqpModule.d.ts","sourceRoot":"","sources":["../src/AmqpModule.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAU,MAAM,gBAAgB,CAAA;AAGhD,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAA;AAEtC,qBACa,UAAU;IACrB,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,OAAO,GAAG,OAAO;CAU3C"}

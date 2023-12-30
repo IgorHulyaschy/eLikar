@@ -1,0 +1,1 @@
+{"version":3,"file":"TypeormModule.d.ts","sourceRoot":"","sources":["../src/TypeormModule.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAU,MAAM,gBAAgB,CAAA;AAChD,OAAO,EAAE,iBAAiB,EAAE,MAAM,SAAS,CAAA;AAI3C,qBACa,aAAa;IACxB,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,iBAAiB,GAAG,OAAO;CAUrD"}

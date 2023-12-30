@@ -1,0 +1,1 @@
+{"version":3,"file":"HospitalSendRegistrationLettersCommand.d.ts","sourceRoot":"","sources":["../../src/hospital/HospitalSendRegistrationLettersCommand.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,wBAAwB,CAAA;AAEhD,qBAAa,sCAAuC,SAAQ,OAAO,CAAC;IAClE,MAAM,EAAE,MAAM,EAAE,CAAA;IAChB,UAAU,EAAE,MAAM,CAAA;CACnB,CAAC;CAAG"}

@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HospitalSendRegistrationLettersCommand = void 0;
+const message_client_1 = require("@elikar/message-client");
+class HospitalSendRegistrationLettersCommand extends message_client_1.Command {
+}
+exports.HospitalSendRegistrationLettersCommand = HospitalSendRegistrationLettersCommand;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSG9zcGl0YWxTZW5kUmVnaXN0cmF0aW9uTGV0dGVyc0NvbW1hbmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaG9zcGl0YWwvSG9zcGl0YWxTZW5kUmVnaXN0cmF0aW9uTGV0dGVyc0NvbW1hbmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsMkRBQWdEO0FBRWhELE1BQWEsc0NBQXVDLFNBQVEsd0JBRzFEO0NBQUc7QUFITCx3RkFHSyJ9

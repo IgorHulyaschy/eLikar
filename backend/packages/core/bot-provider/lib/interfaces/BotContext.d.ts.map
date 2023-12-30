@@ -1,0 +1,1 @@
+{"version":3,"file":"BotContext.d.ts","sourceRoot":"","sources":["../../src/interfaces/BotContext.ts"],"names":[],"mappings":"AAAA,OAAO,WAAW,MAAM,uBAAuB,CAAA;AAE/C,MAAM,WAAW,UAAW,SAAQ,WAAW;IAC7C,GAAG,EAAE,WAAW,CAAC,OAAO,CAAA;CACzB;AACD,MAAM,WAAW,YAAa,SAAQ,WAAW;IAC/C,EAAE,EAAE,WAAW,CAAC,aAAa,CAAA;CAC9B"}
