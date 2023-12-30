@@ -1,0 +1,20 @@
+<div class="main-wrapper">
+  <form class="form-wrapper" [formGroup]="authenticationFormGroup">
+    <div>
+      <h2>Authentication</h2>
+    </div>
+    <div class="input-text">
+      <label>Email</label>
+      <input formControlName="email" required/>
+    </div>
+    <div class="input-text">
+      <label>Password</label>
+      <input type="password" formControlName="password" required />
+    </div>
+    <div class="input-checkbox" >
+      <label>Authenticate as admin</label>
+      <input type="checkbox" [(ngModel)]="loginAsAdmin" [ngModelOptions]="{standalone: true}"/>
+    </div>
+    <button (click)="authenticate()" [disabled]="!authenticationFormGroup.valid">Authenticate</button>
+  </form>
+</div>

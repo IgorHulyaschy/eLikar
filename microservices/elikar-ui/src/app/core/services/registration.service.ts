@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { RegistrationForm } from '../models/registration/RegistrationForm'
+import { RegistrationForm } from '../models/registration/registration-form'
 import { Observable } from 'rxjs'
 
 @Injectable({
