@@ -55,6 +55,8 @@ export class RegistrationFormComponent implements OnInit {
     registrationForm.lastName = this.registrationFormGroup.controls['lastName'].value
     registrationForm.phone = this.registrationFormGroup.controls['phone'].value
     registrationForm.password = this.registrationFormGroup.controls['password'].value
+    registrationForm.password = this.registrationFormGroup.controls['position'].value
+    registrationForm.password = this.registrationFormGroup.controls['specialist'].value
     return registrationForm
   }
 
