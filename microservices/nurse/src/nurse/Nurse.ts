@@ -32,6 +32,12 @@ export class Nurse extends Domain<Nurse> {
   @Column()
   phoneNumber!: string
 
+  @Column()
+  position!: NurseDto.Position
+
+  @Column()
+  specialist!: NurseDto.Specialist
+
   static create(dto: NurseDto.CreateNurse): Nurse {
     const nurse = new Nurse()
     nurse.id = randomUUID()
@@ -41,6 +47,8 @@ export class Nurse extends Domain<Nurse> {
     nurse.lname = dto.lname
     nurse.password = dto.password
     nurse.phoneNumber = dto.phoneNumber
+    nurse.position = dto.position
+    nurse.specialist = dto.specialist
     return nurse
   }
 
@@ -57,5 +65,7 @@ export class Nurse extends Domain<Nurse> {
     this.password = entity.password
     this.phoneNumber = entity.phoneNumber
     this.isActive = entity.isActive
+    this.position = entity.position
+    this.specialist = entity.specialist
   }
 }

@@ -5,6 +5,8 @@ export interface CreateNurse {
   password: string
   hospitalId: string
   phoneNumber: string
+  position: Position
+  specialist: Specialist
 }
 
 export interface TelegramConnect {
@@ -19,6 +21,8 @@ export interface Nurse {
   email: string
   fname: string
   lname: string
+  position: Position
+  specialist: Specialist
 }
 
 export interface SignIn {
@@ -31,4 +35,17 @@ export interface CreateMedicineReport {
   patientId: string
   tgId: string
   count: number
+}
+
+export enum Position {
+  NURSE = 'Nurse',
+  DOCTOR = 'Doctor',
+  ADMIN = 'Admin'
+}
+
+export enum Specialist {
+  SURGEON = 'surgeon',
+  THERAPIST = 'therapist',
+  UROLOGIST = 'urologist',
+  GYNECOLOGIST = 'gynecologist'
 }

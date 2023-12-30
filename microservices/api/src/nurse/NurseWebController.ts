@@ -17,7 +17,7 @@ export class NurseWebController {
   @post('')
   async signUp(ctx: Context): Promise<void> {
     try {
-      await this.service.signUp(JSON.parse(ctx.request.body))
+      await this.service.signUp(ctx.request.body)
       ctx.status = 200
     } catch (err) {
       if (err instanceof AlreadyExistsError)

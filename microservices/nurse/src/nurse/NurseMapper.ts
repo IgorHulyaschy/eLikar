@@ -11,7 +11,9 @@ export class NurseMapper {
       phoneNumber: n.phoneNumber,
       email: n.email,
       fname: n.fname,
-      lname: n.lname
+      lname: n.lname,
+      position: n.position,
+      specialist: n.specialist
     }
   }
 }
