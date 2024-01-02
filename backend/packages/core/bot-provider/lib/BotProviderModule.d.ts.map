@@ -1,1 +1,0 @@
-{"version":3,"file":"BotProviderModule.d.ts","sourceRoot":"","sources":["../src/BotProviderModule.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAU,MAAM,gBAAgB,CAAA;AAKhD,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAA;AAEtC,qBACa,iBAAiB;IAC5B,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,OAAO,GAAG,OAAO;CAW3C"}

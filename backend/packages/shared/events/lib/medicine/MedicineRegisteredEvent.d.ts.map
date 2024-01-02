@@ -1,1 +1,0 @@
-{"version":3,"file":"MedicineRegisteredEvent.d.ts","sourceRoot":"","sources":["../../src/medicine/MedicineRegisteredEvent.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,iBAAiB,CAAA;AACvC,OAAO,EAAE,WAAW,EAAE,MAAM,aAAa,CAAA;AAEzC,qBAAa,uBAAwB,SAAQ,KAAK,CAAC,WAAW,CAAC,kBAAkB,CAAC;CAAG"}

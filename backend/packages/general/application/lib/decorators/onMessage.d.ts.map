@@ -1,1 +1,0 @@
-{"version":3,"file":"onMessage.d.ts","sourceRoot":"","sources":["../../src/decorators/onMessage.ts"],"names":[],"mappings":"AAEA,wBAAgB,SAAS,CAAC,OAAO,EAAE,MAAM,GAAG,eAAe,CAS1D;AAED,wBAAgB,oBAAoB,CAAC,MAAM,EAAE,GAAG,GAAG,KAAK,CAAC;IAAE,OAAO,EAAE,MAAM,CAAC;IAAC,UAAU,EAAE,MAAM,CAAA;CAAE,CAAC,CAEhG"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"RedisModule.d.ts","sourceRoot":"","sources":["../src/RedisModule.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAU,MAAM,gBAAgB,CAAA;AAGhD,OAAO,EAAE,OAAO,EAAE,MAAM,cAAc,CAAA;AAGtC,qBACa,WAAW;IACtB,MAAM,CAAC,QAAQ,CAAC,OAAO,EAAE,OAAO,GAAG,OAAO;CAU3C"}

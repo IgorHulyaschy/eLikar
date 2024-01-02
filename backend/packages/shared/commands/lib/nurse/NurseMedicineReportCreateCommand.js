@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NurseMedicineReportCreateCommand = void 0;
-const message_client_1 = require("@elikar/message-client");
-class NurseMedicineReportCreateCommand extends message_client_1.Command {
-}
-exports.NurseMedicineReportCreateCommand = NurseMedicineReportCreateCommand;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTnVyc2VNZWRpY2luZVJlcG9ydENyZWF0ZUNvbW1hbmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvbnVyc2UvTnVyc2VNZWRpY2luZVJlcG9ydENyZWF0ZUNvbW1hbmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsMkRBQWdEO0FBR2hELE1BQWEsZ0NBQWlDLFNBQVEsd0JBQXNDO0NBQUc7QUFBL0YsNEVBQStGIn0=

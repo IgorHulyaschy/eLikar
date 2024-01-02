@@ -1,1 +1,0 @@
-{"version":3,"file":"TraceMiddleware.d.ts","sourceRoot":"","sources":["../src/TraceMiddleware.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,OAAO,EAAE,IAAI,EAAE,MAAM,KAAK,CAAA;AAKnC,qBACa,eAAe;WACb,GAAG,CAAC,IAAI,EAAE,OAAO,EAAE,IAAI,EAAE,IAAI,GAAG,OAAO,CAAC,GAAG,CAAC;CAG1D"}
