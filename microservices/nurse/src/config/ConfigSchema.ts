@@ -1,3 +1,4 @@
+import { ElectronicQueue } from '../electronic-queue/ElectronicQueue'
 import { Nurse } from '../nurse/Nurse'
 
 export default {
@@ -14,7 +15,7 @@ export default {
       default: 'postgres'
     },
     entities: {
-      default: [Nurse] as any[]
+      default: [Nurse, ElectronicQueue] as any[]
     },
     url: {
       format: String,
@@ -22,7 +23,7 @@ export default {
       env: 'POSTGRES_URL'
     },
     logging: {
-      default: false
+      default: true
     }
   },
   bcrypt: {

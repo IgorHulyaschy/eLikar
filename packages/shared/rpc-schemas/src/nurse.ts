@@ -1,4 +1,4 @@
-import { NurseDto } from '@elikar/dto'
+import { ElectronicQueueDto, NurseDto } from '@elikar/dto'
 
 export class NurseRpcSchema {
   queueName = 'nurse_rpc'
@@ -7,4 +7,21 @@ export class NurseRpcSchema {
   signIn!: (dto: NurseDto.SignIn) => Promise<{ token: string }>
   validateToken!: (token: string) => Promise<NurseDto.Nurse | null>
   get!: (id: string) => Promise<NurseDto.Nurse>
+  getElectronicQueue!: (dto: ElectronicQueueDto.GetElectronicQueue) => Promise<
+    Record<
+      string,
+      Record<
+        string,
+        {
+          id: string
+          hospitalId: string
+          nurseId: string
+          patientId: string
+          status: ElectronicQueueDto.Status
+          dayOfMonth: Date
+          bookedTime: string
+        }
+      >
+    >
+  >
 }

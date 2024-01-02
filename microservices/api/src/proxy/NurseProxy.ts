@@ -1,4 +1,4 @@
-import { NurseDto } from '@elikar/dto'
+import { ElectronicQueueDto, NurseDto } from '@elikar/dto'
 import { RpcClient } from '@elikar/rpc-client'
 import { NurseRpcErrorCodes, RpcError } from '@elikar/rpc-error-codes'
 import { NurseRpcSchema } from '@elikar/rpc-schemas'
@@ -43,5 +43,25 @@ export class NurseProxy {
       }
       throw err
     }
+  }
+
+  getQueue(dto: ElectronicQueueDto.GetElectronicQueue): Promise<
+    Record<
+      string,
+      Record<
+        string,
+        {
+          id: string
+          hospitalId: string
+          nurseId: string
+          patientId: string
+          status: ElectronicQueueDto.Status
+          dayOfMonth: Date
+          bookedTime: string
+        }
+      >
+    >
+  > {
+    return this.proxy.getElectronicQueue(dto)
   }
 }

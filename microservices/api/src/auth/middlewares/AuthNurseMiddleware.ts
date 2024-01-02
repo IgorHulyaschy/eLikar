@@ -16,6 +16,6 @@ export class AuthNurseMiddleware {
     if (!nurse) throw new Error()
 
     ctx.state = nurse
-    next()
+    return next()
   }
 }
