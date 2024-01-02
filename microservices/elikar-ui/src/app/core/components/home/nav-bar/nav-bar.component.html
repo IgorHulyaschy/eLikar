@@ -1,0 +1,31 @@
+<nav>
+  <ng-container *ngIf="!userAuthenticated(); else authNavigation">
+      <div class="navigation-buttons">
+        <ng-container *ngTemplateOutlet="homeNavigation"></ng-container>
+      </div>
+  </ng-container>
+</nav>
+
+<ng-template #authNavigation>
+  <div class="navigation-buttons">
+    <ng-container *ngTemplateOutlet="homeNavigation"></ng-container>
+    <div>
+      <p class="navigation-trigger">Register patient</p>
+    </div>
+  </div>
+  <div class="navigation-icons">
+    <div class="button-about-me navigation-trigger" [routerLink]="['/about-me']">
+      <img src="assets/icons/profile.png" />
+    </div>
+    <div class="button-logout navigation-trigger" (click)="logout()">
+      <img src="assets/icons/logout.png" />
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #homeNavigation>
+  <div>
+    <p class="navigation-trigger" [routerLink]="['/home']">eLikar</p>
+  </div>
+</ng-template>
+

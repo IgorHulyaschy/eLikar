@@ -20,7 +20,7 @@ export class AuthComponent implements OnInit {
   private readonly WRONG_CREDENTIALS_ERROR = 'WRONG_CREDENTIALS'
   constructor(authenticationService: AuthService, router: Router) {
     this.authenticationService = authenticationService
-    this.router = router;
+    this.router = router
   }
 
   public ngOnInit(): void {
@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit {
         .subscribe(
           (res) => {
             const token = Object.values(res)[0]
-            this.authenticationService.authenticateWithToken(token as string)
+            this.authenticationService.authenticateWithToken(token as string, this.loginAsAdmin)
             this.router.navigate(['/home'])
           },
           (error) => {

@@ -20,6 +20,7 @@ export class AuthService {
   private readonly AUTH_TOKEN = 'token'
   private readonly EXPIRES_AT = 'expires_at'
   private readonly USER_ID = 'user_id'
+  private readonly IS_ADMIN = 'is_admin'
 
   public getAuthenticationToken(
     authForm: AuthenticationForm,
@@ -32,8 +33,9 @@ export class AuthService {
     }
   }
 
-  public authenticateWithToken(token: string): void {
+  public authenticateWithToken(token: string, isAdmin: boolean): void {
     const authResponse = this.buildAuthResponse(token)
+    localStorage.setItem(this.IS_ADMIN, JSON.stringify(isAdmin))
     this.setSession(authResponse)
   }
 
@@ -45,7 +47,10 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return moment().isBefore(this.getExpiration())
+    if (localStorage.getItem(this.AUTH_TOKEN)) {
+      return moment().isBefore(this.getExpiration())
+    }
+    return false
   }
 
   public isLoggedOut(): boolean {

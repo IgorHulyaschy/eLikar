@@ -1,15 +1,5 @@
-export enum Position {
-  NURSE = 'NURSE',
-  DOCTOR = 'DOCTOR',
-  ADMIN = 'ADMIN'
-}
-
-export enum Specialist {
-  SURGEON = 'SURGEON',
-  THERAPIST = 'THERAPIST',
-  UROLOGIST = 'UROLOGIST',
-  GYNECOLOGIST = 'GYNECOLOGIST'
-}
+import { Position } from '../user/position'
+import { Specialist } from '../user/specialist'
 
 export class RegistrationForm {
   email!: string

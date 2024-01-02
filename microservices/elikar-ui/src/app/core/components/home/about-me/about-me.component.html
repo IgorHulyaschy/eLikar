@@ -1,0 +1,70 @@
+<div class="main-wrapper">
+  <div class="info-wrapper">
+    <div class="info-image">
+      <div class="info-image-wrapper">
+        <img src="assets/icons/profile.png" />
+      </div>
+    </div>
+    <div class="info-text">
+      <div class="info-text-header">
+        <p>About you</p>
+      </div>
+      <div class="info-text-content" *ngIf="user">
+        <ng-container *ngIf="!isUserAdmin(); else adminAboutTemplate">
+          <div class="info-text-content-item info-text-user-id">
+            <label> Your id: </label>
+            <p class="item-value">{{ user.id }}</p>
+          </div>
+          <div class="info-text-content-item">
+
+          </div>
+          <div class="info-text-content-item">
+            <label> Your name: </label>
+            <p class="item-value">{{ user.fname }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Your lastname: </label>
+            <p class="item-value">{{ user.lname }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Your email: </label>
+            <p class="item-value">{{ user.email }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Your phone: </label>
+            <p class="item-value">{{ user.phoneNumber }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Your position: </label>
+            <p class="item-value">{{ user.position }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Your speciality: </label>
+            <p class="item-value">{{ user.specialist }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #adminAboutTemplate>
+  <div class="info-text-content-item info-text-user-id">
+    <label> Your id: </label>
+    <p class="item-value">{{ user?.id }}</p>
+  </div>
+  <div class="info-text-content-item">
+
+  </div>
+  <div class="info-text-content-item info-text-user-id">
+    <label> You are admin of: </label>
+    <p class="item-value">{{ user?.name }}</p>
+  </div>
+  <div class="info-text-content-item">
+
+  </div>
+  <div class="info-text-content-item info-text-user-id">
+    <label> Your email: </label>
+    <p class="item-value">{{ user?.email }}</p>
+  </div>
+</ng-template>

@@ -1,0 +1,6 @@
+export enum Specialist {
+  SURGEON = 'SURGEON',
+  THERAPIST = 'THERAPIST',
+  UROLOGIST = 'UROLOGIST',
+  GYNECOLOGIST = 'GYNECOLOGIST'
+}
