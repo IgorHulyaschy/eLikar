@@ -32,10 +32,10 @@ export class Nurse extends Domain<Nurse> {
   @Column()
   phoneNumber!: string
 
-  @Column()
+  @Column({ nullable: true })
   position!: NurseDto.Position
 
-  @Column()
+  @Column({ nullable: true })
   specialist!: NurseDto.Specialist
 
   static create(dto: NurseDto.CreateNurse): Nurse {

@@ -12,6 +12,7 @@ import { JWTModule } from '@elikar/jwt'
 import { ConfigService } from './config'
 import { App } from './App'
 import { NurseModule } from './nurse'
+import { ElectroniceQueueModule } from './electronic-queue'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -31,6 +32,7 @@ export class AppModule {
         BcryptModule.register(config.get('bcrypt')),
         JWTModule.register(config.get('jwt')),
         NurseModule,
+        ElectroniceQueueModule,
         MessageClientModule
       ],
       deps: {

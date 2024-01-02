@@ -1,14 +1,18 @@
 import { rpcController } from '@elikar/application'
-import { NurseDto } from '@elikar/dto'
+import { ElectronicQueueDto, NurseDto } from '@elikar/dto'
 import { TokenExpiredError } from '@elikar/jwt'
 import { RpcError, NurseRpcErrorCodes } from '@elikar/rpc-error-codes'
+import { ElectronicQueueService } from '../electronic-queue/ElectronicQueueService'
 
 import { AlreadyExistsError, WrongCredentialsError } from './errors'
 import { NurseService } from './NurseService'
 
 @rpcController('nurse_rpc')
 export class NurseRpcController {
-  constructor(private readonly service: NurseService) {}
+  constructor(
+    private readonly service: NurseService,
+    private readonly queueService: ElectronicQueueService
+  ) {}
 
   async validateCreation(dto: NurseDto.CreateNurse): Promise<void> {
     try {
@@ -44,5 +48,25 @@ export class NurseRpcController {
 
   get(id: string): Promise<NurseDto.Nurse> {
     return this.service.get(id)
+  }
+
+  getElectronicQueue(dto: ElectronicQueueDto.GetElectronicQueue): Promise<
+    Record<
+      string,
+      Record<
+        string,
+        {
+          id: string
+          hospitalId: string
+          nurseId: string
+          patientId: string
+          status: ElectronicQueueDto.Status
+          dayOfMonth: Date
+          bookedTime: string
+        }
+      >
+    >
+  > {
+    return this.queueService.getFreeSlots(dto)
   }
 }

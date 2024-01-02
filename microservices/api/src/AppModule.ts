@@ -13,6 +13,7 @@ import { ProxyModule } from './proxy'
 import { NurseModule } from './nurse'
 import { MedicineModule } from './medicine'
 import { PatientModule } from './patient'
+import { ElectronicQueueModule } from './electronic-queue'
 
 export const TYPES = {
   Options: Symbol('App:Options')
@@ -36,6 +37,7 @@ export class AppModule {
         HospitalModule,
         AuthModule,
         NurseModule,
+        ElectronicQueueModule,
         MedicineModule,
         PatientModule
       ],
