@@ -5,6 +5,8 @@ import { jwtDecode } from 'jwt-decode'
 import { AuthenticationResponse } from '../models/authentication/authentication-response'
 import * as moment from 'moment'
 import { Observable } from 'rxjs'
+import { UserService } from "./user.service";
+import { User } from "../models/user/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,11 @@ export class AuthService {
   private http: HttpClient
   private authUrl = 'http://localhost:3000/api/auth/nurses/sign-in'
   private authAsAdminUrl = 'http://localhost:3000/api/auth/hospitals/sign-in'
-  constructor(http: HttpClient) {
+  private userService: UserService
+  constructor(http: HttpClient,
+              userService: UserService) {
     this.http = http
+    this.userService = userService
   }
 
   private readonly AUTH_TOKEN = 'token'
@@ -61,7 +66,7 @@ export class AuthService {
     const expiration = localStorage.getItem(this.EXPIRES_AT)
     if (expiration) {
       const expiresAt = JSON.parse(expiration)
-      return moment(expiresAt)
+      return moment(expiresAt * 1000)
     }
   }
 
@@ -73,12 +78,20 @@ export class AuthService {
   }
 
   private setSession(authResponse: AuthenticationResponse): void {
-    const expiresAt = moment().add(authResponse.exp, 'second')
+    const expiresAt = JSON.stringify(authResponse.exp)
 
     localStorage.setItem(this.AUTH_TOKEN, authResponse.token)
-    localStorage.setItem(this.EXPIRES_AT, JSON.stringify(expiresAt.valueOf()))
+    localStorage.setItem(this.EXPIRES_AT, JSON.stringify(expiresAt))
     localStorage.setItem(this.USER_ID, authResponse.id)
 
     console.log('User logged in!')
+    this.setUserInSession()
+  }
+
+  private setUserInSession(): void {
+    this.userService.getInfoAboutMe().subscribe((user) => {
+      console.log()
+      this.userService.setUser(user)
+    })
   }
 }

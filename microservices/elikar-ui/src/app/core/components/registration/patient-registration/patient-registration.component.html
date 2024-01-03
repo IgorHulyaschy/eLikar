@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <form class="form-wrapper" [formGroup]="patientRegistrationFormGroup">
+    <div class="header-wrapper"> <h2>Patient Registration</h2> </div>
+
+    <div class="main-wrapper">
+
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname" formControlName="firstName">
+
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" name="lname" formControlName="lastName">
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" formControlName="phone">
+    </div>
+
+    <div class="register-button-wrapper">
+      <button class="register-button" (click)="registerPatient()" [disabled]="!patientRegistrationFormGroup.valid" type="submit">Register</button>
+    </div>
+  </form>
+</div>
+
+<app-pop-up></app-pop-up>
+

@@ -12,7 +12,9 @@ import { HomeComponent } from './core/components/home/home.component'
 import { NavBarComponent } from './core/components/home/nav-bar/nav-bar.component'
 import { AboutMeComponent } from './core/components/home/about-me/about-me.component'
 import { AuthInterceptor } from './core/interceptor/auth.interceptor'
-
+import { PatientRegistrationComponent } from './core/components/registration/patient-registration/patient-registration.component'
+import { PopUpComponent } from './shared/components/pop-up.component'
+import { PatientOverviewComponent } from "./core/components/patient/patient-overview/patient-overview.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,10 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor'
     AuthComponent,
     HomeComponent,
     NavBarComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    PatientRegistrationComponent,
+    PopUpComponent,
+    PatientOverviewComponent
   ],
   imports: [
     CommonModule,

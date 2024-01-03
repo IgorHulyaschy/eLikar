@@ -11,9 +11,18 @@ export class UserService {
   private adminUrl = 'http://localhost:3000/api/hospital'
   private http: HttpClient
   private readonly IS_ADMIN = 'is_admin'
+  private user!: User
 
   constructor(http: HttpClient) {
     this.http = http
+  }
+
+  public setUser(user: User): void {
+    this.user = user
+  }
+
+  public getUser(): User{
+    return this.user
   }
 
   public getInfoAboutMe(): Observable<User> {
