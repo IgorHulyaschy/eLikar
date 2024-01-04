@@ -29,4 +29,10 @@ export class PatientService {
 
     return this.mapper.toDto(patient)
   }
+
+  async getByPhone(phone: string): Promise<PatientDto.Patient | null> {
+    const res = await this.repository.findAllByPhone(phone)
+    if (!res.length) return null
+    return res[0]
+  }
 }

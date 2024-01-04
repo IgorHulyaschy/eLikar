@@ -25,4 +25,8 @@ export class PatientRpcController {
   addToMedicalHistory(dto: MedicalHistoryDto.CreateMedicalHistory): Promise<void> {
     return this.mhService.create(dto)
   }
+
+  getByPhone(phone: string): Promise<PatientDto.Patient | null> {
+    return this.service.getByPhone(phone)
+  }
 }

@@ -28,4 +28,8 @@ export class PatientService {
   getMedicalHistory(patientId: string): Promise<void> {
     return this.proxy.getMedicalHistory(patientId)
   }
+
+  getByPhone(phone: string): Promise<PatientDto.Patient | null> {
+    return this.proxy.getByPhone(phone)
+  }
 }

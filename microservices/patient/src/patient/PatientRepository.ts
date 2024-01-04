@@ -22,4 +22,12 @@ export class PatientRepository extends Repository(Patient) {
       .offset(offset || 0)
       .getMany()
   }
+
+  async findAllByPhone(phone: string, em = getManager()): Promise<any[]> {
+    return em.query(`
+      SELECT *
+      FROM patient
+      WHERE "phoneNumber" = '${phone}'
+    `)
+  }
 }
