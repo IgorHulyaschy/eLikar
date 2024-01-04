@@ -24,4 +24,6 @@ export class NurseRpcSchema {
       >
     >
   >
+
+  startOverview!: ({ id }: { id: string }) => Promise<void>
 }

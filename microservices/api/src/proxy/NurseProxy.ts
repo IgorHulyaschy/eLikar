@@ -64,4 +64,8 @@ export class NurseProxy {
   > {
     return this.proxy.getElectronicQueue(dto)
   }
+
+  startOverview(id: string): Promise<void> {
+    return this.proxy.startOverview({ id })
+  }
 }

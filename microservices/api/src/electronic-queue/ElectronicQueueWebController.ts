@@ -1,4 +1,4 @@
-import { get, post, useMiddleware, webController } from '@elikar/application'
+import { get, post, put, useMiddleware, webController } from '@elikar/application'
 import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
 import { AuthNurseMiddleware } from '../auth/middlewares'
@@ -15,7 +15,6 @@ export class ElectronicQueueWebController {
       this.service.create({
         ...ctx.request.body,
         hospitalId: ctx.state.hospitalId,
-        nurseId: ctx.state.id,
         dayOfMonth: new Date(ctx.request.body.dayOfMonth).getTime()
       })
       ctx.status = 200
@@ -25,21 +24,20 @@ export class ElectronicQueueWebController {
   }
 
   @useMiddleware(AuthNurseMiddleware)
-  @get('/list')
+  @get('/:nurseId')
   async getSlots(ctx: Context): Promise<void> {
-    try {
-      const res = await this.service.get({
-        nurseId: ctx.state.id,
-        hospitalId: ctx.state.hospitalId
-      })
-      ctx.body = {}
-      ctx.status = 200
-      console.log(ctx.body, ctx.status)
-      // ctx.body = res
-      ctx.body = res
-      return
-    } catch (err) {
-      console.log(err)
-    }
+    const res = await this.service.get({
+      nurseId: ctx.request.params.nurseId,
+      hospitalId: ctx.state.hospitalId
+    })
+    ctx.body = res
+  }
+
+  @useMiddleware(AuthNurseMiddleware)
+  @put('/:id')
+  async setDone(ctx: Context): Promise<void> {
+    await this.service.startOverview(ctx.request.params.id)
+    ctx.status = 200
+    ctx.body = { success: true }
   }
 }

@@ -12,3 +12,4 @@ packages/**/lib/**
 **/.env
 **/npm-debug.log
 .DS_Store
+.idea

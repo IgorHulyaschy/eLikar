@@ -69,4 +69,8 @@ export class NurseRpcController {
   > {
     return this.queueService.getFreeSlots(dto)
   }
+
+  startOverview({ id }: { id: string }): Promise<void> {
+    return this.queueService.startOverview(id)
+  }
 }

@@ -17,6 +17,11 @@ export class ElectronicQueueService {
     await this.repository.save(queue)
   }
 
+  async startOverview(queueId: string): Promise<void> {
+    const queue = await this.repository.findOne({ id: queueId })
+    await this.repository.save(queue!.setDone())
+  }
+
   async getFreeSlots({ hospitalId, nurseId }: { hospitalId: string; nurseId: string }): Promise<
     Record<
       string,
@@ -71,28 +76,14 @@ export class ElectronicQueueService {
         return acc
       },
       {
-        [ElectronicQueueDto.Week.Monday]: workHours,
-        [ElectronicQueueDto.Week.Tuesday]: workHours,
-        [ElectronicQueueDto.Week.Wednesday]: workHours,
-        [ElectronicQueueDto.Week.Thursday]: workHours,
-        [ElectronicQueueDto.Week.Friday]: workHours
+        [ElectronicQueueDto.Week.Monday]: { ...workHours },
+        [ElectronicQueueDto.Week.Tuesday]: { ...workHours },
+        [ElectronicQueueDto.Week.Wednesday]: { ...workHours },
+        [ElectronicQueueDto.Week.Thursday]: { ...workHours },
+        [ElectronicQueueDto.Week.Friday]: { ...workHours }
       }
     )
     return groupedSlots
-    // const slots = {
-    //   1: [...freeSlots.filter((row) => row.dayOfWeek === 1)],
-    //   2: {
-    //     13: null,
-    //     14: null,
-    //     15: null,
-    //     16: null,
-    //     17: null
-    //   },
-    //   3: [...freeSlots.filter((row) => row.dayOfWeek === 1)],
-    //   4: [...freeSlots.filter((row) => row.dayOfWeek === 1)],
-    //   5: [...freeSlots.filter((row) => row.dayOfWeek === 1)]
-    // }
-    // return freeSlots
   }
 
   getWeekTime(): Date {

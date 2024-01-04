@@ -26,6 +26,11 @@ export class ElectronicQueue extends Domain<ElectronicQueue> {
   @Column()
   bookedTime!: number
 
+  setDone(): this {
+    this.status = ElectronicQueueDto.Status.DONE
+    return this
+  }
+
   static create(dto: ElectronicQueueDto.CreateElectronicQueue): ElectronicQueue {
     const queue = new ElectronicQueue()
     queue.id = randomUUID()
