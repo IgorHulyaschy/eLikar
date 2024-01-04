@@ -1,3 +1,4 @@
+import { MedicalHistory } from '../medical-history/MedicalHistory'
 import { Patient } from '../patient/Patient'
 
 export default {
@@ -14,7 +15,7 @@ export default {
       default: 'postgres'
     },
     entities: {
-      default: [Patient] as any[]
+      default: [Patient, MedicalHistory] as any[]
     },
     url: {
       format: String,

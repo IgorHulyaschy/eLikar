@@ -35,7 +35,7 @@ export class ElectronicQueueService {
     return this.nurseProxy.getQueue(dto)
   }
 
-  startOverview(id: string): Promise<void> {
-    return this.nurseProxy.startOverview(id)
+  startOverview(dto: ElectronicQueueDto.SetDone): Promise<void> {
+    return this.nurseProxy.startOverview(dto)
   }
 }

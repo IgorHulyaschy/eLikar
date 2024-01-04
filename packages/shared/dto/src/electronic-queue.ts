@@ -35,3 +35,9 @@ export interface GetElectronicQueue {
   nurseId: string
   hospitalId: string
 }
+
+export interface SetDone {
+  queueId: string
+  diagnosis: string
+  nurseNotes?: string
+}

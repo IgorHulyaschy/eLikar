@@ -23,12 +23,11 @@ export class ElectronicQueueWebController {
     }
   }
 
-  @useMiddleware(AuthNurseMiddleware)
-  @get('/:nurseId')
+  @get('/:nurseId/:hospitalId')
   async getSlots(ctx: Context): Promise<void> {
     const res = await this.service.get({
       nurseId: ctx.request.params.nurseId,
-      hospitalId: ctx.state.hospitalId
+      hospitalId: ctx.request.params.hospitalId
     })
     ctx.body = res
   }
@@ -36,7 +35,11 @@ export class ElectronicQueueWebController {
   @useMiddleware(AuthNurseMiddleware)
   @put('/:id')
   async setDone(ctx: Context): Promise<void> {
-    await this.service.startOverview(ctx.request.params.id)
+    await this.service.startOverview({
+      queueId: ctx.request.params.id,
+      diagnosis: ctx.request.body.diagnosis,
+      nurseNotes: ctx.request.body.nurseNotes
+    })
     ctx.status = 200
     ctx.body = { success: true }
   }

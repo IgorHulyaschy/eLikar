@@ -21,4 +21,10 @@ export class PatientWebController {
     ctx.body = await this.service.get(ctx.request.params.id)
     ctx.status = 200
   }
+
+  @get('/medical-history/:id')
+  async getMedicalHistory(ctx: Context<any>): Promise<void> {
+    ctx.body = await this.service.getMedicalHistory(ctx.request.params.id)
+    ctx.status = 200
+  }
 }

@@ -65,8 +65,8 @@ export class NurseProxy {
     return this.proxy.getElectronicQueue(dto)
   }
 
-  startOverview(id: string): Promise<void> {
-    return this.proxy.startOverview({ id })
+  startOverview(dto: ElectronicQueueDto.SetDone): Promise<void> {
+    return this.proxy.startOverview(dto)
   }
 
   getList(): Promise<NurseDto.Nurse[]> {

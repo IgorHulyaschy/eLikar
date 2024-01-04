@@ -13,6 +13,8 @@ import { ConfigService } from './config'
 import { App } from './App'
 import { NurseModule } from './nurse'
 import { ElectroniceQueueModule } from './electronic-queue'
+import { PatientModule } from './patient'
+import { RpcClientModule } from '@elikar/rpc-client'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -27,10 +29,12 @@ export class AppModule {
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
         ApplicationBuilderModule,
+        RpcClientModule,
         LoggerModule,
         RpcServerModule,
         BcryptModule.register(config.get('bcrypt')),
         JWTModule.register(config.get('jwt')),
+        PatientModule,
         NurseModule,
         ElectroniceQueueModule,
         MessageClientModule

@@ -1,5 +1,6 @@
 import { ElectronicQueueDto } from '@elikar/dto'
 import { injectable } from 'inversify'
+import { PatientProxy } from '../patient'
 import { DAY } from './contsants'
 import { ElectronicQueue } from './ElectronicQueue'
 // import { ElectronicQueueMapper } from './ElectronicQueueMapper'
@@ -9,7 +10,8 @@ import { ElectronicQueueRepository } from './ElectronicQueueRepository'
 export class ElectronicQueueService {
   constructor(
     // private readonly mapper: ElectronicQueueMapper,
-    private readonly repository: ElectronicQueueRepository
+    private readonly repository: ElectronicQueueRepository,
+    private readonly patientProxy: PatientProxy
   ) {}
 
   async create(dto: ElectronicQueueDto.CreateElectronicQueue): Promise<void> {
@@ -17,9 +19,15 @@ export class ElectronicQueueService {
     await this.repository.save(queue)
   }
 
-  async startOverview(queueId: string): Promise<void> {
-    const queue = await this.repository.findOne({ id: queueId })
+  async startOverview(dto: ElectronicQueueDto.SetDone): Promise<void> {
+    const queue = await this.repository.findOne({ id: dto.queueId })
     await this.repository.save(queue!.setDone())
+    await this.patientProxy.addToMedicalHistory({
+      nurseId: queue!.nurseId,
+      patientId: queue!.patientId,
+      nurseNotes: dto.nurseNotes,
+      diagnosis: dto.diagnosis
+    })
   }
 
   async getFreeSlots({ hospitalId, nurseId }: { hospitalId: string; nurseId: string }): Promise<

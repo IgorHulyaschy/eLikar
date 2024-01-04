@@ -10,6 +10,7 @@ import { LoggerModule } from '@elikar/logger'
 import { ConfigService } from './config'
 import { App } from './App'
 import { PatientModule } from './patient'
+import { MedicalHistoryModule } from './medical-history'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -27,7 +28,8 @@ export class AppModule {
         LoggerModule,
         RpcServerModule,
         MessageClientModule,
-        PatientModule
+        PatientModule,
+        MedicalHistoryModule
       ],
       deps: {
         services(local) {

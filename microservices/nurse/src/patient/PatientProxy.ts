@@ -1,4 +1,4 @@
-import { PatientDto } from '@elikar/dto'
+import { MedicalHistoryDto, PatientDto } from '@elikar/dto'
 import { RpcClient } from '@elikar/rpc-client'
 import { PatientRpcSchema } from '@elikar/rpc-schemas'
 import { injectable } from 'inversify'
@@ -16,5 +16,11 @@ export class PatientProxy {
 
   getMedicalHistory(patientId: string): Promise<void> {
     return this.proxy.getMedicalHistory(patientId)
+  }
+
+  addToMedicalHistory(
+    dto: MedicalHistoryDto.CreateMedicalHistory
+  ): Promise<MedicalHistoryDto.MedicalHistory[]> {
+    return this.proxy.addToMedicalHistory(dto)
   }
 }
