@@ -15,7 +15,7 @@
       <label>Authenticate as admin</label>
       <input type="checkbox" [(ngModel)]="loginAsAdmin" [ngModelOptions]="{standalone: true}"/>
     </div>
-    <button (click)="authenticate()" [disabled]="!authenticationFormGroup.valid">Authenticate</button>
+    <button class="submit-button" (click)="authenticate()" [disabled]="!authenticationFormGroup.valid">Authenticate</button>
     <div class="error-message">{{errorMessageText}}</div>
   </form>
 </div>

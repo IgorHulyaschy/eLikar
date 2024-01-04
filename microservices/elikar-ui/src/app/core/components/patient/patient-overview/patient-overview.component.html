@@ -1,0 +1,39 @@
+<div class="main-wrapper">
+  <div class="info-wrapper">
+    <div class="info-image">
+      <div class="info-image-wrapper">
+        <img src="assets/icons/profile.png" />
+      </div>
+    </div>
+    <div class="info-text">
+      <div class="info-text-header">
+        <p>Patient information</p>
+      </div>
+      <div class="info-text-content" *ngIf="patient">
+          <div class="info-text-content-item info-text-user-id">
+            <label> Id: </label>
+            <p class="item-value">{{ patient.id }}</p>
+          </div>
+          <div class="info-text-content-item">
+
+          </div>
+          <div class="info-text-content-item">
+            <label> Name: </label>
+            <p class="item-value">{{ patient.fname }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Lastname: </label>
+            <p class="item-value">{{ patient.lname }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Phone: </label>
+            <p class="item-value">{{ patient.phoneNumber }}</p>
+          </div>
+          <div class="info-text-content-item">
+            <label> Active diagnosis: </label>
+            <p class="item-value">{{ patient.diagnosis }}</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

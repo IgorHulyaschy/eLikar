@@ -1,0 +1,79 @@
+.main-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    width: 1000px;
+    height: 600px;
+    background-color: navajowhite;
+    display: grid;
+    grid-template: 1fr/1fr 1fr;
+}
+
+.selector-wrapper {
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.time-intervals-selector {
+    background-color: white;
+    width: 400px;
+    height: 265px;
+    border-radius: 5px;
+    display: grid;
+    grid-template: 1fr 1fr 1fr/1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.time-interval {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: yellow;
+}
+
+.booked-time-interval {
+    background-color: darkgray;
+    cursor: not-allowed;
+}
+
+.date-selection {
+    margin-right: 170px;
+}
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.date-picker {
+    width: 130px;
+    font-family: Arial, sans-serif;
+    height: 35px;
+}
+
+.submit-button {
+    width: 200px;
+    font-size: 25px;
+    font-weight: bold;
+
+    font-family: Arial, sans-serif;
+}

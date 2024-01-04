@@ -20,6 +20,12 @@
 
   <label for="confirm_password">Confirm Password:</label>
   <input type="password" id="confirm_password" name="confirm_password" formControlName="confirmPassword">
+
+  <label>Speciality:</label>
+  <select name="speciality" formControlName="specialist">
+    <option *ngFor="let spec of getListOfSpecialities()" [value]="spec">{{spec}}</option>
+  </select>
+
   </div>
 
   <div class="register-button-wrapper">

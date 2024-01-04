@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { RegistrationForm } from '../../../models/registration/registration-form'
 import { RegistrationService } from '../../../services/registration.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Specialist, SpecialistUtil } from "../../../models/user/specialist";
 
 @Component({
   selector: 'app-registration-form',
@@ -10,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegistrationFormComponent implements OnInit {
   public registrationFormGroup!: FormGroup
+  public speciality = 'THERAPIST'
 
   private registrationForm = new RegistrationForm()
   private confirmPassword!: string
@@ -39,6 +41,10 @@ export class RegistrationFormComponent implements OnInit {
     }
   }
 
+  public getListOfSpecialities(): string[] {
+    return Object.keys(Specialist)
+  }
+
   private passwordsAreEqual(): boolean {
     this.confirmPassword = this.registrationFormGroup.controls['confirmPassword'].value
     console.log(this.confirmPassword)
@@ -55,8 +61,7 @@ export class RegistrationFormComponent implements OnInit {
     registrationForm.lastName = this.registrationFormGroup.controls['lastName'].value
     registrationForm.phone = this.registrationFormGroup.controls['phone'].value
     registrationForm.password = this.registrationFormGroup.controls['password'].value
-    registrationForm.password = this.registrationFormGroup.controls['position'].value
-    registrationForm.password = this.registrationFormGroup.controls['specialist'].value
+    registrationForm.specialist = SpecialistUtil.getSpecialist(this.registrationFormGroup.controls['specialist'].value)
     return registrationForm
   }
 
@@ -82,7 +87,8 @@ export class RegistrationFormComponent implements OnInit {
       confirmPassword: new FormControl(this.confirmPassword, [
         Validators.required,
         Validators.minLength(6)
-      ])
+      ]),
+      specialist: new FormControl(this.registrationForm.specialist)
     })
   }
 }

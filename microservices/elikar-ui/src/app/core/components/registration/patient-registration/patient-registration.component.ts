@@ -37,6 +37,7 @@ export class PatientRegistrationComponent implements OnInit {
   public registerPatient(): void {
     this.createPatientForm = this.buildCreatePatientForm(this.patientRegistrationFormGroup)
     this.patientService.createPatient(this.createPatientForm).subscribe((res) => {
+      console.log(res)
       this.popUpComponent.show('Patient was successfully registered', true)
     })
   }

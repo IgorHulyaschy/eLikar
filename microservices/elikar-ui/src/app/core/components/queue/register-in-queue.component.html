@@ -1,0 +1,40 @@
+<div class="main-wrapper">
+  <div class="wrapper">
+    <div class="time-selector-wrapper selector-wrapper">
+      <div>
+        <h2>Queue data</h2>
+      </div>
+      <div class="time-intervals-selector">
+        <div class="time-interval">10:00</div>
+        <div class="time-interval">11:00</div>
+        <div class="time-interval selected">12:00</div>
+        <div class="time-interval">14:00</div>
+        <div class="time-interval">15:00</div>
+        <div class="time-interval booked-time-interval">16:00</div>
+      </div>
+      <button class="submit-button">Select</button>
+    </div>
+    <div class="date-and-nurse-selector-wrapper selector-wrapper">
+      <div>
+        <h2>Queue parameters</h2>
+      </div>
+      <div class="speciality-selection selection">
+        <label>Speciality</label>
+        <select [(ngModel)]="selectedSpeciality" (change)="filterNursesBySelectedSpeciality()">
+          <option *ngFor="let speciality of specialities">{{speciality}}</option>
+        </select>
+      </div>
+      <div class="nurse-selection selection">
+        <label>Doctor</label>
+        <select [(ngModel)]="selectedNurseId">
+          <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{this.getNurseFullName(nurse)}}</option>
+        </select>
+      </div>
+      <div class="date-selection selection">
+        <label>Date</label>
+        <input class="date-picker" type="date">
+      </div>
+      <button class="submit-button" (click)="findQueue(selectedNurseId)">Find</button>
+    </div>
+  </div>
+</div>

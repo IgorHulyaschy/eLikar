@@ -15,6 +15,7 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor'
 import { PatientRegistrationComponent } from './core/components/registration/patient-registration/patient-registration.component'
 import { PopUpComponent } from './shared/components/pop-up.component'
 import { PatientOverviewComponent } from "./core/components/patient/patient-overview/patient-overview.component";
+import { RegisterInQueueComponent } from "./core/components/queue/register-in-queue.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { PatientOverviewComponent } from "./core/components/patient/patient-over
     AboutMeComponent,
     PatientRegistrationComponent,
     PopUpComponent,
-    PatientOverviewComponent
+    PatientOverviewComponent,
+    RegisterInQueueComponent
   ],
   imports: [
     CommonModule,

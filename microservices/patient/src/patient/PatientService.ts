@@ -11,9 +11,9 @@ export class PatientService {
     private readonly mapper: PatientMapper
   ) {}
 
-  async create(dto: PatientDto.CreatePatient): Promise<void> {
+  async create(dto: PatientDto.CreatePatient): Promise<PatientDto.Patient> {
     const patient = Patient.create(dto)
-    await this.repository.save(patient)
+    return await this.repository.save(patient)
   }
 
   async getListOfPatients(dto: PatientDto.GetListOfPatients): Promise<PatientDto.Patient[]> {
