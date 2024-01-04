@@ -1,7 +1,6 @@
 import { Domain } from '@elikar/typeorm'
 import { Column, Entity, PrimaryColumn } from 'typeorm'
 import { PatientDto } from '@elikar/dto'
-import { randomUUID } from 'crypto'
 
 @Entity('patient')
 export class Patient extends Domain<Patient> {
@@ -28,7 +27,7 @@ export class Patient extends Domain<Patient> {
 
   static create(dto: PatientDto.CreatePatient): Patient {
     const patient = new Patient()
-    patient.id = randomUUID()
+    patient.id = dto.id
     patient.fname = dto.fname
     patient.lname = dto.lname
     patient.diagnosis = dto.diagnosis

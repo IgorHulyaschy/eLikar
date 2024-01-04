@@ -1,4 +1,5 @@
 export interface CreatePatient {
+  id: string
   fname: string
   lname: string
   hospitalId: string

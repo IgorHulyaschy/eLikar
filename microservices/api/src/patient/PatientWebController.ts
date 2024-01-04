@@ -10,7 +10,9 @@ export class PatientWebController {
   @useMiddleware(AuthHospitalAdminMiddleware)
   @post('')
   async create(ctx: Context<PatientDto.CreatePatient>): Promise<void> {
-    await this.service.create(ctx.request.body, ctx.state.id)
+    ctx.body = {
+      id: await this.service.create(ctx.request.body, ctx.state.id)
+    }
     ctx.status = 200
   }
 

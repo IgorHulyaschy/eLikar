@@ -1,6 +1,7 @@
 import { PatientCreateCommand } from '@elikar/commands'
 import { PatientDto } from '@elikar/dto'
 import { MessageClient } from '@elikar/message-client'
+import { randomUUID } from 'crypto'
 import { injectable } from 'inversify'
 import { PatientProxy } from '../proxy/PatientProxy'
 
@@ -14,8 +15,10 @@ export class PatientService {
   async create(
     dto: Omit<PatientDto.CreatePatient, 'hospitalId'>,
     hospitalId: string
-  ): Promise<void> {
-    return this.messageClient.emit(new PatientCreateCommand({ ...dto, hospitalId }))
+  ): Promise<string> {
+    const id = randomUUID()
+    this.messageClient.emit(new PatientCreateCommand({ ...dto, hospitalId, id }))
+    return id
   }
 
   get(id: string): Promise<PatientDto.Patient> {
