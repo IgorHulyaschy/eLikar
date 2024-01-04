@@ -85,13 +85,5 @@ export class AuthService {
     localStorage.setItem(this.USER_ID, authResponse.id)
 
     console.log('User logged in!')
-    this.setUserInSession()
-  }
-
-  private setUserInSession(): void {
-    this.userService.getInfoAboutMe().subscribe((user) => {
-      console.log()
-      this.userService.setUser(user)
-    })
   }
 }

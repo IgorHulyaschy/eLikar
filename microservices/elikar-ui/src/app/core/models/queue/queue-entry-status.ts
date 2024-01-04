@@ -1,4 +1,4 @@
-export class QueueEntryStatus {
-  BOOKED = 'BOOKED'
+export enum QueueEntryStatus {
+  BOOKED = 'BOOKED',
   DONE = 'DONE'
 }

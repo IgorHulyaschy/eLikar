@@ -14,7 +14,7 @@ export class QueueService {
     this.http = http
   }
 
-  public getQueue(nurseId: string): Observable<any> {
-    return this.http.get<any>(`${this.queueUrl}/${nurseId}`)
+  public getQueue(nurseId: string, hospitalId: string): Observable<Queue> {
+    return this.http.get<Queue>(`${this.queueUrl}/${nurseId}/${hospitalId}`)
   }
 }

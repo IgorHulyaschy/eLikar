@@ -5,12 +5,26 @@
         <h2>Queue data</h2>
       </div>
       <div class="time-intervals-selector">
-        <div class="time-interval">10:00</div>
-        <div class="time-interval">11:00</div>
-        <div class="time-interval selected">12:00</div>
-        <div class="time-interval">14:00</div>
-        <div class="time-interval">15:00</div>
-        <div class="time-interval booked-time-interval">16:00</div>
+        <ng-container *ngIf="dateInterval">
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(10)"
+               [ngClass]="selectedTimeInterval === 10 ? 'selected' : ''" (click)="selectTimeInterval(10)">10:00
+          </div>
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(11)"
+               [ngClass]="selectedTimeInterval === 11 ? 'selected' : ''" (click)="selectTimeInterval(11)">11:00
+          </div>
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(12)"
+               [ngClass]="selectedTimeInterval === 12 ? 'selected' : ''" (click)="selectTimeInterval(12)">12:00
+          </div>
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(14)"
+               [ngClass]="selectedTimeInterval === 14 ? 'selected' : ''" (click)="selectTimeInterval(14)">14:00
+          </div>
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(15)"
+               [ngClass]="selectedTimeInterval === 15 ? 'selected' : ''" (click)="selectTimeInterval(15)">15:00
+          </div>
+          <div class="time-interval" [class.booked-time-interval]="isTimeIntervalBooked(16)"
+               [ngClass]="selectedTimeInterval === 16 ? 'selected' : ''" (click)="selectTimeInterval(16)">16:00
+          </div>
+        </ng-container>
       </div>
       <button class="submit-button">Select</button>
     </div>
@@ -32,7 +46,7 @@
       </div>
       <div class="date-selection selection">
         <label>Date</label>
-        <input class="date-picker" type="date">
+        <input [(ngModel)]="selectedDate" class="date-picker" type="date">
       </div>
       <button class="submit-button" (click)="findQueue(selectedNurseId)">Find</button>
     </div>

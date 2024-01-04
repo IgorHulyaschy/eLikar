@@ -3,6 +3,9 @@ import { NurseService } from "../../services/nurse.service";
 import { User } from "../../models/user/user";
 import { Specialist } from "../../models/user/specialist";
 import { QueueService } from "../../services/queue.service";
+import { UserService } from "../../services/user.service";
+import { DateInterval } from "../../models/queue/date-interval";
+import { QueueEntryStatus } from "../../models/queue/queue-entry-status";
 
 @Component({
   selector: 'app-register-in-queue',
@@ -14,15 +17,21 @@ export class RegisterInQueueComponent implements OnInit {
   public filteredNurses: User[]
   public selectedSpeciality: Specialist
   public selectedNurseId: string
+  public selectedTimeInterval: number
+  public dateInterval: DateInterval
+  public selectedDate: Date
 
   private nurseService: NurseService
   private queueService: QueueService
+  private userService: UserService
   private nurses: User[]
 
   constructor(nurseService: NurseService,
-              queueService: QueueService) {
+              queueService: QueueService,
+              userService: UserService) {
     this.nurseService = nurseService
     this.queueService = queueService
+    this.userService = userService
   }
 
   public ngOnInit(): void {
@@ -37,6 +46,7 @@ export class RegisterInQueueComponent implements OnInit {
 
   public filterNursesBySelectedSpeciality(): void {
     this.filteredNurses = this.nurses.filter(nurse => nurse.specialist === this.selectedSpeciality)
+    this.selectedNurseId = this.filteredNurses[0].id
   }
 
   public getNurseFullName(nurse: User): string {
@@ -44,9 +54,25 @@ export class RegisterInQueueComponent implements OnInit {
   }
 
   public findQueue(nurseId: string): void {
-    this.queueService.getQueue(nurseId).subscribe((res) => {
-      console.log(res)
+    const hospitalId = this.userService.getUserId()
+    this.queueService.getQueue(nurseId, hospitalId).subscribe((res) => {
+      const dayOfTheWeek = new Date(this.selectedDate).getDay()
+      this.dateInterval = res[dayOfTheWeek]
     })
+  }
+
+  public selectTimeInterval(interval: number): void {
+    this.selectedTimeInterval = interval
+  }
+
+  public isTimeIntervalBooked(interval: number): boolean {
+    if (this.dateInterval) {
+      const queryEntry = this.dateInterval[interval.toString()]
+      if (queryEntry && queryEntry.status) {
+        return queryEntry === QueueEntryStatus.BOOKED
+      }
+      return false
+    }
   }
 
   private getUniqueNursesSpecialities(): Specialist[] {
