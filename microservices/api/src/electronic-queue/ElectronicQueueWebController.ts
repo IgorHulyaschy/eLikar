@@ -1,20 +1,20 @@
 import { get, post, put, useMiddleware, webController } from '@elikar/application'
 import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
-import { AuthNurseMiddleware } from '../auth/middlewares'
+import { AuthHospitalAdminMiddleware, AuthNurseMiddleware } from '../auth/middlewares'
 import { ElectronicQueueService } from './ElectronicQueueService'
 
 @webController('/electronic-queue')
 export class ElectronicQueueWebController {
   constructor(private readonly service: ElectronicQueueService) {}
 
-  @useMiddleware(AuthNurseMiddleware)
+  @useMiddleware(AuthHospitalAdminMiddleware)
   @post('')
   async create(ctx: Context): Promise<void> {
     try {
       this.service.create({
         ...ctx.request.body,
-        hospitalId: ctx.state.hospitalId,
+        hospitalId: ctx.state.id,
         dayOfMonth: new Date(ctx.request.body.dayOfMonth).getTime()
       })
       ctx.status = 200
