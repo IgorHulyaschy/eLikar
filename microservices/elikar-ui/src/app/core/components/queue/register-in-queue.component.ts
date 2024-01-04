@@ -3,8 +3,8 @@ import { NurseService } from "../../services/nurse.service";
 import { User } from "../../models/user/user";
 import { Specialist } from "../../models/user/specialist";
 import { QueueService } from "../../services/queue.service";
-import { UserService } from "../../services/user.service";
-import { DateInterval } from "../../models/queue/date-interval";
+import { UserService } from '../../services/user.service'
+import { DateInterval } from '../../models/queue/date-interval'
 import { QueueEntryStatus } from "../../models/queue/queue-entry-status";
 
 @Component({
