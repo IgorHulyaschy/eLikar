@@ -73,4 +73,8 @@ export class NurseRpcController {
   startOverview({ id }: { id: string }): Promise<void> {
     return this.queueService.startOverview(id)
   }
+
+  getList(): Promise<NurseDto.Nurse[]> {
+    return this.service.getList()
+  }
 }

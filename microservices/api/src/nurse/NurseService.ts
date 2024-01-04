@@ -28,4 +28,8 @@ export class NurseService {
   async signIn(data: NurseDto.SignIn): Promise<{ token: string }> {
     return this.proxy.signIn(data)
   }
+
+  getList(): Promise<NurseDto.Nurse[]> {
+    return this.proxy.getList()
+  }
 }

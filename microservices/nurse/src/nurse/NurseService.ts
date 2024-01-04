@@ -79,4 +79,9 @@ export class NurseService {
 
     return this.mapper.toDto(nurse)
   }
+
+  async getList(): Promise<NurseDto.Nurse[]> {
+    const nurses = await this.repository.findAll()
+    return nurses.map(this.mapper.toDto)
+  }
 }

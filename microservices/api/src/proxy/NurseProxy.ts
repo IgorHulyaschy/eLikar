@@ -68,4 +68,8 @@ export class NurseProxy {
   startOverview(id: string): Promise<void> {
     return this.proxy.startOverview({ id })
   }
+
+  getList(): Promise<NurseDto.Nurse[]> {
+    return this.proxy.getList()
+  }
 }

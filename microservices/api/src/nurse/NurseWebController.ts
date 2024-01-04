@@ -1,7 +1,7 @@
 import { get, post, useMiddleware, webController } from '@elikar/application'
 import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
-import { AuthNurseMiddleware } from '../auth/middlewares'
+import { AuthHospitalAdminMiddleware, AuthNurseMiddleware } from '../auth/middlewares'
 import { AlreadyExistsError } from '../proxy/errors'
 import { NurseService } from './NurseService'
 
@@ -30,5 +30,12 @@ export class NurseWebController {
   @get('/me')
   async getMe(ctx: Context): Promise<void> {
     ctx.body = ctx.state
+  }
+
+  @useMiddleware(AuthHospitalAdminMiddleware)
+  @get('')
+  async getList(ctx: Context): Promise<void> {
+    ctx.body = await this.service.getList()
+    ctx.status = 200
   }
 }
