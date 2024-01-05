@@ -9,6 +9,26 @@
     width: 1000px;
     height: 600px;
     background-color: navajowhite;
+    border-radius: 5px;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+    color: palevioletred;
+}
+
+label {
+    font-weight: bold;
+    color: cornflowerblue;
+}
+
+.time-date-selection-wrapper {
     display: grid;
     grid-template: 1fr/1fr 1fr;
 }
@@ -77,3 +97,63 @@
 
     font-family: Arial, sans-serif;
 }
+
+.find-patient-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.find-patient-and-register-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px 40px 40px 40px;
+    height: 670px;
+}
+
+.register-in-queue-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-in-queue-button {
+    width: 300px;
+}
+
+.column-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.patient-information {
+    display: flex;
+    gap: 40px;
+    font-size: 20px;
+    height: 80px;
+}
+
+.queue-registration-information {
+    display: flex;
+    gap: 80px;
+    font-size: 20px;
+}
+
+.back-button {
+    font-size: 20px;
+    height: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.error-text {
+    font-size: 20px;
+    color: red;
+}
+
+
+

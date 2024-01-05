@@ -6,6 +6,7 @@ import { RegistrationForm } from "../../../models/registration/registration-form
 import { UserService } from "../../../services/user.service";
 import { User } from "../../../models/user/user";
 import { PopUpComponent } from "../../../../shared/components/pop-up.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-patient-registration',
@@ -20,14 +21,16 @@ export class PatientRegistrationComponent implements OnInit {
   private createPatientForm = new CreatePatientForm()
   private patientService: PatientService
   private userService: UserService
+  private router: Router
   private readonly DEFAULT_DIAGNOSIS_ON_REGISTRATION = 'Not defined'
 
   @ViewChild(PopUpComponent, { static: false })
   private popUpComponent!: PopUpComponent
 
-  constructor(patientService: PatientService, userService: UserService) {
+  constructor(patientService: PatientService, userService: UserService, router: Router) {
     this.patientService = patientService
     this.userService = userService
+    this.router = router
   }
 
   public ngOnInit(): void {
@@ -37,8 +40,10 @@ export class PatientRegistrationComponent implements OnInit {
   public registerPatient(): void {
     this.createPatientForm = this.buildCreatePatientForm(this.patientRegistrationFormGroup)
     this.patientService.createPatient(this.createPatientForm).subscribe((res) => {
-      console.log(res)
-      this.popUpComponent.show('Patient was successfully registered', true)
+      setTimeout(() => {
+        this.popUpComponent.show('Patient was successfully registered', true)
+        this.router.navigate(['/patients', res.id])
+      }, 500)
     })
   }
 

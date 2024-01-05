@@ -26,9 +26,9 @@ export class PatientOverviewComponent implements OnInit {
 
   private setPatient(): void {
     if (this.patientId) {
-      this.patientService.getById(this.patientId).subscribe((patient) => {
-        this.patient = patient
-      });
+      this.patientService.getById(this.patientId).subscribe((res) => {
+        this.patient = res
+      })
     }
   }
 }

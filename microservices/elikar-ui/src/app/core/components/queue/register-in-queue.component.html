@@ -1,5 +1,5 @@
 <div class="main-wrapper">
-  <div class="wrapper">
+  <div class="time-date-selection-wrapper wrapper" *ngIf="!shouldShowPatientFinderAndRegisterSection; else findUserAndRegister">
     <div class="time-selector-wrapper selector-wrapper">
       <div>
         <h2>Queue data</h2>
@@ -26,7 +26,7 @@
           </div>
         </ng-container>
       </div>
-      <button class="submit-button">Select</button>
+      <button class="submit-button" [disabled]="shouldSelectTimeIntervalBeDisabled()" (click)="goToFindUserAndRegisterButtonSection()">Select</button>
     </div>
     <div class="date-and-nurse-selector-wrapper selector-wrapper">
       <div>
@@ -35,13 +35,13 @@
       <div class="speciality-selection selection">
         <label>Speciality</label>
         <select [(ngModel)]="selectedSpeciality" (change)="filterNursesBySelectedSpeciality()">
-          <option *ngFor="let speciality of specialities">{{speciality}}</option>
+          <option *ngFor="let speciality of specialities">{{ speciality }}</option>
         </select>
       </div>
       <div class="nurse-selection selection">
         <label>Doctor</label>
         <select [(ngModel)]="selectedNurseId">
-          <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{this.getNurseFullName(nurse)}}</option>
+          <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{ this.getNurseFullName(nurse) }}</option>
         </select>
       </div>
       <div class="date-selection selection">
@@ -52,3 +52,57 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #findUserAndRegister>
+  <div class="find-patient-and-register-wrapper wrapper">
+    <div class="find-patient-and-register-header">
+      <p class="back-button" (click)="goBack()">< Back</p>
+      <h2>Patient registration in queue</h2>
+    </div>
+    <div>
+      <input class="find-patient-input" placeholder="Patient phone number" [(ngModel)]="phoneToSearch">
+      <button class="search-button" (click)="searchByPhone()" [disabled]="shouldSearchButtonBeDisabled()">Search</button>
+    </div>
+    <h3>Patient information</h3>
+    <div class="patient-information" *ngIf="patient; else patientInfoError">
+      <div class="patient-id column-info">
+        <label>Id</label>
+        <div>{{ patient.id }}</div>
+      </div>
+      <div class="patient-name column-info">
+        <label>Name</label>
+        <div> {{ patient.fname + ' ' + patient.lname}}</div>
+      </div>
+      <div class="patient-phone column-info">
+        <label>Phone number</label>
+        <div>{{ patient.phoneNumber }}</div>
+      </div>
+    </div>
+    <h3>Queue registration parameters</h3>
+    <div class="queue-registration-information ">
+      <div class="queue-date column-info">
+        <label>Date</label>
+        <div>{{ selectedDate }}</div>
+      </div>
+      <div class="queue-time column-info">
+        <label>Time</label>
+        <div> {{ selectedTimeInterval + ':00'}}</div>
+      </div>
+      <div class="queue-doctor column-info">
+        <label>Doctor</label>
+        <div> {{ getSelectedNurseName() }}</div>
+      </div>
+
+    </div>
+    <div class="register-in-queue-button-wrapper">
+      <button class="submit-button register-in-queue-button" [disabled]="!patient" (click)="registerInQueue()">Register in queue</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #patientInfoError>
+  <div class="error-text">{{textToShowInPatientInfoError}}</div>
+</ng-template>
+
+<app-pop-up></app-pop-up>

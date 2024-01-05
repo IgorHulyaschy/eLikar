@@ -1,4 +1,4 @@
-import { QueueEntryStatus } from "./queue-entry-status";
+import { QueueEntryStatus } from './queue-entry-status'
 
 export class QueueEntry {
   id: string

@@ -1,11 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { NurseService } from "../../services/nurse.service";
-import { User } from "../../models/user/user";
-import { Specialist } from "../../models/user/specialist";
-import { QueueService } from "../../services/queue.service";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NurseService } from '../../services/nurse.service'
+import { User } from '../../models/user/user'
+import { Specialist } from '../../models/user/specialist'
+import { QueueService } from '../../services/queue.service'
 import { UserService } from '../../services/user.service'
 import { DateInterval } from '../../models/queue/date-interval'
-import { QueueEntryStatus } from "../../models/queue/queue-entry-status";
+import { QueueEntryStatus } from '../../models/queue/queue-entry-status'
+import { Patient } from '../../models/patient/patient'
+import { PatientService } from '../../services/patient.service'
+import { BookQueue } from "../../models/queue/book-queue";
+import { PopUpComponent } from "../../../shared/components/pop-up.component";
 
 @Component({
   selector: 'app-register-in-queue',
@@ -20,18 +24,30 @@ export class RegisterInQueueComponent implements OnInit {
   public selectedTimeInterval: number
   public dateInterval: DateInterval
   public selectedDate: Date
+  public phoneToSearch: string
+  public patient: Patient
+  public textToShowInPatientInfoError: string
+  public shouldShowPatientFinderAndRegisterSection = false
+
+  @ViewChild(PopUpComponent, { static: false })
+  private popUpComponent!: PopUpComponent
 
   private nurseService: NurseService
   private queueService: QueueService
   private userService: UserService
+  private patientService: PatientService
   private nurses: User[]
 
-  constructor(nurseService: NurseService,
-              queueService: QueueService,
-              userService: UserService) {
+  constructor(
+    nurseService: NurseService,
+    queueService: QueueService,
+    userService: UserService,
+    patientService: PatientService
+  ) {
     this.nurseService = nurseService
     this.queueService = queueService
     this.userService = userService
+    this.patientService = patientService
   }
 
   public ngOnInit(): void {
@@ -42,6 +58,17 @@ export class RegisterInQueueComponent implements OnInit {
       this.filterNursesBySelectedSpeciality()
       this.selectedNurseId = this.filteredNurses[0].id
     })
+  }
+
+  public shouldSearchButtonBeDisabled(): boolean {
+    if (this.phoneToSearch) {
+      return this.phoneToSearch.length < 6
+    }
+    return true
+  }
+
+  public goBack(): void {
+    this.shouldShowPatientFinderAndRegisterSection = false
   }
 
   public filterNursesBySelectedSpeciality(): void {
@@ -61,23 +88,75 @@ export class RegisterInQueueComponent implements OnInit {
     })
   }
 
+  public shouldSelectTimeIntervalBeDisabled(): boolean {
+    return !this.selectedTimeInterval
+  }
+
   public selectTimeInterval(interval: number): void {
-    this.selectedTimeInterval = interval
+    if (!this.isTimeIntervalBooked(interval)) {
+      this.selectedTimeInterval = interval
+    }
+  }
+
+  public goToFindUserAndRegisterButtonSection(): void {
+    this.shouldShowPatientFinderAndRegisterSection = true
   }
 
   public isTimeIntervalBooked(interval: number): boolean {
     if (this.dateInterval) {
       const queryEntry = this.dateInterval[interval.toString()]
       if (queryEntry && queryEntry.status) {
-        return queryEntry === QueueEntryStatus.BOOKED
+        return queryEntry.status === QueueEntryStatus.BOOKED
       }
       return false
     }
   }
 
+  public searchByPhone(): void {
+    this.patientService.getByPhone(this.phoneToSearch).subscribe(
+      (res) => {
+        this.patient = res.patient
+        console.log(this.patient)
+        if (!this.patient) {
+          this.textToShowInPatientInfoError = 'Patient not found'
+        }
+      },
+      () => {
+        this.textToShowInPatientInfoError = 'Error occurred. Try again'
+      }
+    )
+  }
+
+  public getSelectedNurseName(): string {
+    const nurse = this.nurses.filter((nurse) => nurse.id === this.selectedNurseId)[0]
+    return nurse.fname + ' ' + nurse.lname
+  }
+
+  public registerInQueue(): void {
+    if (this.patient) {
+      this.queueService.registerInQueue(this.getBookQueue()).subscribe((res) => {
+          this.popUpComponent.show('User was successfully registered in queue', true)
+        },
+        () => {
+          this.popUpComponent.show('Error occurred. Try again', false)
+        }
+      )
+    }
+  }
+
+  private getBookQueue(): BookQueue {
+    const bookQueue = new BookQueue()
+    bookQueue.nurseId = this.selectedNurseId
+    bookQueue.bookedTime = this.selectedTimeInterval
+    bookQueue.patientId = this.patient.id
+    bookQueue.dayOfMonth = this.selectedDate.toString()
+    return bookQueue
+  }
   private getUniqueNursesSpecialities(): Specialist[] {
     if (this.nurses) {
-      return  this.nurses.map(nurse => nurse.specialist).filter((speciality, index, array) => array.indexOf(speciality) === index)
+      return this.nurses
+        .map((nurse) => nurse.specialist)
+        .filter((speciality, index, array) => array.indexOf(speciality) === index)
     }
   }
 }

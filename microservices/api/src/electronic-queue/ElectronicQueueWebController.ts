@@ -18,6 +18,7 @@ export class ElectronicQueueWebController {
         dayOfMonth: new Date(ctx.request.body.dayOfMonth).getTime()
       })
       ctx.status = 200
+      ctx.body = { success: true }
     } catch (err) {
       throw new HTTPError({ status: 400, message: err.message })
     }
