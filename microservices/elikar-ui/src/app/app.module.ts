@@ -17,6 +17,7 @@ import { PopUpComponent } from './shared/components/pop-up.component'
 import { PatientOverviewComponent } from "./core/components/patient/patient-overview/patient-overview.component";
 import { RegisterInQueueComponent } from "./core/components/queue/register-in-queue.component";
 import { QueueViewComponent } from "./core/components/queue/queue-view/queue-view.component";
+import { PatientReceptionComponent } from "./core/components/nurse/patient-reception/patient-reception.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { QueueViewComponent } from "./core/components/queue/queue-view/queue-vie
     PopUpComponent,
     PatientOverviewComponent,
     RegisterInQueueComponent,
-    QueueViewComponent
+    QueueViewComponent,
+    PatientReceptionComponent
   ],
   imports: [
     CommonModule,

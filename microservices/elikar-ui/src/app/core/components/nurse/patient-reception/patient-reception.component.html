@@ -1,0 +1,32 @@
+<div class="main-wrapper">
+  <div class="wrapper">
+    <h2>Patient reception</h2>
+    <div class="patient-reception-information-wrapper">
+      <label class="patient-name-label">Patient: </label>
+      <span class="patient-name label-value" *ngIf="patient">
+        <span>{{getPatientFullName()}}</span>
+      </span>
+      <label class="nurse-name-label">Doctor: </label>
+      <span class="nurse-name label-value" *ngIf="nurse">
+        <span>{{getNurseFullName()}}</span>
+      </span>
+      <label class="date-label">Date: </label>
+      <span class="date-value label-value">
+        <span>{{ date }}</span>
+      </span>
+    </div>
+    <div class="text-input-wrapper">
+      <label>Notes:</label>
+      <textarea [(ngModel)]="notes"></textarea>
+    </div>
+    <div class="text-input-wrapper">
+      <label>Diagnosis:</label>
+      <textarea [(ngModel)]="diagnosis" class="diagnosis-input"></textarea>
+    </div>
+    <div class="submit-button-wrapper">
+      <button class="search-button" (click)="submit()" [disabled]="shouldSubmitButtonBeDisabled()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<app-pop-up></app-pop-up>

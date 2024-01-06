@@ -11,6 +11,7 @@ import { Patient } from "../../../models/patient/patient";
 import { PatientService } from "../../../services/patient.service";
 import { PreselectedQueueState } from "../../../models/queue/preselected-queue-state";
 import { PopUpComponent } from "../../../../shared/components/pop-up.component";
+import { QueueEntryStatus } from "../../../models/queue/queue-entry-status";
 
 @Component({
   selector: "app-queue-view",
@@ -62,7 +63,7 @@ export class QueueViewComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
+    this.resetData()
     // @ts-ignore
     this.patientsIndexes = Array(this.maxPatientsAtDay).fill().map((x, i) => i);
     if (this.isAdmin()) {
@@ -95,6 +96,17 @@ export class QueueViewComponent implements OnInit {
     this.selectDate(new Date(this.selectedDateStr));
   }
 
+  public admitPatient(index: number): void {
+    let timePeriod = index + 10
+    if (timePeriod >= 13) {
+      timePeriod++
+    }
+
+    const queueId = this.dateInterval[timePeriod].id
+
+    this.router.navigate(['nurse/patient-reception', queueId, this.patients[index].id])
+  }
+
 
   public navigateToPatientOverview(index: number): void {
     this.router.navigate(["patients", this.patients[index].id]);
@@ -123,6 +135,17 @@ export class QueueViewComponent implements OnInit {
     return nurse.fname + " " + nurse.lname;
   }
 
+  public statusIsBooked(index: number): boolean {
+    let timePeriod = index + 10
+    if (timePeriod >= 13) {
+      timePeriod++
+    }
+
+    console.log(this.dateInterval[timePeriod].status)
+
+    return this.dateInterval[timePeriod].status === QueueEntryStatus.BOOKED
+  }
+
   public onSpecialityUpdate(): void {
     this.filterNurses();
     this.selectedNurseId = this.filteredNurses[0].id;
@@ -147,13 +170,9 @@ export class QueueViewComponent implements OnInit {
 
     const hospitalId = this.getHospitalId()
 
-
-
     this.queueService.getQueue(nurseId, hospitalId).subscribe((res) => {
       const dayOfTheWeek = new Date(this.selectedDateStr).getDay();
       this.dateInterval = res[dayOfTheWeek];
-      console.log(dayOfTheWeek);
-      console.log(this.dateInterval);
       if (dayOfTheWeek < 6 && dayOfTheWeek !== 0) {
         this.getPatients();
       }
@@ -174,10 +193,13 @@ export class QueueViewComponent implements OnInit {
 
   public getPatients(): void {
     this.isLoading = true;
-    for (let i = 10, j = 0; i <= 16; i++, j++) {
+    for (let i = 10; i <= 16; i++) {
       if (i !== 13) {
+        let j = i - 10
+        if (j >= 4) {
+          j -= 1
+        }
         const patientId = this.dateInterval[i].patientId;
-        console.log(patientId);
         if (patientId) {
           this.patientService.getById(patientId).subscribe((patient) => {
             this.patients[j] = patient;

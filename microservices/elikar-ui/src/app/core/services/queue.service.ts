@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Queue } from "../models/queue/queue";
 import { Observable } from "rxjs";
 import { BookQueue } from "../models/queue/book-queue";
+import { SlotSetDone } from "../models/queue/slot-set-done";
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class QueueService {
 
   public registerInQueue(bookQueue: BookQueue): Observable<any> {
     return this.http.post(`${this.queueUrl}`, bookQueue)
+  }
+
+  public slotSetDone(slotSetDone: SlotSetDone): Observable<any> {
+    return this.http.put(`${this.queueUrl}/${slotSetDone.queueId}`, slotSetDone)
   }
 }

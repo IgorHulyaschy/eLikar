@@ -57,9 +57,9 @@
         <h3>Patient</h3>
         <div class="patients-information">
           <div class="patient-information" *ngFor="let index of patientsIndexes">
-            <ng-container *ngIf="wasDataFetched && patientsLoadStatuses[index]; else noPatientRegistered">
+            <ng-container *ngIf="wasDataFetched && patientsLoadStatuses[index] && statusIsBooked(index); else noPatientRegistered">
             <div class="patient-name" (click)="navigateToPatientOverview(index)">{{ getPatientFullName(index)}}</div>
-            <button class="take-patient-button" *ngIf="!isAdmin()">Admit patient</button>
+            <button class="take-patient-button" *ngIf="!isAdmin()" (click)="admitPatient(index)">Admit patient</button>
             </ng-container>
           </div>
       </div>

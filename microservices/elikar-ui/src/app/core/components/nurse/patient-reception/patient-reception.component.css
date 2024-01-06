@@ -1,0 +1,77 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.wrapper {
+    background-color: navajowhite;
+    height: 750px;
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+    gap: 30px
+}
+
+.patient-reception-information-wrapper {
+    font-size: 25px;
+}
+
+
+
+.patient-info-header {
+    font-weight: bold;
+}
+
+label {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+    height: 220px;
+    font-size: 22px;
+    padding: 20px;
+}
+
+.diagnosis-input {
+    height: 95px;
+}
+
+.text-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h2 {
+    font-size: 35px;
+    text-align: center;
+}
+
+.submit-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-button {
+    width: 200px;
+}
+
+.patient-name-and-phone {
+    display: inline-flex;
+    gap: 20px;
+}
+
+.label-value {
+    color: blue;
+    font-weight: bold;
+}
+
+.nurse-name-label, .date-label {
+    margin-left: 80px;
+}
