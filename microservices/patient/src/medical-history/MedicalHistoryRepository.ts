@@ -18,4 +18,13 @@ export class MedicalHistoryRepository extends Repository(MedicalHistory) {
       ORDER BY "createdAt" DESC
     `)
   }
+
+  findNurseHistory(nurseId: string, em = getManager()): Promise<any[]> {
+    return em.query(`
+      SELECT *
+      FROM medical_history
+      WHERE "nurseId" = '${nurseId}'
+      ORDER BY "createdAt" DESC
+    `)
+  }
 }

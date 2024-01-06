@@ -11,6 +11,8 @@ import { ConfigService } from './config'
 import { App } from './App'
 import { PatientModule } from './patient'
 import { MedicalHistoryModule } from './medical-history'
+import { NurseModule } from './nurse'
+import { RpcClientModule } from '@elikar/rpc-client'
 
 export const TYPES = {
   Options: Symbol('options')
@@ -24,10 +26,12 @@ export class AppModule {
         TypeormModule.register(config.get('typeorm')),
         AmqpModule.register(config.get('amqp')),
         MessageListenerModule,
+        RpcClientModule,
         ApplicationBuilderModule,
         LoggerModule,
         RpcServerModule,
         MessageClientModule,
+        NurseModule,
         PatientModule,
         MedicalHistoryModule
       ],

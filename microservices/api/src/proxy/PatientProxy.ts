@@ -21,4 +21,8 @@ export class PatientProxy {
   getByPhone(phone: string): Promise<PatientDto.Patient | null> {
     return this.proxy.getByPhone(phone)
   }
+
+  getNurseDiagnosisHistory(nurseId: string): Promise<any> {
+    return this.proxy.getNurseDiagnosisHistory(nurseId)
+  }
 }

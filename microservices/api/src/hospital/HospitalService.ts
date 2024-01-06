@@ -4,11 +4,13 @@ import { MessageClient } from '@elikar/message-client'
 import { injectable } from 'inversify'
 
 import { HospitalProxy } from '../proxy'
+import { PatientProxy } from '../proxy/PatientProxy'
 
 @injectable()
 export class HospitalService {
   constructor(
     private readonly proxy: HospitalProxy,
+    private readonly patientProxy: PatientProxy,
     private readonly messageClient: MessageClient
   ) {}
 
@@ -29,5 +31,9 @@ export class HospitalService {
     return this.messageClient.emit(
       new HospitalSendRegistrationLettersCommand({ emails, hospitalId })
     )
+  }
+
+  getNurseDiagnosisHistory(nurseId: string): Promise<any> {
+    return this.patientProxy.getNurseDiagnosisHistory(nurseId)
   }
 }

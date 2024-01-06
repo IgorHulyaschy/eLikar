@@ -29,4 +29,8 @@ export class PatientRpcController {
   getByPhone(phone: string): Promise<PatientDto.Patient | null> {
     return this.service.getByPhone(phone)
   }
+
+  getNurseDiagnosisHistory(nurseId: string): Promise<any> {
+    return this.mhService.getNurseDiagnosisHistory(nurseId)
+  }
 }

@@ -10,4 +10,5 @@ export class PatientRpcSchema {
   ) => Promise<MedicalHistoryDto.MedicalHistory[]>
 
   getByPhone!: (phone: string) => Promise<PatientDto.Patient | null>
+  getNurseDiagnosisHistory!: (nurseId: string) => Promise<any>
 }

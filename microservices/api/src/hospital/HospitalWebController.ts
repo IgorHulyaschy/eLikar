@@ -40,4 +40,11 @@ export class HospitalWebController {
     this.service.sendRegistrationLettersForNurses(ctx.request.body.emails, ctx.state.id)
     ctx.body = { success: true }
   }
+
+  @get('/nurses/history/:nurseId')
+  async getNurseHistory(ctx: Context): Promise<void> {
+    const respones = await this.service.getNurseDiagnosisHistory(ctx.request.params.nurseId)
+    ctx.body = respones
+    ctx.status = 200
+  }
 }

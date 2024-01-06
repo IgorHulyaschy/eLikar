@@ -10139,6 +10139,7 @@ __metadata:
     "@elikar/message-client": "workspace:*"
     "@elikar/message-listener": "workspace:*"
     "@elikar/module": "workspace:*"
+    "@elikar/rpc-client": "workspace:*"
     "@elikar/rpc-error-codes": "workspace:*"
     "@elikar/rpc-schemas": "workspace:*"
     "@elikar/rpc-server": "workspace:*"
