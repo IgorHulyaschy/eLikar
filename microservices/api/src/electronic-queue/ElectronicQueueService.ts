@@ -38,4 +38,8 @@ export class ElectronicQueueService {
   startOverview(dto: ElectronicQueueDto.SetDone): Promise<void> {
     return this.nurseProxy.startOverview(dto)
   }
+
+  delete(queueId: string): Promise<void> {
+    return this.nurseProxy.delete(queueId)
+  }
 }

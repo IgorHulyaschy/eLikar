@@ -34,4 +34,11 @@ export class ElectronicQueueRepository extends Repository(ElectronicQueue) {
     `)
     return result
   }
+
+  delete(queueId: string, em = getManager()): Promise<void> {
+    return em.query(`
+      DELETE FROM electronic_queue
+      WHERE "id" = '${queueId}'
+    `)
+  }
 }

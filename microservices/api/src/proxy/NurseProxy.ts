@@ -72,4 +72,8 @@ export class NurseProxy {
   getList(): Promise<NurseDto.Nurse[]> {
     return this.proxy.getList()
   }
+
+  delete(queueId: string): Promise<void> {
+    return this.proxy.delete(queueId)
+  }
 }

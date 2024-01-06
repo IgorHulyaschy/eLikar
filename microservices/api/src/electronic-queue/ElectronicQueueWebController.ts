@@ -1,4 +1,4 @@
-import { get, post, put, useMiddleware, webController } from '@elikar/application'
+import { del, get, post, put, useMiddleware, webController } from '@elikar/application'
 import { HTTPError } from '@elikar/middlewares'
 import { Context } from 'koa'
 import { AuthHospitalAdminMiddleware, AuthNurseMiddleware } from '../auth/middlewares'
@@ -43,5 +43,11 @@ export class ElectronicQueueWebController {
     })
     ctx.status = 200
     ctx.body = { success: true }
+  }
+
+  @del('/:queueId')
+  async deleteFromQueue(ctx: Context): Promise<void> {
+    await this.service.delete(ctx.request.params.queueId)
+    ctx.body = { deleted: true }
   }
 }
