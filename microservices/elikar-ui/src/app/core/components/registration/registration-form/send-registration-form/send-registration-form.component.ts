@@ -27,6 +27,8 @@ export class SendRegistrationFormComponent implements OnInit {
 
   public sendRegistrationForm(): void {
     console.log('test')
+    this.email = this.emailFormGroup.controls['email'].value
+    console.log(this.emailFormGroup.controls['email'].value)
     this.registrationService.sendRegistrationForm(this.email).subscribe((res) => {
       console.log(res)
       this.popUpComponent.show('Registration form was successfully send!', true)
@@ -38,6 +40,4 @@ export class SendRegistrationFormComponent implements OnInit {
       email: new FormControl(this.email, [Validators.email, Validators.min(5), Validators.required])
     })
   }
-
-  protected readonly HTMLEmbedElement = HTMLEmbedElement;
 }

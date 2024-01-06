@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { RegistrationForm } from '../../../models/registration/registration-form'
 import { RegistrationService } from '../../../services/registration.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Specialist, SpecialistUtil } from "../../../models/user/specialist";
+import { PopUpComponent } from "../../../../shared/components/pop-up.component";
 
 @Component({
   selector: 'app-registration-form',
@@ -12,6 +13,8 @@ import { Specialist, SpecialistUtil } from "../../../models/user/specialist";
 export class RegistrationFormComponent implements OnInit {
   public registrationFormGroup!: FormGroup
   public speciality = 'THERAPIST'
+  @ViewChild(PopUpComponent, { static: false })
+  private popUpComponent!: PopUpComponent;
 
   private registrationForm = new RegistrationForm()
   private confirmPassword!: string
@@ -38,6 +41,7 @@ export class RegistrationFormComponent implements OnInit {
       this.registrationService.registerNurse(this.registrationForm).subscribe((res) => {
         console.log(res)
       })
+      this.popUpComponent.show('You were registered successfully', true)
     }
   }
 

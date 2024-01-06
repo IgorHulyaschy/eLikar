@@ -24,6 +24,9 @@
     <div *ngIf="isAdmin() else myHistory">
       <p class="navigation-trigger" [routerLink]="['/nurse-history']">Nurse history</p>
     </div>
+    <div *ngIf="isAdmin() else myHistory">
+      <p class="navigation-trigger" [routerLink]="['/send-registration-form']">Send registration</p>
+    </div>
     <ng-template #myHistory>
       <div>
         <p class="navigation-trigger" [routerLink]="['/nurse-history', getUserId()]">My history</p>
