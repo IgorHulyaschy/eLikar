@@ -9,11 +9,14 @@
 <ng-template #authNavigation>
   <div class="navigation-buttons">
     <ng-container *ngTemplateOutlet="homeNavigation"></ng-container>
-    <div>
+    <div *ngIf="isAdmin()">
       <p class="navigation-trigger" [routerLink]="['/register-patient']">Register patient</p>
     </div>
-    <div>
+    <div *ngIf="isAdmin()">
       <p class="navigation-trigger" [routerLink]="['/register-in-queue']">Register in queue</p>
+    </div>
+    <div>
+      <p class="navigation-trigger" [routerLink]="['/queue-view']">View queue</p>
     </div>
   </div>
   <div class="navigation-icons">

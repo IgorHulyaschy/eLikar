@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../services/auth.service'
+import { UserService } from "../../../services/user.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,13 +11,19 @@ import { AuthService } from '../../../services/auth.service'
 export class NavBarComponent {
   private router: Router
   private authService: AuthService
-  constructor(router: Router, authService: AuthService) {
+  private userService: UserService
+  constructor(router: Router, authService: AuthService, userService: UserService) {
     this.router = router
     this.authService = authService
+    this.userService = userService
   }
 
   public userAuthenticated(): boolean {
     return this.authService.isLoggedIn()
+  }
+
+  public isAdmin(): boolean {
+    return this.userService.isAdmin()
   }
 
   public logout(): void {

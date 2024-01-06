@@ -1,0 +1,170 @@
+h2 {
+    text-align: center;
+    font-size: 35px;
+}
+
+h3 {
+    font-size: 32px;
+    text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.input-date {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.time-slot, .patient-information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    height: 50px;
+}
+
+.patient-information {
+    gap: 20px;
+}
+
+.take-patient-button {
+    width: 120px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    transition: 1s;
+    font-weight: bold;
+}
+
+.take-patient-button:hover {
+    background-color: white;
+    color: green;
+    border: 1px solid black;
+}
+
+.queue-view {
+    display: grid;
+    width: 800px;
+    grid-template: 1fr/0.5fr 1fr;
+    padding: 20px 60px;
+}
+
+.time-slots, .patients-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.time-slots {
+    border-left: 1px solid black;
+}
+
+.patients-information {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.date-selection {
+    display: flex;
+    gap: 20px;
+}
+
+.nurse-selection-wrapper, .specialist-selection-wrapper, .date-selection-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.nurse-selection-wrapper, .specialist-selection-wrapper {
+    gap: 30px;
+}
+
+.date-selection-wrapper {
+    gap: 30px;
+}
+
+label {
+    font-size: 20px;
+}
+
+input[type=date] {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.date-selection-wrapper {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.submit-button {
+    width: 300px;
+}
+
+.submit-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-selection-header {
+    padding-left: 30px;
+}
+
+.nurse-selection-wrapper {
+    margin-bottom: 100px;
+}
+
+.specialist-selection {
+    justify-self: end;
+}
+
+.patient-name {
+    color: blue;
+    cursor: pointer;
+}
+
+.patient-name:hover {
+    border-bottom: 3px blue solid;
+}
+
+.no-patient-registered {
+    color: darkgray;
+}
+
+.no-patient-registered:hover {
+    border-bottom: none;
+    cursor: text;
+}
+
+.nurse-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nurse-name {
+    font-size: 40px;
+    color: green;
+    font-weight: bold;
+}

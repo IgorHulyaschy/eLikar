@@ -16,6 +16,7 @@ import { PatientRegistrationComponent } from './core/components/registration/pat
 import { PopUpComponent } from './shared/components/pop-up.component'
 import { PatientOverviewComponent } from "./core/components/patient/patient-overview/patient-overview.component";
 import { RegisterInQueueComponent } from "./core/components/queue/register-in-queue.component";
+import { QueueViewComponent } from "./core/components/queue/queue-view/queue-view.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { RegisterInQueueComponent } from "./core/components/queue/register-in-qu
     PatientRegistrationComponent,
     PopUpComponent,
     PatientOverviewComponent,
-    RegisterInQueueComponent
+    RegisterInQueueComponent,
+    QueueViewComponent
   ],
   imports: [
     CommonModule,

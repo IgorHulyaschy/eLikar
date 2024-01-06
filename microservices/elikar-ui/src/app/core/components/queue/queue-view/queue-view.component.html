@@ -1,0 +1,86 @@
+<div class="main-wrapper">
+
+  <h2>Queue view</h2>
+  <div class="wrapper">
+    <div class="input-date">
+      <ng-container *ngIf="isAdmin(); else nurseView">
+      <h3>Specialist selection</h3>
+      <div class="specialist-selection-wrapper">
+        <label>Specialist</label>
+        <select class="specialist-selection" [(ngModel)]="selectedSpeciality" (change)="onSpecialityUpdate()">
+          <option *ngFor="let speciality of specialities">{{ speciality }}</option>
+        </select>
+      </div>
+      <div class="nurse-selection-wrapper">
+        <label>Doctor</label>
+        <select [(ngModel)]="selectedNurseId" (change)="onNurseUpdate()">
+          <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{ this.getNurseFullName(nurse) }}</option>
+        </select>
+      </div>
+      </ng-container>
+      <div class="date-selection-container">
+        <h3 class="date-selection-header">Date selection</h3>
+        <div class="date-selection-wrapper">
+          <button class="search-button" (click)="selectPrevDate()" [disabled]="isLoading">Prev day</button>
+          <input type="date" [(ngModel)]="selectedDateStr" (change)="updateQueue()">
+          <button class="search-button" (click)="selectNextDate()" [disabled]="isLoading">Next day</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="queue-view">
+      <div class="time-slots-wrapper">
+        <h3>Time slots</h3>
+        <div class="time-slots">
+        <div class="time-slot">
+          10:00
+        </div>
+        <div class="time-slot">
+          11:00
+        </div>
+        <div class="time-slot">
+          12:00
+        </div>
+        <div class="time-slot">
+          14:00
+        </div>
+        <div class="time-slot">
+          15:00
+        </div>
+        <div class="time-slot">
+          16:00
+        </div>
+      </div>
+      </div>
+      <div class="patients-information-wrapper">
+        <h3>Patient</h3>
+        <div class="patients-information">
+          <div class="patient-information" *ngFor="let index of patientsIndexes">
+            <ng-container *ngIf="wasDataFetched && patientsLoadStatuses[index]; else noPatientRegistered">
+            <div class="patient-name" (click)="navigateToPatientOverview(index)">{{ getPatientFullName(index)}}</div>
+            <button class="take-patient-button" *ngIf="!isAdmin()">Admit patient</button>
+            </ng-container>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPatientRegistered>
+  <div class="patient-name no-patient-registered" *ngIf="wasDataFetched; else loader">No patient registered</div>
+</ng-template>
+
+<ng-template #nurseView>
+  <div class="nurse-view">
+    <h3>Doctor</h3>
+    <div class="nurse-name" *ngIf="!nurseLoading; else loader">{{getNurseName()}}</div>
+  </div>
+</ng-template>
+
+<ng-template #loader>
+  <span class="loader" *ngIf="isLoading || nurseLoading"></span>
+</ng-template>
+
+<app-pop-up></app-pop-up>

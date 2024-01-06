@@ -10,6 +10,8 @@ import { Patient } from '../../models/patient/patient'
 import { PatientService } from '../../services/patient.service'
 import { BookQueue } from "../../models/queue/book-queue";
 import { PopUpComponent } from "../../../shared/components/pop-up.component";
+import { PreselectedQueueState } from "../../models/queue/preselected-queue-state";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register-in-queue',
@@ -37,17 +39,20 @@ export class RegisterInQueueComponent implements OnInit {
   private userService: UserService
   private patientService: PatientService
   private nurses: User[]
+  private router: Router
 
   constructor(
     nurseService: NurseService,
     queueService: QueueService,
     userService: UserService,
-    patientService: PatientService
+    patientService: PatientService,
+    router: Router
   ) {
     this.nurseService = nurseService
     this.queueService = queueService
     this.userService = userService
     this.patientService = patientService
+    this.router = router
   }
 
   public ngOnInit(): void {
@@ -135,7 +140,11 @@ export class RegisterInQueueComponent implements OnInit {
   public registerInQueue(): void {
     if (this.patient) {
       this.queueService.registerInQueue(this.getBookQueue()).subscribe((res) => {
-          this.popUpComponent.show('User was successfully registered in queue', true)
+          const preselectedQueueState = new PreselectedQueueState()
+          preselectedQueueState.nurseId = this.selectedNurseId
+          preselectedQueueState.specialist = this.selectedSpeciality
+          preselectedQueueState.selectedDateStr = new Date(this.selectedDate).toISOString().substring(0, 10)
+          this.router.navigate(['queue-view/', JSON.stringify(preselectedQueueState)])
         },
         () => {
           this.popUpComponent.show('Error occurred. Try again', false)
@@ -149,7 +158,7 @@ export class RegisterInQueueComponent implements OnInit {
     bookQueue.nurseId = this.selectedNurseId
     bookQueue.bookedTime = this.selectedTimeInterval
     bookQueue.patientId = this.patient.id
-    bookQueue.dayOfMonth = this.selectedDate.toString()
+    bookQueue.dayOfMonth = new Date(this.selectedDate).toISOString().substring(0, 10)
     return bookQueue
   }
   private getUniqueNursesSpecialities(): Specialist[] {

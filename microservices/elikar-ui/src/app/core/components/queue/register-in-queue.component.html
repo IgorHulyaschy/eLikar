@@ -38,7 +38,7 @@
           <option *ngFor="let speciality of specialities">{{ speciality }}</option>
         </select>
       </div>
-      <div class="nurse-selection selection">
+      <div class="nurse-selection-wrapper selection">
         <label>Doctor</label>
         <select [(ngModel)]="selectedNurseId">
           <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{ this.getNurseFullName(nurse) }}</option>
