@@ -20,7 +20,7 @@ export class MailerService {
         to: email,
         subject: 'Register',
         template: this.template({
-          link: `http://localhost:3000/api/nurses/form/${email}/${hospitalId}`
+          link: `http://localhost:4200/registration-form`
         })
       })
     }
