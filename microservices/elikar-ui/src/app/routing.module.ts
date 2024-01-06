@@ -13,6 +13,9 @@ import { PatientOverviewComponent } from "./core/components/patient/patient-over
 import { RegisterInQueueComponent } from "./core/components/queue/register-in-queue.component";
 import { QueueViewComponent } from "./core/components/queue/queue-view/queue-view.component";
 import { PatientReceptionComponent } from "./core/components/nurse/patient-reception/patient-reception.component";
+import {
+  MedicalHistoryViewComponent
+} from "./core/components/medical-history/medical-history-view/medical-history-view.component";
 
 const routes: Routes = [
   { path: 'registration-form', component: RegistrationFormComponent, canActivate: [AdminGuard] },
@@ -24,7 +27,8 @@ const routes: Routes = [
   { path: 'register-in-queue', component: RegisterInQueueComponent, canActivate: [AuthGuard, AdminGuard]},
   { path: 'queue-view', component: QueueViewComponent, canActivate: [AuthGuard]},
   { path: 'queue-view/:data', component: QueueViewComponent, canActivate: [AuthGuard]},
-  { path: 'nurse/patient-reception/:queueId/:patientId', component: PatientReceptionComponent, canActivate: [AuthGuard]}
+  { path: 'nurse/patient-reception/:queueId/:patientId', component: PatientReceptionComponent, canActivate: [AuthGuard]},
+  { path: 'medical-history', component: MedicalHistoryViewComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({

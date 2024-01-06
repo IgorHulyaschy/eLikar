@@ -18,6 +18,9 @@ import { PatientOverviewComponent } from "./core/components/patient/patient-over
 import { RegisterInQueueComponent } from "./core/components/queue/register-in-queue.component";
 import { QueueViewComponent } from "./core/components/queue/queue-view/queue-view.component";
 import { PatientReceptionComponent } from "./core/components/nurse/patient-reception/patient-reception.component";
+import {
+  MedicalHistoryViewComponent
+} from "./core/components/medical-history/medical-history-view/medical-history-view.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { PatientReceptionComponent } from "./core/components/nurse/patient-recep
     PatientOverviewComponent,
     RegisterInQueueComponent,
     QueueViewComponent,
-    PatientReceptionComponent
+    PatientReceptionComponent,
+    MedicalHistoryViewComponent
   ],
   imports: [
     CommonModule,

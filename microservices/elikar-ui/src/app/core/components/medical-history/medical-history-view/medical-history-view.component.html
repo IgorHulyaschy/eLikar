@@ -1,0 +1,35 @@
+<div class="main-wrapper">
+  <div class="wrapper">
+    <div class="input-date">
+      <div>
+        <input class="find-patient-input" placeholder="Patient phone number" [(ngModel)]="phoneToSearch">
+        <button class="search-button" (click)="searchByPhone()" [disabled]="shouldSearchButtonBeDisabled()">Search</button>
+      </div>
+    </div>
+    <h3>Medical history</h3>
+    <div class="table-wrapper">
+      <div class="columns-wrapper">
+        <div class="date-column">Date</div>
+        <div class="patient-name-column">Patient</div>
+        <div class="nurse-name-column">Nurse</div>
+        <div class="diagnosis-column">Diagnosis</div>
+        <div class="nurse-notes-column">Notes</div>
+      </div>
+      <div class="data-wrapper" *ngIf="medicalHistoryRecords; else noInfoFound">
+        <ng-container *ngFor="let record of medicalHistoryRecords">
+          <div class="date" >{{record.createdAt | date}}</div>
+          <div class="patient-name">Nikita Linovytskyi</div>
+          <div class="nurse-name">dsadsadsa</div>
+          <div class="diagnosis">{{record.diagnosis}}</div>
+          <div class="nurse-notes">{{record.nurseNotes}};d</div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noInfoFound>
+  <div class="message-wrapper">
+    <div class="message-text"></div>
+  </div>
+</ng-template>
