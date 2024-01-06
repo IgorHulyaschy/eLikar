@@ -27,4 +27,5 @@ export class NurseRpcSchema {
 
   startOverview!: (dto: ElectronicQueueDto.SetDone) => Promise<void>
   getList!: () => Promise<NurseDto.Nurse[]>
+  delete!: (queueId: string) => Promise<void>
 }

@@ -77,4 +77,8 @@ export class NurseRpcController {
   getList(): Promise<NurseDto.Nurse[]> {
     return this.service.getList()
   }
+
+  async delete(queueId: string): Promise<void> {
+    await this.queueService.delete(queueId)
+  }
 }

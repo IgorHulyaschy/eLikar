@@ -19,6 +19,10 @@ export class ElectronicQueueService {
     await this.repository.save(queue)
   }
 
+  async delete(queueId: string): Promise<void> {
+    await this.repository.delete(queueId)
+  }
+
   async startOverview(dto: ElectronicQueueDto.SetDone): Promise<void> {
     const queue = await this.repository.findOne({ id: dto.queueId })
     await this.repository.save(queue!.setDone())
