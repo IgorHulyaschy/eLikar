@@ -18,8 +18,8 @@
       <div class="data-wrapper" *ngIf="medicalHistoryRecords; else noInfoFound">
         <ng-container *ngFor="let record of medicalHistoryRecords">
           <div class="date" >{{record.createdAt | date}}</div>
-          <div class="patient-name">Nikita Linovytskyi</div>
-          <div class="nurse-name">dsadsadsa</div>
+          <div class="patient-name">{{getPatientFullName(record.patient)}}</div>
+          <div class="nurse-name">{{getNurseFullName(record.nurse)}}</div>
           <div class="diagnosis">{{record.diagnosis}}</div>
           <div class="nurse-notes">{{record.nurseNotes}};d</div>
         </ng-container>
@@ -30,6 +30,13 @@
 
 <ng-template #noInfoFound>
   <div class="message-wrapper">
-    <div class="message-text"></div>
+    <ng-container *ngIf="!isLoading; else loader">
+      <div class="message-text" *ngIf="!wasSearched">No user provided</div>
+      <div class="message-text" *ngIf="wasSearched">No user found</div>
+    </ng-container>
   </div>
+</ng-template>
+
+<ng-template #loader>
+  <span class="loader" *ngIf="isLoading"></span>
 </ng-template>

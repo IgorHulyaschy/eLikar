@@ -14,7 +14,8 @@ export class PatientOverviewComponent implements OnInit {
   public patientId: string | undefined | null
   public patient: Patient | undefined
   constructor(private patientService: PatientService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -22,6 +23,10 @@ export class PatientOverviewComponent implements OnInit {
       this.patientId = params.get('id')
       this.setPatient()
     })
+  }
+
+  public goToPatientHistory(): void {
+    this.router.navigate(['medical-history', this.patientId])
   }
 
   private setPatient(): void {

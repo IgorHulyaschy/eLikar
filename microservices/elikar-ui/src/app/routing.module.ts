@@ -28,7 +28,8 @@ const routes: Routes = [
   { path: 'queue-view', component: QueueViewComponent, canActivate: [AuthGuard]},
   { path: 'queue-view/:data', component: QueueViewComponent, canActivate: [AuthGuard]},
   { path: 'nurse/patient-reception/:queueId/:patientId', component: PatientReceptionComponent, canActivate: [AuthGuard]},
-  { path: 'medical-history', component: MedicalHistoryViewComponent, canActivate: [AuthGuard] }
+  { path: 'medical-history', component: MedicalHistoryViewComponent, canActivate: [AuthGuard] },
+  { path: 'medical-history/:id', component: MedicalHistoryViewComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
