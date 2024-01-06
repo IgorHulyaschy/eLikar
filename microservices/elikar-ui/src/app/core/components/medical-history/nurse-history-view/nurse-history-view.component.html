@@ -1,0 +1,34 @@
+<div class="main-wrapper">
+  <div class="wrapper">
+    <div class="input-data-wrapper" *ngIf="!isNurseDataLoading else loader">
+      <ng-container *ngIf="!preSelectedParams; else nurseView">
+        <h3>Specialist selection</h3>
+        <div class="specialist-selection-wrapper">
+          <label>Specialist</label>
+          <select class="specialist-selection" [(ngModel)]="selectedSpeciality" (change)="onSpecialityUpdate()">
+            <option *ngFor="let speciality of specialities">{{ speciality }}</option>
+          </select>
+        </div>
+        <div class="nurse-selection-wrapper">
+          <label class="doctor-label">Doctor</label>
+          <select [(ngModel)]="selectedNurseId" (change)="onNurseUpdate()">
+            <option *ngFor="let nurse of filteredNurses" [value]="nurse.id">{{ this.getNurseFullName(nurse) }}</option>
+          </select>
+        </div>
+      </ng-container>
+    </div>
+    <app-medical-history [medicalHistoryRecords]="medicalHistoryRecords"
+                         [isLoading]="isLoading" [wasSearched]="wasSearched" [nurse]="nurse"></app-medical-history>
+  </div>
+</div>
+
+<ng-template #nurseView>
+  <div class="nurse-view">
+    <h3>Doctor</h3>
+    <div class="nurse-name">{{getNurseName() + ' (' + nurse.specialist + ')'}}</div>
+  </div>
+</ng-template>
+
+<ng-template #loader>
+  <span class="loader" *ngIf="isLoading"></span>
+</ng-template>

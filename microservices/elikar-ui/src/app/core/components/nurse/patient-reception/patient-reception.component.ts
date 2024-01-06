@@ -20,8 +20,8 @@ export class PatientReceptionComponent implements OnInit {
   public nurse: User
   public date: string
   public queueId: string
-  public diagnosis: string
-  public notes: string
+  public diagnosis = ''
+  public notes = ''
 
 
   @ViewChild(PopUpComponent, { static: false })
@@ -65,7 +65,7 @@ export class PatientReceptionComponent implements OnInit {
   }
 
   public shouldSubmitButtonBeDisabled(): boolean {
-    return this.notes.length > 0 && this.diagnosis.length > 2
+    return this.notes.length <= 0 && this.diagnosis.length <= 2
   }
 
   private setPatient(): void {

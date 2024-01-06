@@ -112,6 +112,20 @@ export class QueueViewComponent implements OnInit {
     this.router.navigate(["patients", this.patients[index].id]);
   }
 
+  public deleteQueueEntry(index: number): void {
+    let timeInterval = index + 10
+    if (index >= 3) {
+      timeInterval++
+    }
+    const entryId = this.dateInterval[timeInterval].id
+    this.queueService.deleteQueueEntry(entryId).subscribe((res) => {
+      console.log(res)
+      this.patients[index] = null
+      this.patientsLoadStatuses[index] = false
+      this.popUpComponent.show('Query entry was deleted successfully', true)
+    })
+  }
+
   public selectNextDate(): void {
     const splited = this.selectedDateStr.split("-");
     console.log(splited);

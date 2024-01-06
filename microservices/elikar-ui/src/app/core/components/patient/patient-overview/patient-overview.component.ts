@@ -26,7 +26,7 @@ export class PatientOverviewComponent implements OnInit {
   }
 
   public goToPatientHistory(): void {
-    this.router.navigate(['medical-history', this.patientId])
+    this.router.navigate(['patient-history', this.patientId])
   }
 
   private setPatient(): void {

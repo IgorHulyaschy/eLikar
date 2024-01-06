@@ -1,0 +1,9 @@
+<div class="main-wrapper">
+  <form class="wrapper" [formGroup]="emailFormGroup">
+    <h2>Send registration form</h2>
+    <input class="email-input" placeholder="Email of doctor" formControlName="email">
+    <button class="submit-button" (click)="sendRegistrationForm()" [disabled]="!emailFormGroup.valid">Send</button>
+  </form>
+</div>
+
+<app-pop-up></app-pop-up>

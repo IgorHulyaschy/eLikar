@@ -18,6 +18,10 @@ export class NavBarComponent {
     this.userService = userService
   }
 
+  public getUserId(): string {
+    return this.userService.getUserId()
+  }
+
   public userAuthenticated(): boolean {
     return this.authService.isLoggedIn()
   }

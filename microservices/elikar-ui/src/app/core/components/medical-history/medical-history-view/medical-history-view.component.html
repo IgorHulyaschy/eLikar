@@ -1,38 +1,29 @@
-<div class="main-wrapper">
-  <div class="wrapper">
-    <div class="input-date">
-      <div>
-        <input class="find-patient-input" placeholder="Patient phone number" [(ngModel)]="phoneToSearch">
-        <button class="search-button" (click)="searchByPhone()" [disabled]="shouldSearchButtonBeDisabled()">Search</button>
-      </div>
-    </div>
-    <h3>Medical history</h3>
-    <div class="table-wrapper">
-      <div class="columns-wrapper">
-        <div class="date-column">Date</div>
-        <div class="patient-name-column">Patient</div>
-        <div class="nurse-name-column">Nurse</div>
-        <div class="diagnosis-column">Diagnosis</div>
-        <div class="nurse-notes-column">Notes</div>
-      </div>
-      <div class="data-wrapper" *ngIf="medicalHistoryRecords; else noInfoFound">
-        <ng-container *ngFor="let record of medicalHistoryRecords">
-          <div class="date" >{{record.createdAt | date}}</div>
-          <div class="patient-name">{{getPatientFullName(record.patient)}}</div>
-          <div class="nurse-name">{{getNurseFullName(record.nurse)}}</div>
-          <div class="diagnosis">{{record.diagnosis}}</div>
-          <div class="nurse-notes">{{record.nurseNotes}};d</div>
-        </ng-container>
-      </div>
-    </div>
+<h3>Medical history</h3>
+<div class="table-wrapper">
+  <div class="columns-wrapper">
+    <div class="date-column">Date</div>
+    <div class="patient-name-column">Patient</div>
+    <div class="nurse-name-column">Nurse</div>
+    <div class="diagnosis-column">Diagnosis</div>
+    <div class="nurse-notes-column">Notes</div>
+  </div>
+  <div class="data-wrapper" *ngIf="medicalHistoryRecords && medicalHistoryRecords.length > 0; else noInfoFound">
+    <ng-container *ngFor="let record of medicalHistoryRecords">
+      <div class="date">{{ record.createdAt | date }}</div>
+      <div class="patient-name" (click)="navigateToPatientHistory(record.patientId)">{{ getPatientFullName(record.patient) }}</div>
+      <div class="nurse-name" (click)="navigateToNurseHistory(record.nurseId)">{{ getNurseFullName(record.nurse) }}</div>
+      <div class="diagnosis">{{ record.diagnosis }}</div>
+      <div class="nurse-notes">{{ record.nurseNotes }};d</div>
+    </ng-container>
   </div>
 </div>
 
 <ng-template #noInfoFound>
   <div class="message-wrapper">
     <ng-container *ngIf="!isLoading; else loader">
+      <div class="message-text" *ngIf="wasSearched && medicalHistoryRecords.length <= 0">No history found</div>
       <div class="message-text" *ngIf="!wasSearched">No user provided</div>
-      <div class="message-text" *ngIf="wasSearched">No user found</div>
+      <div class="message-text" *ngIf="wasSearched && !nurse">No user found</div>
     </ng-container>
   </div>
 </ng-template>

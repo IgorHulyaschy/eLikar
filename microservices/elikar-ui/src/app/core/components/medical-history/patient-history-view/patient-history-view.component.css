@@ -1,0 +1,11 @@
+.main-wrapper {
+    height: 100%;
+}
+
+
+.wrapper {
+    display: grid;
+    grid-template: 0.1fr 0.05fr 1fr/1fr;
+    height: 100%;
+    padding: 40px;
+}

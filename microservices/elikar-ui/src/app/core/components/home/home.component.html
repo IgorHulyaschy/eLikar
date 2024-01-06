@@ -1,1 +1,10 @@
-<h1>home component authenticated</h1>
+<div class="wrapper">
+  <ng-container *ngIf="isAdmin(); else nurseView">
+  <app-patient-registration></app-patient-registration>
+  <app-register-in-queue></app-register-in-queue>
+  </ng-container>
+</div>
+
+<ng-template #nurseView>
+  <app-queue-view></app-queue-view>
+</ng-template>

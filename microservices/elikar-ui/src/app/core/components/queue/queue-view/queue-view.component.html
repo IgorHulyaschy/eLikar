@@ -60,6 +60,7 @@
             <ng-container *ngIf="wasDataFetched && patientsLoadStatuses[index] && statusIsBooked(index); else noPatientRegistered">
             <div class="patient-name" (click)="navigateToPatientOverview(index)">{{ getPatientFullName(index)}}</div>
             <button class="take-patient-button" *ngIf="!isAdmin()" (click)="admitPatient(index)">Admit patient</button>
+            <button class="delete-entry-button" *ngIf="isAdmin()" (click)="deleteQueueEntry(index)">Delete entry</button>
             </ng-container>
           </div>
       </div>

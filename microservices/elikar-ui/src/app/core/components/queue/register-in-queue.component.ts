@@ -30,6 +30,7 @@ export class RegisterInQueueComponent implements OnInit {
   public patient: Patient
   public textToShowInPatientInfoError: string
   public shouldShowPatientFinderAndRegisterSection = false
+  public isLoading = false
 
   @ViewChild(PopUpComponent, { static: false })
   private popUpComponent!: PopUpComponent
@@ -87,9 +88,11 @@ export class RegisterInQueueComponent implements OnInit {
 
   public findQueue(nurseId: string): void {
     const hospitalId = this.userService.getUserId()
+    this.isLoading = true
     this.queueService.getQueue(nurseId, hospitalId).subscribe((res) => {
       const dayOfTheWeek = new Date(this.selectedDate).getDay()
       this.dateInterval = res[dayOfTheWeek]
+      this.isLoading = false
     })
   }
 

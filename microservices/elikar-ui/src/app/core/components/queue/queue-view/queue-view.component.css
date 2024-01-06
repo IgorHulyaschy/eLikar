@@ -51,6 +51,25 @@ h3 {
     font-weight: bold;
 }
 
+.delete-entry-button {
+    width: 120px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    transition: 1s;
+    font-weight: bold;
+}
+
+.delete-entry-button:hover {
+    background-color: white;
+    color: red;
+    border: 1px solid black;
+}
+
 .take-patient-button:hover {
     background-color: white;
     color: green;

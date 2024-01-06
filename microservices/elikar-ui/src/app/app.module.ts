@@ -21,6 +21,15 @@ import { PatientReceptionComponent } from "./core/components/nurse/patient-recep
 import {
   MedicalHistoryViewComponent
 } from "./core/components/medical-history/medical-history-view/medical-history-view.component";
+import {
+  NurseHistoryViewComponent
+} from "./core/components/medical-history/nurse-history-view/nurse-history-view.component";
+import {
+  PatientHistoryViewComponent
+} from "./core/components/medical-history/patient-history-view/patient-history-view.component";
+import {
+  SendRegistrationFormComponent
+} from "./core/components/registration/registration-form/send-registration-form/send-registration-form.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +44,10 @@ import {
     RegisterInQueueComponent,
     QueueViewComponent,
     PatientReceptionComponent,
-    MedicalHistoryViewComponent
+    MedicalHistoryViewComponent,
+    NurseHistoryViewComponent,
+    PatientHistoryViewComponent,
+    SendRegistrationFormComponent
   ],
   imports: [
     CommonModule,

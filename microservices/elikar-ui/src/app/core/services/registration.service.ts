@@ -8,6 +8,7 @@ import { Observable } from 'rxjs'
 })
 export class RegistrationService {
   private registrationUrl = 'http://localhost:3000/api/nurses'
+  private registrationFormUrl = 'http://localhost:3000/api/hospital/registration-letters'
   private http: HttpClient
 
   constructor(http: HttpClient) {
@@ -26,5 +27,9 @@ export class RegistrationService {
       position: registrationForm.position,
       specialist: registrationForm.specialist
     })
+  }
+
+  public sendRegistrationForm(email: string): Observable<any> {
+    return this.http.post(this.registrationFormUrl, { emails: [email] })
   }
 }

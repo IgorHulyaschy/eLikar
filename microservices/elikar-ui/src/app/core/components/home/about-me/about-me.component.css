@@ -23,7 +23,7 @@ img {
 
 .info-wrapper {
     width: 900px;
-    height: 600px;
+    height: 650px;
     background-color: navajowhite;
     margin: 0 70px 30px 70px;
     border-radius: 25px;
@@ -53,4 +53,15 @@ img {
     font-weight: bold;
     text-align: center;
     padding-right: 45px;
+}
+
+.view-my-history {
+    color: blue;
+    cursor: pointer;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.view-my-history:hover {
+    border-bottom: 3px blue solid;
 }

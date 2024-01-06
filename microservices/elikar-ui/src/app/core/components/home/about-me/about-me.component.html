@@ -42,6 +42,9 @@
             <label> Your speciality: </label>
             <p class="item-value">{{ user.specialist }}</p>
           </div>
+          <div *ngIf="!isUserAdmin()" class="view-my-history" (click)="goToMyHistory()">
+            View my history
+          </div>
         </ng-container>
       </div>
     </div>

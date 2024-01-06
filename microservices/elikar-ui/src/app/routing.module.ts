@@ -16,9 +16,18 @@ import { PatientReceptionComponent } from "./core/components/nurse/patient-recep
 import {
   MedicalHistoryViewComponent
 } from "./core/components/medical-history/medical-history-view/medical-history-view.component";
+import {
+  PatientHistoryViewComponent
+} from "./core/components/medical-history/patient-history-view/patient-history-view.component";
+import {
+  NurseHistoryViewComponent
+} from "./core/components/medical-history/nurse-history-view/nurse-history-view.component";
+import {
+  SendRegistrationFormComponent
+} from "./core/components/registration/registration-form/send-registration-form/send-registration-form.component";
 
 const routes: Routes = [
-  { path: 'registration-form', component: RegistrationFormComponent, canActivate: [AdminGuard] },
+  { path: 'registration-form', component: RegistrationFormComponent  },
   { path: 'auth', component: AuthComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'about-me', component: AboutMeComponent, canActivate: [AuthGuard] },
@@ -28,8 +37,11 @@ const routes: Routes = [
   { path: 'queue-view', component: QueueViewComponent, canActivate: [AuthGuard]},
   { path: 'queue-view/:data', component: QueueViewComponent, canActivate: [AuthGuard]},
   { path: 'nurse/patient-reception/:queueId/:patientId', component: PatientReceptionComponent, canActivate: [AuthGuard]},
-  { path: 'medical-history', component: MedicalHistoryViewComponent, canActivate: [AuthGuard] },
-  { path: 'medical-history/:id', component: MedicalHistoryViewComponent, canActivate: [AuthGuard]}
+  { path: 'patient-history', component: PatientHistoryViewComponent, canActivate: [AuthGuard] },
+  { path: 'patient-history/:id', component: PatientHistoryViewComponent, canActivate: [AuthGuard]},
+  { path: 'nurse-history', component: NurseHistoryViewComponent, canActivate: [AuthGuard] },
+  { path: 'nurse-history/:id', component: NurseHistoryViewComponent, canActivate: [AuthGuard]},
+  { path: 'send-registration-form', component: SendRegistrationFormComponent, canActivate: [AuthGuard, AdminGuard]}
 ]
 
 @NgModule({

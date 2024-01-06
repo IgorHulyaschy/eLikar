@@ -1,0 +1,11 @@
+<div class="main-wrapper">
+  <div class="wrapper">
+    <div class="input-date">
+      <div>
+        <input class="find-patient-input" placeholder="Patient phone number" [(ngModel)]="phoneToSearch">
+        <button class="search-button" (click)="searchByPhone()" [disabled]="shouldSearchButtonBeDisabled()">Search</button>
+      </div>
+    <app-medical-history [medicalHistoryRecords]="medicalHistoryRecords"
+                         [isLoading]="isLoading" [wasSearched]="wasSearched"></app-medical-history>
+  </div>
+</div>

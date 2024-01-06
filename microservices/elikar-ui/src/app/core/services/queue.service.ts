@@ -27,4 +27,8 @@ export class QueueService {
   public slotSetDone(slotSetDone: SlotSetDone): Observable<any> {
     return this.http.put(`${this.queueUrl}/${slotSetDone.queueId}`, slotSetDone)
   }
+
+  public deleteQueueEntry(id: string): Observable<any> {
+    return this.http.delete(`${this.queueUrl}/${id}`)
+  }
 }

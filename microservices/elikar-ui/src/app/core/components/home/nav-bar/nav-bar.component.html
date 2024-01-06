@@ -16,11 +16,19 @@
       <p class="navigation-trigger" [routerLink]="['/register-in-queue']">Register in queue</p>
     </div>
     <div>
-      <p class="navigation-trigger" [routerLink]="['/queue-view']">View queue</p>
+      <p class="navigation-trigger" *ngIf="isAdmin()" [routerLink]="['/queue-view']">View queue</p>
     </div>
     <div>
-      <p class="navigation-trigger" [routerLink]="['/medical-history']">Patient history</p>
+      <p class="navigation-trigger" [routerLink]="['/patient-history']">Patient history</p>
     </div>
+    <div *ngIf="isAdmin() else myHistory">
+      <p class="navigation-trigger" [routerLink]="['/nurse-history']">Nurse history</p>
+    </div>
+    <ng-template #myHistory>
+      <div>
+        <p class="navigation-trigger" [routerLink]="['/nurse-history', getUserId()]">My history</p>
+      </div>
+    </ng-template>
   </div>
   <div class="navigation-icons">
     <div class="button-about-me navigation-trigger" [routerLink]="['/about-me']">
